@@ -51,8 +51,21 @@ Themes: `neutral`, `kodentuzo`, `librevitalis`, `librelifts`, `spotcraft`, `soko
 
 Colors outside CSS (meta tags, favicons, canvas) come from `spotstrap/tokens.json`.
 
+React Native with Uniwind: import `spotstrap/native.css` and a theme, then build components with
+`spotstrap/recipes` ([docs](docs/components.md#react-native)).
+
+Menu, Listbox, Combobox and Tabs in plain HTML need a little script:
+
+```html
+<script type="module">
+  import { init } from "spotstrap/js"
+  init()
+</script>
+```
+
 ## Docs
 
+- [Components](docs/components.md): classes, and the states they style.
 - [Guidelines](docs/guidelines.md): the interface rules, taken from Apple's Human Interface
   Guidelines.
 - [Decisions](docs/decisions/README.md): architecture decision records.

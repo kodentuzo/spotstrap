@@ -1,0 +1,129 @@
+/*
+ * Menu, and the option lists of Listbox and Combobox: `menu` holds `menu-item`s, with
+ * `menu-label` and `menu-separator` between groups. Rows are 44px (36px with `menu-compact`
+ * on the menu), so a menu is as easy to hit on a phone as a button.
+ *
+ * Highlight follows every library's attribute for it: `[data-highlighted]` (Zag, Radix,
+ * reka-ui, bits-ui), `[data-focus]`/`[data-active]` (Headless UI), `[data-focused]` (react-aria).
+ * A selected option, `[data-state="checked"]`, `[aria-selected="true"]` or `[data-selected]`,
+ * shows a check at the end.
+ */
+
+@utility menu {
+  min-width: 12rem;
+  max-width: min(20rem, 100vw - 2rem);
+  max-height: min(24rem, 60vh);
+  margin: 0;
+  padding: 0.25rem;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-popover);
+  color: var(--color-popover-foreground);
+  box-shadow: var(--shadow-lg);
+  outline: none;
+
+  &:where([popover]) {
+    inset: auto;
+    margin: 0.25rem 0;
+    position-area: block-end span-inline-end;
+    position-try-fallbacks: flip-block, flip-inline;
+  }
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+@utility menu-compact {
+  --menu-row: var(--size-control-compact);
+}
+
+@utility menu-item {
+  position: relative;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: var(--menu-row, var(--size-control));
+  padding-inline: 0.75rem;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+  text-align: start;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &:is([data-highlighted], [data-focus], [data-active], [data-focused], :focus-visible) {
+    background-color: var(--color-accent);
+    color: var(--color-accent-foreground);
+  }
+
+  @media (hover: hover) {
+    &:hover:not([data-disabled], [aria-disabled="true"], :disabled) {
+      background-color: var(--color-accent);
+      color: var(--color-accent-foreground);
+    }
+  }
+
+  &:is(
+      [data-state="checked"],
+      [aria-selected="true"],
+      [aria-checked="true"],
+      [data-selected]
+    )::after {
+    content: "";
+    width: 0.375rem;
+    height: 0.6875rem;
+    margin-inline-start: auto;
+    margin-top: -0.125rem;
+    border: solid currentColor;
+    border-width: 0 2px 2px 0;
+    rotate: 45deg;
+  }
+
+  &:is([data-disabled], [aria-disabled="true"], :disabled) {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+@utility menu-item-destructive {
+  color: var(--color-destructive);
+}
+
+@utility menu-label {
+  padding: 0.5rem 0.75rem 0.25rem;
+  font-size: var(--text-footnote);
+  line-height: var(--text-footnote--line-height);
+  font-weight: 600;
+  color: var(--color-muted-foreground);
+}
+
+@utility menu-separator {
+  height: 1px;
+  margin: 0.25rem -0.25rem;
+  border: 0;
+  background-color: var(--color-border);
+}
+
+@utility menu-empty {
+  padding: 0.75rem;
+  font-size: var(--text-subhead);
+  color: var(--color-muted-foreground);
+
+  &[hidden] {
+    display: none;
+  }
+}

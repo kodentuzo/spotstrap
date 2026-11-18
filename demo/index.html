@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Spotstrap demo</title>
+    <link rel="stylesheet" href="../dist/spotstrap.css" />
+    <link rel="stylesheet" id="theme" href="../dist/themes/neutral.css" />
+    <style>
+      body { margin: 0; padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) 3rem max(1rem, env(safe-area-inset-left)); }
+      main { max-width: 48rem; margin-inline: auto; display: grid; gap: 2rem; }
+      section { display: grid; gap: var(--gap-control); }
+      .row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-control); }
+      h1, h2 { margin: 0; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="row">
+        <h1 class="text-large-title">Spotstrap</h1>
+        <label class="row">
+          <span class="text-subhead">Theme</span>
+          <select id="theme-picker" class="select">
+            <option>neutral</option>
+            <option>kodentuzo</option>
+            <option>librevitalis</option>
+            <option>librelifts</option>
+            <option>spotcraft</option>
+            <option>sokobanko</option>
+            <option>tagtape</option>
+            <option>vinskiano</option>
+          </select>
+        </label>
+      </header>
+
+      <section id="buttons">
+        <h2 class="text-title-2">Button</h2>
+        <div class="row">
+          <button type="button" class="btn" data-control>Save</button>
+          <button type="button" class="btn btn-secondary" data-control>Duplicate</button>
+          <button type="button" class="btn btn-outline" data-control>Export…</button>
+          <button type="button" class="btn btn-ghost" data-control>Cancel</button>
+          <button type="button" class="btn btn-link" data-control>Learn more</button>
+          <button type="button" class="btn btn-destructive" data-control>Delete</button>
+        </div>
+        <div class="row">
+          <button type="button" class="btn btn-compact" data-control>Save</button>
+          <button type="button" class="btn btn-outline btn-compact" data-control>Filter</button>
+          <button type="button" class="btn btn-icon btn-outline" data-control aria-label="Add">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+          </button>
+          <button type="button" class="btn btn-icon btn-ghost btn-compact" data-control aria-label="Close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+          </button>
+          <a class="btn btn-secondary" href="#buttons" data-control>Link button</a>
+        </div>
+        <div class="row">
+          <button type="button" class="btn" aria-busy="true" data-control>Saving…</button>
+          <button type="button" class="btn btn-outline" disabled>Disabled</button>
+        </div>
+      </section>
+
+      <section id="fields">
+        <h2 class="text-title-2">Fields</h2>
+        <div class="field">
+          <label class="label" for="email">Email</label>
+          <input class="input" id="email" type="email" autocomplete="email" placeholder="you@example.com" data-control />
+          <p class="field-description">We send the sign-in link here.</p>
+        </div>
+        <div class="field">
+          <label class="label" for="handle">Username</label>
+          <input class="input" id="handle" value="ad" aria-invalid="true" aria-describedby="handle-error" data-control />
+          <p class="field-error" id="handle-error">Use at least 3 characters.</p>
+        </div>
+        <div class="field">
+          <label class="label" for="notes">Notes</label>
+          <textarea class="textarea" id="notes" data-control></textarea>
+        </div>
+        <div class="field">
+          <label class="label" for="plan">Plan</label>
+          <select class="select" id="plan" data-control>
+            <option>Free</option>
+            <option>Pro</option>
+            <option>Team</option>
+          </select>
+        </div>
+        <fieldset class="fieldset">
+          <legend class="legend">Shipping</legend>
+          <div class="field">
+            <label class="label" for="zip">Postal code</label>
+            <input class="input" id="zip" inputmode="numeric" autocomplete="postal-code" data-control />
+          </div>
+          <div class="field">
+            <label class="label" for="locked">Country</label>
+            <input class="input" id="locked" value="Croatia" disabled />
+          </div>
+        </fieldset>
+      </section>
+
+      <section id="toggles">
+        <h2 class="text-title-2">Checkbox, radio, switch</h2>
+        <label class="choice"><input type="checkbox" class="checkbox" checked data-control /> Email me about releases</label>
+        <label class="choice"><input type="checkbox" class="checkbox" id="mixed" data-control /> Select all</label>
+        <label class="choice"><input type="checkbox" class="checkbox" disabled /> Not available</label>
+        <fieldset class="fieldset">
+          <legend class="legend">Plan</legend>
+          <div class="radio-group">
+            <label class="choice"><input type="radio" name="plan" class="radio" checked data-control /> Free</label>
+            <label class="choice"><input type="radio" name="plan" class="radio" data-control /> Pro</label>
+          </div>
+        </fieldset>
+        <!-- biome-ignore lint/a11y/useAriaPropsForRole: a native checkbox exposes its checked state; aria-checked would have to be kept in sync by script -->
+        <label class="choice"><input type="checkbox" role="switch" class="switch" checked data-control /> Wi-Fi</label>
+        <!-- biome-ignore lint/a11y/useAriaPropsForRole: a native checkbox exposes its checked state; aria-checked would have to be kept in sync by script -->
+        <label class="choice"><input type="checkbox" role="switch" class="switch" data-control /> Bluetooth</label>
+      </section>
+
+      <section id="overlays">
+        <h2 class="text-title-2">Dialog and popover</h2>
+        <div class="row">
+          <button type="button" class="btn btn-destructive" commandfor="confirm" command="show-modal" data-control>Delete…</button>
+          <button type="button" class="btn btn-outline" commandfor="info" command="toggle-popover" data-control>What's this?</button>
+        </div>
+        <div class="popover" id="info" popover>
+          Backups run every night and are kept for 30 days.
+        </div>
+        <dialog class="dialog" id="confirm" aria-labelledby="confirm-title" aria-describedby="confirm-text">
+          <h3 class="dialog-title" id="confirm-title">Delete this project?</h3>
+          <p class="dialog-description" id="confirm-text">Its files and history go too. You can't undo this.</p>
+          <div class="dialog-actions">
+            <button type="button" class="btn btn-outline" commandfor="confirm" command="close">Cancel</button>
+            <button type="button" class="btn btn-destructive" commandfor="confirm" command="close">Delete</button>
+          </div>
+        </dialog>
+      </section>
+
+      <section id="menus">
+        <h2 class="text-title-2">Menu, listbox, combobox</h2>
+        <div class="row">
+          <div data-spotstrap="menu" id="project-menu">
+            <button type="button" class="btn btn-outline" data-part="trigger" commandfor="project-actions" command="toggle-popover" data-control>Project…</button>
+            <div class="menu" id="project-actions" data-part="content" popover>
+              <div class="menu-label">Project</div>
+              <button type="button" class="menu-item" data-part="item" data-value="rename">Rename…</button>
+              <button type="button" class="menu-item" data-part="item" data-value="duplicate">Duplicate</button>
+              <hr class="menu-separator" />
+              <button type="button" class="menu-item menu-item-destructive" data-part="item" data-value="delete">Delete…</button>
+            </div>
+          </div>
+          <output id="menu-result" class="text-subhead"></output>
+        </div>
+
+        <div class="field" data-spotstrap="listbox" data-name="size" id="size">
+          <span class="label" data-part="label">Size</span>
+          <button type="button" class="select" data-part="trigger" data-control><span data-part="value-text" data-placeholder="Pick a size"></span></button>
+          <div class="menu" data-part="content">
+            <div class="menu-item" data-part="item" data-value="s">Small</div>
+            <div class="menu-item" data-part="item" data-value="m" data-selected>Medium</div>
+            <div class="menu-item" data-part="item" data-value="l">Large</div>
+            <div class="menu-item" data-part="item" data-value="xl" data-disabled>Extra large</div>
+          </div>
+        </div>
+
+        <div class="field" data-spotstrap="combobox" data-name="country" id="country">
+          <label class="label" data-part="label" for="country-input">Country</label>
+          <div data-part="control">
+            <input class="input" id="country-input" data-part="input" placeholder="Start typing" data-control />
+          </div>
+          <div class="menu" data-part="content">
+            <div class="menu-item" data-part="item" data-value="at">Austria</div>
+            <div class="menu-item" data-part="item" data-value="hr">Croatia</div>
+            <div class="menu-item" data-part="item" data-value="de">Germany</div>
+            <div class="menu-item" data-part="item" data-value="it">Italy</div>
+            <div class="menu-item" data-part="item" data-value="si">Slovenia</div>
+            <div class="menu-empty" data-part="empty" hidden>No country matches.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="more">
+        <h2 class="text-title-2">Tabs, disclosure, appear</h2>
+        <div class="tabs" data-spotstrap="tabs" id="settings-tabs">
+          <div class="tab-list" data-part="list">
+            <button type="button" class="tab" data-part="trigger" data-value="general" data-control>General</button>
+            <button type="button" class="tab" data-part="trigger" data-value="members" data-control>Members</button>
+            <button type="button" class="tab" data-part="trigger" data-value="billing" data-control>Billing</button>
+          </div>
+          <div class="tab-panel" data-part="content" data-value="general">Name, address and time zone.</div>
+          <div class="tab-panel" data-part="content" data-value="members">Who can open this project.</div>
+          <div class="tab-panel" data-part="content" data-value="billing">Plan and invoices.</div>
+        </div>
+        <div>
+          <details class="disclosure" name="faq" id="faq-backups">
+            <summary class="disclosure-button" data-control>How long are backups kept?</summary>
+            <div class="disclosure-panel">Thirty days, then the oldest one goes each night.</div>
+          </details>
+          <details class="disclosure" name="faq" id="faq-export">
+            <summary class="disclosure-button" data-control>Can I export my data?</summary>
+            <div class="disclosure-panel">Yes, as JSON, from Settings.</div>
+          </details>
+        </div>
+        <div class="row">
+          <button type="button" class="btn btn-outline" id="toggle-note" data-control>Show note</button>
+          <p class="appear-up text-subhead" id="note" hidden>Saved a moment ago.</p>
+        </div>
+      </section>
+    </main>
+    <script>
+      document.getElementById('mixed').indeterminate = true
+      document.getElementById('theme-picker').addEventListener('change', (e) => {
+        document.getElementById('theme').href = `../dist/themes/${e.target.value}.css`
+      })
+    </script>
+    <script type="module">
+      import { init } from '../dist/js/spotstrap.js'
+
+      init()
+      document.getElementById('project-menu').addEventListener('spotstrap:select', (e) => {
+        document.getElementById('menu-result').textContent = `Chose ${e.detail.value}`
+      })
+      document.getElementById('toggle-note').addEventListener('click', () => {
+        const note = document.getElementById('note')
+        note.hidden = !note.hidden
+      })
+    </script>
+  </body>
+</html>

@@ -2,9 +2,14 @@
 //   dist/spotstrap.css        base layer, type scale and every spotstrap class, no theme
 //   dist/themes/<name>.css    one theme as plain CSS; dark follows the system setting
 //   dist/tokens.json          every theme's values, as oklch and hex
+//   dist/js/spotstrap.js      spotstrap/js, bundled with Zag, for browsers and bundlers alike
+//   dist/js/index.d.ts        its types
+//   dist/recipes/index.js     spotstrap/recipes, class strings for React Native, with types
 
-import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
+import { execFileSync } from 'node:child_process'
+import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { compile, optimize } from '@tailwindcss/node'
+import { build as bundle } from 'esbuild'
 import { toHex } from './color.ts'
 import { colors, fonts, radii, themes } from './contract.ts'
 
@@ -18,7 +23,14 @@ async function build(css: string, candidates: string[]): Promise<string> {
 
 /** Every class name spotstrap defines with `@utility` or as a theme text style. */
 async function spotstrapClasses(): Promise<string[]> {
-  const source = await readFile(new URL('src/tailwind.css', root), 'utf8')
+  const files = [
+    'src/tailwind.css',
+    'src/tokens.css',
+    ...(await readdir(new URL('src/components/', root))).map((f) => `src/components/${f}`),
+  ]
+  const source = (await Promise.all(files.map((f) => readFile(new URL(f, root), 'utf8')))).join(
+    '\n',
+  )
   const utilities = [...source.matchAll(/@utility ([\w-]+)/g)].map((m) => m[1])
   const text = [...source.matchAll(/--text-([\w-]+?):/g)].map((m) => `text-${m[1]}`)
   return [...utilities, ...text]
@@ -54,6 +66,32 @@ async function main() {
     )
   }
   await writeFile(new URL('tokens.json', dist), `${JSON.stringify(tokens, null, 2)}\n`)
+
+  await bundle({
+    entryPoints: [new URL('src/js/index.ts', root).pathname],
+    outfile: new URL('js/spotstrap.js', dist).pathname,
+    bundle: true,
+    format: 'esm',
+    platform: 'browser',
+    target: 'es2022',
+    minify: true,
+    sourcemap: true,
+    legalComments: 'linked',
+    banner: { js: header('behavior for menu, listbox, combobox and tabs').split('\n')[0] },
+  })
+  await bundle({
+    entryPoints: [new URL('src/recipes/index.ts', root).pathname],
+    outfile: new URL('recipes/index.js', dist).pathname,
+    bundle: true,
+    format: 'esm',
+    platform: 'neutral',
+    target: 'es2022',
+    banner: { js: header('React Native recipes').split('\n')[0] },
+  })
+  execFileSync('tsc', ['-p', 'tsconfig.build.json'], { stdio: 'inherit' })
+  // tsc keeps the source's `.ts` specifiers in declarations; consumers resolve `.js` to `.d.ts`.
+  const types = new URL('recipes/index.d.ts', dist)
+  await writeFile(types, (await readFile(types, 'utf8')).replaceAll("'./sizes.ts'", "'./sizes.js'"))
 }
 
 type ThemeTokens = Awaited<ReturnType<typeof themeTokens>>

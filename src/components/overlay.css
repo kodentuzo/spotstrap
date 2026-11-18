@@ -1,0 +1,160 @@
+/*
+ * Dialog and popover, on the browser's own <dialog> and [popover], or on a headless library's
+ * content element. Open them without script with invoker buttons:
+ *
+ *   <button class="btn" commandfor="confirm" command="show-modal">Delete…</button>
+ *   <dialog class="dialog" id="confirm">…</dialog>
+ *
+ *   <button class="btn" commandfor="info" command="toggle-popover">Info</button>
+ *   <div class="popover" id="info" popover>…</div>
+ *
+ * On narrow screens a dialog becomes a sheet at the bottom, within thumb reach, and its
+ * actions stack full width with the first one (usually Cancel) at the bottom.
+ */
+
+@utility dialog {
+  position: fixed;
+  inset: 0;
+  width: min(32rem, 100% - 2rem);
+  max-height: calc(100% - 2rem);
+  margin: auto;
+  padding: 1.5rem;
+  overflow: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background-color: var(--color-popover);
+  color: var(--color-popover-foreground);
+  box-shadow: var(--shadow-xl);
+  opacity: 1;
+  scale: 1;
+  transition-property: opacity, scale, translate, display, overlay;
+  transition-duration: 200ms;
+  transition-behavior: allow-discrete;
+
+  /* A closed <dialog> stays hidden; open ones and libraries' mounted content lay out. */
+  &:is([open], :popover-open, :not(dialog, [popover])) {
+    display: grid;
+    gap: 1rem;
+  }
+
+  @starting-style {
+    &:is([open], :popover-open) {
+      opacity: 0;
+      scale: 0.96;
+    }
+  }
+
+  &:is([data-state="closed"], [data-closed], [data-exiting]) {
+    opacity: 0;
+    scale: 0.96;
+  }
+
+  &::backdrop {
+    background-color: oklch(0 0 0 / 40%);
+    transition-property: opacity, display, overlay;
+    transition-duration: 200ms;
+    transition-behavior: allow-discrete;
+  }
+
+  @starting-style {
+    &[open]::backdrop {
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 40rem) {
+    width: 100%;
+    max-width: none;
+    max-height: calc(100% - 2.75rem);
+    margin-bottom: 0;
+    padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+    border-bottom-width: 0;
+    border-end-start-radius: 0;
+    border-end-end-radius: 0;
+
+    @starting-style {
+      &:is([open], :popover-open) {
+        scale: 1;
+        translate: 0 2rem;
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition-property: opacity, display, overlay;
+
+    @starting-style {
+      &:is([open], :popover-open) {
+        scale: 1;
+        translate: none;
+      }
+    }
+  }
+}
+
+@utility dialog-title {
+  margin: 0;
+  font-size: var(--text-title-3);
+  line-height: var(--text-title-3--line-height);
+  font-weight: 600;
+}
+
+@utility dialog-description {
+  margin: 0;
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+  color: var(--color-muted-foreground);
+}
+
+@utility dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--gap-control);
+
+  @media (max-width: 40rem) {
+    flex-direction: column-reverse;
+
+    & > * {
+      width: 100%;
+    }
+  }
+}
+
+@utility popover {
+  width: max-content;
+  max-width: min(20rem, 100vw - 2rem);
+  padding: 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-popover);
+  color: var(--color-popover-foreground);
+  box-shadow: var(--shadow-lg);
+  font-size: var(--text-subhead);
+  line-height: var(--text-subhead--line-height);
+  opacity: 1;
+  transition-property: opacity, display, overlay;
+  transition-duration: 150ms;
+  transition-behavior: allow-discrete;
+
+  /* A native popover sits next to the button that opened it, and flips to stay on screen. */
+  &:where([popover]) {
+    inset: auto;
+    /* A percentage is of the area next to the button, so the popover fits it and only
+       flips when it runs out of room below. */
+    max-width: min(20rem, 100%);
+    margin: 0.25rem 0;
+    position-area: block-end span-inline-end;
+    position-try-fallbacks: flip-block, flip-inline;
+  }
+
+  @starting-style {
+    &:popover-open {
+      opacity: 0;
+    }
+  }
+
+  &:is([data-state="closed"], [data-closed], [data-exiting]) {
+    opacity: 0;
+  }
+}
