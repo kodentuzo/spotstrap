@@ -109,3 +109,23 @@
     color: var(--color-muted-foreground);
   }
 }
+
+/* Highlighted code: Shiki writes both themes; the dark one applies with the site's .dark. */
+@layer components {
+  .example-code {
+    margin: 0;
+    padding: 1rem;
+    overflow-x: auto;
+    font-size: var(--text-subhead);
+    line-height: 1.6;
+  }
+
+  /* Shiki sets the light colors as style attributes, so only !important can switch them. */
+  .dark .astro-code,
+  .dark .astro-code span {
+    /* biome-ignore lint/complexity/noImportantStyles: overrides Shiki's style attributes */
+    color: var(--shiki-dark) !important;
+    /* biome-ignore lint/complexity/noImportantStyles: overrides Shiki's style attributes */
+    background-color: var(--shiki-dark-bg) !important;
+  }
+}
