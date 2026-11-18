@@ -1,0 +1,136 @@
+/*
+ * Spotstrap theme: Vinskiano.
+ * Crimson on mauve, soft corners, Inter.
+ *
+ * Static values only, so Tailwind and Uniwind both read this file
+ * (docs/decisions/0001-token-contract.md).
+ */
+
+@theme {
+  --color-background: oklch(1 0 0);
+  --color-foreground: oklch(0.145 0.008 326);
+  --color-surface: oklch(1 0 0);
+  --color-raised: oklch(0.967 0.001 286.375);
+  --color-card: oklch(1 0 0);
+  --color-card-foreground: oklch(0.145 0.008 326);
+  --color-popover: oklch(1 0 0);
+  --color-popover-foreground: oklch(0.145 0.008 326);
+  --color-primary: oklch(0.514 0.222 16.935);
+  --color-primary-foreground: oklch(0.969 0.015 12.422);
+  --color-secondary: oklch(0.967 0.001 286.375);
+  --color-secondary-foreground: oklch(0.21 0.006 285.885);
+  --color-muted: oklch(0.96 0.003 325.6);
+  --color-muted-foreground: oklch(0.542 0.034 322.5);
+  --color-accent: oklch(0.96 0.003 325.6);
+  --color-accent-foreground: oklch(0.212 0.019 322.12);
+  --color-destructive: oklch(0.577 0.245 27.325);
+  --color-destructive-foreground: oklch(0.985 0 0);
+  --color-border: oklch(0.922 0.005 325.62);
+  --color-input: oklch(0.922 0.005 325.62);
+  --color-ring: oklch(0.711 0.019 323.02);
+  --color-chart-1: oklch(0.87 0 0);
+  --color-chart-2: oklch(0.556 0 0);
+  --color-chart-3: oklch(0.439 0 0);
+  --color-chart-4: oklch(0.371 0 0);
+  --color-chart-5: oklch(0.269 0 0);
+  --color-sidebar: oklch(1 0 0);
+  --color-sidebar-foreground: oklch(0.145 0.008 326);
+  --color-sidebar-primary: oklch(0.514 0.222 16.935);
+  --color-sidebar-primary-foreground: oklch(0.969 0.015 12.422);
+  --color-sidebar-accent: oklch(0.96 0.003 325.6);
+  --color-sidebar-accent-foreground: oklch(0.212 0.019 322.12);
+  --color-sidebar-border: oklch(0.922 0.005 325.62);
+  --color-sidebar-ring: oklch(0.711 0.019 323.02);
+
+  --font-sans: "Inter Variable", "Inter Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Inter Variable", "Inter Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+
+  --radius: 0.875rem;
+  --radius-xs: 0.35rem;
+  --radius-sm: 0.525rem;
+  --radius-md: 0.7rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.225rem;
+  --radius-2xl: 1.575rem;
+  --radius-3xl: 1.925rem;
+  --radius-4xl: 2.275rem;
+}
+
+@layer theme {
+  :root {
+    @variant light {
+      --color-background: oklch(1 0 0);
+      --color-foreground: oklch(0.145 0.008 326);
+      --color-surface: oklch(1 0 0);
+      --color-raised: oklch(0.967 0.001 286.375);
+      --color-card: oklch(1 0 0);
+      --color-card-foreground: oklch(0.145 0.008 326);
+      --color-popover: oklch(1 0 0);
+      --color-popover-foreground: oklch(0.145 0.008 326);
+      --color-primary: oklch(0.514 0.222 16.935);
+      --color-primary-foreground: oklch(0.969 0.015 12.422);
+      --color-secondary: oklch(0.967 0.001 286.375);
+      --color-secondary-foreground: oklch(0.21 0.006 285.885);
+      --color-muted: oklch(0.96 0.003 325.6);
+      --color-muted-foreground: oklch(0.542 0.034 322.5);
+      --color-accent: oklch(0.96 0.003 325.6);
+      --color-accent-foreground: oklch(0.212 0.019 322.12);
+      --color-destructive: oklch(0.577 0.245 27.325);
+      --color-destructive-foreground: oklch(0.985 0 0);
+      --color-border: oklch(0.922 0.005 325.62);
+      --color-input: oklch(0.922 0.005 325.62);
+      --color-ring: oklch(0.711 0.019 323.02);
+      --color-chart-1: oklch(0.87 0 0);
+      --color-chart-2: oklch(0.556 0 0);
+      --color-chart-3: oklch(0.439 0 0);
+      --color-chart-4: oklch(0.371 0 0);
+      --color-chart-5: oklch(0.269 0 0);
+      --color-sidebar: oklch(1 0 0);
+      --color-sidebar-foreground: oklch(0.145 0.008 326);
+      --color-sidebar-primary: oklch(0.514 0.222 16.935);
+      --color-sidebar-primary-foreground: oklch(0.969 0.015 12.422);
+      --color-sidebar-accent: oklch(0.96 0.003 325.6);
+      --color-sidebar-accent-foreground: oklch(0.212 0.019 322.12);
+      --color-sidebar-border: oklch(0.922 0.005 325.62);
+      --color-sidebar-ring: oklch(0.711 0.019 323.02);
+    }
+
+    @variant dark {
+      --color-background: oklch(0.145 0.008 326);
+      --color-foreground: oklch(0.985 0 0);
+      --color-surface: oklch(0.212 0.019 322.12);
+      --color-raised: oklch(0.274 0.006 286.033);
+      --color-card: oklch(0.212 0.019 322.12);
+      --color-card-foreground: oklch(0.985 0 0);
+      --color-popover: oklch(0.212 0.019 322.12);
+      --color-popover-foreground: oklch(0.985 0 0);
+      --color-primary: oklch(0.455 0.188 13.697);
+      --color-primary-foreground: oklch(0.969 0.015 12.422);
+      --color-secondary: oklch(0.274 0.006 286.033);
+      --color-secondary-foreground: oklch(0.985 0 0);
+      --color-muted: oklch(0.263 0.024 320.12);
+      --color-muted-foreground: oklch(0.711 0.019 323.02);
+      --color-accent: oklch(0.263 0.024 320.12);
+      --color-accent-foreground: oklch(0.985 0 0);
+      --color-destructive: oklch(0.704 0.191 22.216);
+      --color-destructive-foreground: oklch(0.145 0 0);
+      --color-border: oklch(1 0 0 / 10%);
+      --color-input: oklch(1 0 0 / 15%);
+      --color-ring: oklch(0.542 0.034 322.5);
+      --color-chart-1: oklch(0.87 0 0);
+      --color-chart-2: oklch(0.556 0 0);
+      --color-chart-3: oklch(0.439 0 0);
+      --color-chart-4: oklch(0.371 0 0);
+      --color-chart-5: oklch(0.269 0 0);
+      --color-sidebar: oklch(0.212 0.019 322.12);
+      --color-sidebar-foreground: oklch(0.985 0 0);
+      --color-sidebar-primary: oklch(0.455 0.188 13.697);
+      --color-sidebar-primary-foreground: oklch(0.969 0.015 12.422);
+      --color-sidebar-accent: oklch(0.263 0.024 320.12);
+      --color-sidebar-accent-foreground: oklch(0.985 0 0);
+      --color-sidebar-border: oklch(1 0 0 / 10%);
+      --color-sidebar-ring: oklch(0.542 0.034 322.5);
+    }
+  }
+}

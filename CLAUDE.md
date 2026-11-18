@@ -12,6 +12,15 @@ CSS, and recipes for React Native. It styles state; it doesn't ship a component 
 | `docs/decisions/`    | ADRs                                                     |
 | `CHANGELOG.md`       | Keep a Changelog; `Unreleased` on top                    |
 
+## Commands
+
+```bash
+pnpm verify   # check + typecheck + build + test: run before calling work done
+pnpm check    # Biome; `pnpm fix` writes fixes
+```
+
+Node from `.nvmrc`, pnpm from `packageManager`.
+
 ## Conventions
 
 - **Branches:** `dev` is the default; branch from it and open PRs into it. `main` is

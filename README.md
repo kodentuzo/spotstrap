@@ -27,6 +27,30 @@ the browser's own elements (`<dialog>`, `popover`, `<details>`) in plain HTML.
 - **Outputs:** Tailwind v4 source, prebuilt CSS, tokens as JSON, and class recipes for React
   Native (Uniwind).
 
+## Use
+
+With Tailwind v4:
+
+```css
+@import "tailwindcss";
+@import "spotstrap/tailwind.css";
+@import "spotstrap/themes/neutral.css";
+/* Optional: follow a .dark class on <html> instead of the system setting. */
+@import "spotstrap/dark-class.css";
+```
+
+Without Tailwind:
+
+```html
+<link rel="stylesheet" href="…/spotstrap/dist/spotstrap.css" />
+<link rel="stylesheet" href="…/spotstrap/dist/themes/neutral.css" />
+```
+
+Themes: `neutral`, `kodentuzo`, `librevitalis`, `librelifts`, `spotcraft`, `sokobanko`,
+`tagtape`, `vinskiano`. They name fonts but don't load them; load the font files yourself.
+
+Colors outside CSS (meta tags, favicons, canvas) come from `spotstrap/tokens.json`.
+
 ## Docs
 
 - [Guidelines](docs/guidelines.md): the interface rules, taken from Apple's Human Interface

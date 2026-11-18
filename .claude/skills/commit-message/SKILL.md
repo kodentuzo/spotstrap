@@ -50,13 +50,16 @@ breaking change raises the minor version instead.
 
 Optional, but use one when it fits:
 
-| Scope  | Covers                                   |
-| ------ | ---------------------------------------- |
-| `docs` | `docs/`, ADRs                            |
-| `deps` | dependency changes                       |
-| `ci`   | GitHub workflows                         |
-| `ai`   | `.claude/`, skills, `CLAUDE.md`          |
-| `repo` | license, root config, repo metadata      |
+| Scope     | Covers                                   |
+| --------- | ---------------------------------------- |
+| `css`     | `src/` CSS: tokens, themes, classes      |
+| `js`      | `src/js/`: optional behavior             |
+| `recipes` | `src/recipes/`: React Native recipes     |
+| `docs`    | `docs/`, ADRs                            |
+| `deps`    | dependency changes                       |
+| `ci`      | GitHub workflows                         |
+| `ai`      | `.claude/`, skills, `CLAUDE.md`          |
+| `repo`    | license, root config, repo metadata      |
 
 Add a scope here when a new package or area appears. Leave the scope out for repo-wide changes.
 
