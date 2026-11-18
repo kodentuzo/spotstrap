@@ -1,0 +1,19 @@
+/*
+ * Follow a `.dark` class on <html> instead of the system setting. Import after
+ * "spotstrap/tailwind.css":
+ *
+ *   @import "spotstrap/tailwind.css";
+ *   @import "spotstrap/dark-class.css";
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant light (&:not(:where(.dark, .dark *)));
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  :root.dark {
+    color-scheme: dark;
+  }
+}

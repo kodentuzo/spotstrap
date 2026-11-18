@@ -8,3 +8,9 @@ version is 0.y.z, a breaking change raises the minor version and is listed under
 or **Removed** with migration steps.
 
 ## [Unreleased]
+
+### Added
+
+- **`spotstrap/tailwind.css`** for projects on Tailwind v4: the base layer (page colors, border
+  and outline colors) and a `light` variant for themes. Colors follow the system setting.
+- **`spotstrap/dark-class.css`** makes colors follow a `.dark` class on `<html>` instead.

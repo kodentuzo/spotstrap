@@ -1,0 +1,38 @@
+/*
+ * Spotstrap for projects with Tailwind v4. Import it after Tailwind, then one theme:
+ *
+ *   @import "tailwindcss";
+ *   @import "spotstrap/tailwind.css";
+ *   @import "spotstrap/themes/neutral.css";
+ *
+ * Themes define the tokens (docs/decisions/0001-token-contract.md); this file defines how
+ * they're used. Colors follow the system's light or dark setting; import
+ * "spotstrap/dark-class.css" after this file to follow a `.dark` class instead.
+ */
+
+/* Themes set colors under `light` and `dark`. Tailwind has `dark` built in. */
+@custom-variant light (@media (prefers-color-scheme: light));
+
+/* Older shadcn components use `font-heading`; it's the display font. */
+@theme inline {
+  --font-heading: var(--font-display);
+}
+
+@layer base {
+  :root {
+    color-scheme: light dark;
+  }
+
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-border);
+    outline-color: color-mix(in oklab, var(--color-ring) 50%, transparent);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+}

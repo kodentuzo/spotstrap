@@ -1,0 +1,14 @@
+@theme {
+  --color-background: oklch(1 0 0);
+}
+
+@layer theme {
+  :root {
+    @variant light {
+      --color-background: oklch(1 0 0);
+    }
+    @variant dark {
+      --color-background: oklch(0 0 0);
+    }
+  }
+}
