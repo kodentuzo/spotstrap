@@ -19,3 +19,7 @@ or **Removed** with migration steps.
 - **Type scale** from Apple's iOS text styles: `text-large-title`, `text-title-1`…`3`,
   `text-headline`, `text-body`, `text-callout`, `text-subhead`, `text-footnote`,
   `text-caption-1` and `-2`. Body text is 17px, and text inputs never go below 16px.
+- **Themes** in `spotstrap/themes/`: `neutral` (the default) and presets for kodentuzo,
+  librevitalis, librelifts (LibreBars uses it too), spotcraft, sokobanko, tagtape and
+  vinskiano. Every theme defines the same tokens, in light and dark. Themes name their fonts
+  but don't load them.
