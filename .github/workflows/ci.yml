@@ -2,9 +2,11 @@ name: CI
 
 # Pull requests and pushes to dev and main: check, typecheck, build and test (`pnpm verify`).
 # The tests include a headless Chromium that measures the demo page at a phone's size.
+# v* tags: verify, then publish to npm (docs/releasing.md).
 on:
   push:
     branches: [dev, main]
+    tags: ["v*.*.*"]
   pull_request:
 
 permissions:
@@ -31,3 +33,47 @@ jobs:
       # The demo tests measure controls in headless Chromium.
       - run: pnpm exec playwright install --with-deps --only-shell chromium
       - run: pnpm verify
+
+  # Release tags only, after verify passed on the same commit. Trusted publishing (GitHub
+  # OIDC): no token is stored and provenance is automatic. NPM_TOKEN (environment `npm`) is
+  # only for the very first publish, before a trusted publisher can be linked; delete it after.
+  npm:
+    needs: [verify]
+    # Only the original repository publishes the name; forks skip it.
+    if: startsWith(github.ref, 'refs/tags/v') && github.repository == 'kodentuzo/spotstrap'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.0 (version from packageManager)
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          registry-url: https://registry.npmjs.org
+      - name: Check the tag and npm
+        env:
+          REF: ${{ github.ref }}
+        run: |
+          tag="${REF#refs/tags/v}"
+          version="$(jq -r .version package.json)"
+          if [ "$tag" != "$version" ]; then
+            echo "::error::Tag v$tag doesn't match package.json version $version"
+            exit 1
+          fi
+          # Trusted publishing needs npm 11.5.1 or later.
+          npx --yes semver@7.7.3 -r '>=11.5.1' "$(npm --version)" > /dev/null || {
+            echo "::error::npm $(npm --version) is too old for trusted publishing"
+            exit 1
+          }
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - name: Publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: ./scripts/npm-publish.sh

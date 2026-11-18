@@ -9,6 +9,11 @@ or **Removed** with migration steps.
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-19
+
+The first release: tokens, themes, touch sizes and Apple's type scale, every component in
+Headless UI's list, `spotstrap/js` for plain HTML, and React Native recipes.
+
 ### Added
 
 - **`spotstrap/tailwind.css`** for projects on Tailwind v4: the base layer (page colors, border
@@ -56,3 +61,6 @@ or **Removed** with migration steps.
 - **React Native:** `spotstrap/native.css` (sizes and type scale for Uniwind) and
   `spotstrap/recipes`, functions that return full class strings and a `hitSlop` for each
   component, from the same tokens as the web.
+
+[Unreleased]: https://github.com/kodentuzo/spotstrap/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/kodentuzo/spotstrap/releases/tag/v0.1.0
