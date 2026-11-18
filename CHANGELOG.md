@@ -9,6 +9,12 @@ or **Removed** with migration steps.
 
 ## [Unreleased]
 
+### Changed
+
+- **The neutral theme's accent is shadcn's light gray** (it was near-black, from spotcraft's
+  style), so hovers, highlighted menu items and toggled buttons are subtle. The spotcraft
+  preset keeps its bold accent.
+
 ### Added
 
 - **Prebuilt themes follow `.dark` and `.light`** on `<html>`, over the system setting, so a
