@@ -14,6 +14,8 @@ or **Removed** with migration steps.
 - **Prebuilt themes follow `.dark` and `.light`** on `<html>`, over the system setting, so a
   site without Tailwind can have a theme toggle. Without either class, the system decides, as
   before. See ADR 0007.
+- **Toggle buttons:** a `btn` with `aria-pressed="true"` (or `[data-selected]`,
+  `[data-state="on"]`) shows as on, with the accent fill.
 
 ## [0.1.0] - 2026-11-19
 

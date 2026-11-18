@@ -177,3 +177,9 @@ test('prebuilt themes follow .dark and .light over the system setting', async ()
   await page.emulateMedia({ colorScheme: 'light' })
   assert.equal(await background(), dark, '.dark wins over a light system')
 })
+
+test('a toggle button that is on looks different from one that is off', async () => {
+  const page = await open()
+  const bg = (id: string) => page.$eval(id, (el) => getComputedStyle(el).backgroundColor)
+  assert.notEqual(await bg('#toggle-on'), await bg('#toggle-off'))
+})
