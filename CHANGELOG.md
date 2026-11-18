@@ -9,6 +9,25 @@ or **Removed** with migration steps.
 
 ## [Unreleased]
 
+### Changed
+
+- **The neutral theme's accent is shadcn's light gray** (it was near-black, from spotcraft's
+  style), so hovers, highlighted menu items and toggled buttons are subtle. The spotcraft
+  preset keeps its bold accent.
+- **A `choice` row that follows another is 12px below it**, so stacked checkboxes, radios and
+  switches keep the guidelines' 12px between targets without a wrapper. `radio-group` no longer
+  adds its own gap.
+
+### Added
+
+- **Prebuilt themes follow `.dark` and `.light`** on `<html>`, over the system setting, so a
+  site without Tailwind can have a theme toggle. Without either class, the system decides, as
+  before. See ADR 0007.
+- **Toggle buttons:** a `btn` with `aria-pressed="true"` (or `[data-selected]`,
+  `[data-state="on"]`) shows as on, with the accent fill.
+- **Appear on popovers and dialogs:** `appear`, `appear-up` and `appear-scale` also fade a
+  native `[popover]` or `<dialog>` in and out as it opens and closes.
+
 ## [0.1.0] - 2026-11-19
 
 The first release: tokens, themes, touch sizes and Apple's type scale, every component in

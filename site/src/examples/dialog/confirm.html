@@ -1,0 +1,9 @@
+<button type="button" class="btn btn-destructive" commandfor="confirm" command="show-modal">Delete project…</button>
+<dialog class="dialog" id="confirm" aria-labelledby="confirm-title" aria-describedby="confirm-text">
+  <h2 class="dialog-title" id="confirm-title">Delete this project?</h2>
+  <p class="dialog-description" id="confirm-text">Its files and history go too. You can't undo this.</p>
+  <div class="dialog-actions">
+    <button type="button" class="btn btn-outline" commandfor="confirm" command="close">Cancel</button>
+    <button type="button" class="btn btn-destructive" commandfor="confirm" command="close">Delete</button>
+  </div>
+</dialog>

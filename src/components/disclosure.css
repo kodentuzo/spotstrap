@@ -6,7 +6,8 @@
  * Disclosure: <details class="disclosure"> with <summary class="disclosure-button"> and a
  * `disclosure-panel`; `name` on several <details> makes an accordion. No script needed.
  * Appear: `appear`, `appear-up`, `appear-scale` fade an element in when it's shown and out when
- * it's hidden, closed or unmounted by a library. Reduced motion keeps only the fade.
+ * it's hidden, closed or unmounted by a library, and a native [popover] or <dialog> when it
+ * opens and closes. Reduced motion keeps only the fade.
  */
 
 @utility tabs {
@@ -189,7 +190,14 @@
     scale: var(--appear-scale, 1);
   }
 
-  &:is([hidden], [data-closed], [data-state="closed"], [data-exiting]) {
+  &:is(
+      [hidden],
+      [data-closed],
+      [data-state="closed"],
+      [data-exiting],
+      [popover]:not(:popover-open),
+      dialog:not([open])
+    ) {
     opacity: 0;
     translate: var(--appear-translate, 0);
     scale: var(--appear-scale, 1);
@@ -202,7 +210,14 @@
       scale: none;
     }
 
-    &:is([hidden], [data-closed], [data-state="closed"], [data-exiting]) {
+    &:is(
+        [hidden],
+        [data-closed],
+        [data-state="closed"],
+        [data-exiting],
+        [popover]:not(:popover-open),
+        dialog:not([open])
+      ) {
       translate: none;
       scale: none;
     }

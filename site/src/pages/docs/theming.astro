@@ -1,0 +1,136 @@
+---
+import tokens from 'spotstrap/tokens.json'
+import { contrast } from '../../../../scripts/color.ts'
+import { colors } from '../../../../scripts/contract.ts'
+import Docs from '../../layouts/Docs.astro'
+import { GITHUB_AT_VERSION } from '../../lib/site.ts'
+
+type Mode = Record<string, { oklch: string; hex: string }>
+type Theme = { light: Mode; dark: Mode; fonts: Record<string, string>; radius: Record<string, string> }
+const themes = tokens as unknown as Record<string, Theme>
+
+// The swatches shown per theme, with the text color each one carries.
+const swatches = [
+  ['background', 'foreground'],
+  ['primary', 'primary-foreground'],
+  ['secondary', 'secondary-foreground'],
+  ['muted', 'muted-foreground'],
+  ['accent', 'accent-foreground'],
+  ['destructive', 'destructive-foreground'],
+] as const
+
+const ratio = (mode: Mode, fg: string, bg: string) => contrast(mode[fg].oklch, mode[bg].oklch).toFixed(1)
+
+// Class names written out, so Tailwind finds them.
+const typeScale = [
+  ['large-title', 'text-large-title', 34, 41],
+  ['title-1', 'text-title-1', 28, 34],
+  ['title-2', 'text-title-2', 22, 28],
+  ['title-3', 'text-title-3', 20, 25],
+  ['headline', 'text-headline', 17, 22],
+  ['body', 'text-body', 17, 22],
+  ['callout', 'text-callout', 16, 21],
+  ['subhead', 'text-subhead', 15, 20],
+  ['footnote', 'text-footnote', 13, 18],
+  ['caption-1', 'text-caption-1', 12, 16],
+  ['caption-2', 'text-caption-2', 11, 13],
+] as const
+---
+
+<Docs
+  title="Theming"
+  description="Every theme sets the same tokens, in light and dark. Change the values, never the names, and every component follows."
+  source={`${GITHUB_AT_VERSION}/site/src/pages/docs/theming.astro`}
+>
+  <div class="prose">
+    <p>
+      A theme is a small CSS file with static values only, so Tailwind, the prebuilt CSS and
+      Uniwind (React Native) all read it. The names are shadcn's, so shadcn components in any
+      framework use them as they are (<a href="/docs/decisions/0001-token-contract">ADR 0001</a>).
+    </p>
+
+    <h2 id="presets"><a href="#presets">Presets</a></h2>
+    <p>
+      Each swatch shows its text color on top and the contrast ratio between them. Every text pair
+      in every theme reaches WCAG AA (4.5:1), checked by a test.
+    </p>
+  </div>
+
+  <div class="mt-4 grid gap-6 md:grid-cols-2">
+    {
+      Object.entries(themes).map(([name, theme]) => (
+        <section class="overflow-hidden rounded-xl border border-border" aria-labelledby={`theme-${name}`}>
+          <h3 class="border-b border-border px-4 py-3 text-headline" id={`theme-${name}`}>
+            {name}
+          </h3>
+          {(['light', 'dark'] as const).map((mode) => (
+            <div class="grid grid-cols-3 gap-2 p-3" style={`background:${theme[mode].background.hex}`}>
+              {swatches.map(([bg, fg]) => (
+                <div
+                  class="rounded-md p-2 text-caption-1"
+                  style={`background:${theme[mode][bg].hex};color:${theme[mode][fg].hex};border:1px solid ${theme[mode].border.hex}`}
+                >
+                  <div class="font-medium">{bg}</div>
+                  <div>
+                    {mode} · {ratio(theme[mode], fg, bg)}:1
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+          <p class="border-t border-border px-4 py-2 text-footnote text-muted-foreground">
+            <code>spotstrap/themes/{name}.css</code> · radius {theme.radius.base} · {theme.fonts.sans.split(',')[0].replaceAll('"', '')}
+          </p>
+        </section>
+      ))
+    }
+  </div>
+
+  <div class="prose mt-10">
+    <h2 id="tokens"><a href="#tokens">The tokens</a></h2>
+    <p>Colors, each with light and dark values. As Tailwind utilities: <code>bg-primary</code>, <code>text-muted-foreground</code>, <code>border-border</code>…</p>
+    <p>{colors.map((c, i) => <><code>{c}</code>{i < colors.length - 1 ? ', ' : '.'}</>)}</p>
+    <p>
+      Fonts: <code>--font-sans</code>, <code>--font-display</code>, <code>--font-mono</code>. Radii:
+      <code>--radius</code> and <code>--radius-xs</code> to <code>--radius-4xl</code>. A theme may set
+      every <code>--shadow-*</code> to <code>none</code>, as sokobanko does.
+    </p>
+
+    <h2 id="sizes"><a href="#sizes">Touch sizes</a></h2>
+    <table>
+      <thead><tr><th>Token</th><th>Value</th><th>For</th></tr></thead>
+      <tbody>
+        <tr><td><code>--size-control</code></td><td>44px</td><td>Buttons, inputs, rows, tabs</td></tr>
+        <tr><td><code>--size-control-compact</code></td><td>36px</td><td>Dense desktop screens; the hit area stays 44px</td></tr>
+        <tr><td><code>--gap-control</code></td><td>12px</td><td>Space between targets</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="type"><a href="#type">Type scale</a></h2>
+    <p>Apple's iOS text styles, in rem so they follow the browser's text size. Use them as <code>text-body</code>, <code>text-title-1</code>…</p>
+  </div>
+  <div class="mt-2 grid gap-3">
+    {
+      typeScale.map(([name, className, size, leading]) => (
+        <div class="flex flex-wrap items-baseline gap-x-4 border-b border-border pb-3">
+          <code class="w-28 shrink-0 text-footnote text-muted-foreground">{name}</code>
+          <span class={className}>Feels right on phones</span>
+          <span class="ms-auto text-footnote text-muted-foreground">{size} / {leading}</span>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="prose mt-10">
+    <h2 id="your-own"><a href="#your-own">Your own theme</a></h2>
+    <ol>
+      <li>Copy <code>spotstrap/themes/neutral.css</code> into your project.</li>
+      <li>Change the values: accent, neutrals, radius, fonts. Keep every name.</li>
+      <li>Import it instead of a preset.</li>
+    </ol>
+    <p>
+      Keep text pairs at 4.5:1 or more in light and dark. Values must stay static (no
+      <code>var()</code>, <code>calc()</code> or <code>color-mix()</code>) for React Native.
+    </p>
+  </div>
+</Docs>

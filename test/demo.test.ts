@@ -162,3 +162,24 @@ test('a shown appear element ends visible', async () => {
     () => getComputedStyle(document.getElementById('note') as Element).opacity === '1',
   )
 })
+
+test('prebuilt themes follow .dark and .light over the system setting', async () => {
+  const page = await open()
+  const background = () => page.evaluate(() => getComputedStyle(document.body).backgroundColor)
+  await page.emulateMedia({ colorScheme: 'light' })
+  const light = await background()
+  await page.emulateMedia({ colorScheme: 'dark' })
+  const dark = await background()
+  assert.notEqual(light, dark)
+  await page.evaluate(() => document.documentElement.classList.add('light'))
+  assert.equal(await background(), light, '.light wins over a dark system')
+  await page.evaluate(() => document.documentElement.classList.replace('light', 'dark'))
+  await page.emulateMedia({ colorScheme: 'light' })
+  assert.equal(await background(), dark, '.dark wins over a light system')
+})
+
+test('a toggle button that is on looks different from one that is off', async () => {
+  const page = await open()
+  const bg = (id: string) => page.$eval(id, (el) => getComputedStyle(el).backgroundColor)
+  assert.notEqual(await bg('#toggle-on'), await bg('#toggle-off'))
+})

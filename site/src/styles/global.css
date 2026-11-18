@@ -1,0 +1,131 @@
+/* The site is styled with spotstrap itself (docs/decisions/0006-website.md). */
+@import "tailwindcss";
+@import "spotstrap/tailwind.css";
+@import "spotstrap/themes/neutral.css";
+@import "spotstrap/dark-class.css";
+
+@layer base {
+  html {
+    scroll-padding-top: 5rem;
+  }
+
+  ::selection {
+    background-color: var(--color-primary);
+    color: var(--color-primary-foreground);
+  }
+}
+
+/* Long-form text: docs pages and component descriptions. */
+@utility prose {
+  max-width: 44rem;
+
+  & :where(h2) {
+    margin: 2.5rem 0 0.75rem;
+    font-size: var(--text-title-2);
+    line-height: var(--text-title-2--line-height);
+    font-weight: 600;
+  }
+
+  & :where(h3) {
+    margin: 2rem 0 0.5rem;
+    font-size: var(--text-title-3);
+    line-height: var(--text-title-3--line-height);
+    font-weight: 600;
+  }
+
+  & :where(h2, h3) a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  & :where(p, ul, ol, table, pre, blockquote) {
+    margin: 0 0 1rem;
+  }
+
+  & :where(ul, ol) {
+    padding-inline-start: 1.25rem;
+  }
+
+  & :where(ul) {
+    list-style: disc;
+  }
+
+  & :where(ol) {
+    list-style: decimal;
+  }
+
+  & :where(li) {
+    margin-block: 0.25rem;
+  }
+
+  & :where(a) {
+    color: var(--color-foreground);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  & :where(code) {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+  }
+
+  & :where(:not(pre) > code) {
+    padding: 0.1em 0.35em;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-muted);
+  }
+
+  & :where(pre) {
+    padding: 1rem;
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background-color: var(--color-raised);
+    font-size: var(--text-subhead);
+    line-height: 1.6;
+  }
+
+  & :where(table) {
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: var(--text-subhead);
+  }
+
+  & :where(th, td) {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+    text-align: start;
+    vertical-align: top;
+  }
+
+  & :where(th) {
+    font-weight: 600;
+  }
+
+  & :where(blockquote) {
+    padding-inline-start: 1rem;
+    border-inline-start: 3px solid var(--color-border);
+    color: var(--color-muted-foreground);
+  }
+}
+
+/* Highlighted code: Shiki writes both themes; the dark one applies with the site's .dark. */
+@layer components {
+  .example-code {
+    margin: 0;
+    padding: 1rem;
+    overflow-x: auto;
+    font-size: var(--text-subhead);
+    line-height: 1.6;
+  }
+
+  /* Shiki sets the light colors as style attributes, so only !important can switch them. */
+  .dark .astro-code,
+  .dark .astro-code span {
+    /* biome-ignore lint/complexity/noImportantStyles: overrides Shiki's style attributes */
+    color: var(--shiki-dark) !important;
+    /* biome-ignore lint/complexity/noImportantStyles: overrides Shiki's style attributes */
+    background-color: var(--shiki-dark-bg) !important;
+  }
+}

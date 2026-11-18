@@ -1,0 +1,14 @@
+/* An example page: spotstrap on its own, as a page using it would look. */
+@import "tailwindcss";
+@import "spotstrap/tailwind.css";
+@import "spotstrap/themes/neutral.css";
+@import "spotstrap/dark-class.css";
+
+@source "../examples";
+
+@layer base {
+  body {
+    margin: 0;
+    padding: 1.5rem max(1rem, env(safe-area-inset-left));
+  }
+}

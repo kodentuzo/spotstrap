@@ -1,0 +1,23 @@
+---
+import Docs from '../../layouts/Docs.astro'
+import { allSlugs, renderDoc } from '../../lib/docs.ts'
+
+export function getStaticPaths() {
+  return allSlugs().map((slug) => ({ params: { slug } }))
+}
+
+const doc = renderDoc(Astro.params.slug as string)
+if (!doc) throw new Error(`No doc for ${Astro.params.slug}`)
+const adr = doc.meta.number !== undefined
+---
+
+<Docs title={doc.title} source={doc.source}>
+  {
+    adr && (
+      <p slot="eyebrow" class="mb-2 text-footnote text-muted-foreground">
+        Decision {String(doc.meta.number).padStart(4, '0')} · {doc.meta.status} · {doc.meta.date}
+      </p>
+    )
+  }
+  <div class="prose" set:html={doc.html} />
+</Docs>

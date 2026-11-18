@@ -1,0 +1,18 @@
+<form class="mx-auto grid max-w-md gap-5 rounded-xl border border-border bg-card p-5 text-card-foreground">
+  <div>
+    <h2 class="text-title-3 font-semibold">Notifications</h2>
+    <p class="text-subhead text-muted-foreground">Choose what reaches your phone.</p>
+  </div>
+  <div class="field">
+    <label class="label" for="email">Email</label>
+    <input class="input" id="email" type="email" autocomplete="email" placeholder="you@example.com" />
+  </div>
+  <div>
+    <label class="choice"><input type="checkbox" role="switch" class="switch" checked /> Releases</label>
+    <label class="choice"><input type="checkbox" role="switch" class="switch" /> Security fixes</label>
+  </div>
+  <div class="flex flex-wrap justify-end gap-(--gap-control)">
+    <button type="button" class="btn btn-ghost">Cancel</button>
+    <button type="button" class="btn">Save</button>
+  </div>
+</form>

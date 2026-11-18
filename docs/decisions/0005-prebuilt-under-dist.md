@@ -5,7 +5,7 @@ status: accepted
 implementation: done
 date: 2026-11-18
 supersedes: [2]
-superseded_by: []
+superseded_by: [7]
 notes: "Partly supersedes ADR 0002: the export paths of the prebuilt CSS. Built in scripts/build.ts."
 ---
 

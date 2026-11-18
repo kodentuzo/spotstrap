@@ -1,0 +1,60 @@
+---
+// A live example: a toolbar, the example page in an iframe, and its HTML.
+import { Code } from 'astro:components'
+import { example } from '../lib/examples.ts'
+import { THEMES } from '../lib/themes.ts'
+
+interface Props {
+  /** `button/variants` for src/examples/button/variants.html. */
+  name: string
+  /** A short title for the iframe, e.g. "Button variants". */
+  title: string
+  /** Minimum preview height in px, for examples that open something (menus, dialogs). */
+  minHeight?: number
+  /** Show the HTML under the preview. */
+  code?: boolean
+}
+const { name, title, minHeight = 160, code = true } = Astro.props
+const html = example(name)
+const id = `example-${name.replace(/\W+/g, '-')}`
+---
+
+<figure class="example my-6 overflow-hidden rounded-xl border border-border" data-example id={id}>
+  <div class="flex flex-wrap items-center gap-2 border-b border-border bg-raised p-2" role="toolbar" aria-label={`${title}: preview`}>
+    <label class="sr-only" for={`${id}-theme`}>Theme</label>
+    <select class="select w-auto min-w-40 max-sm:min-w-0 max-sm:flex-1" id={`${id}-theme`} data-example-theme>
+      {THEMES.map((t) => <option value={t}>{t}</option>)}
+    </select>
+    <fieldset class="m-0 flex gap-1 border-0 p-0">
+      <legend class="sr-only">Color scheme</legend>
+      <button type="button" class="btn btn-ghost" data-example-scheme="page" aria-pressed="true" title="Follow this page">Auto</button>
+      <button type="button" class="btn btn-ghost" data-example-scheme="light" aria-pressed="false">Light</button>
+      <button type="button" class="btn btn-ghost" data-example-scheme="dark" aria-pressed="false">Dark</button>
+    </fieldset>
+    <fieldset class="m-0 ms-auto flex gap-1 border-0 p-0 max-sm:hidden">
+      <legend class="sr-only">Width</legend>
+      <button type="button" class="btn btn-ghost" data-example-width="phone" aria-pressed="false">Phone</button>
+      <button type="button" class="btn btn-ghost" data-example-width="full" aria-pressed="true">Full</button>
+    </fieldset>
+  </div>
+  <div class="bg-background" data-example-stage>
+    <iframe
+      class="example-frame mx-auto block w-full border-0 transition-[width] duration-200"
+      src={`/examples/${name}.html`}
+      title={title}
+      loading="lazy"
+      data-min-height={minHeight}></iframe>
+  </div>
+  {code && (<div class="relative border-t border-border">
+    <Code code={html} lang="html" themes={{ light: 'github-light', dark: 'github-dark' }} class="example-code" />
+    <button type="button" class="btn btn-outline btn-compact absolute right-2 top-2" data-example-copy aria-label={`Copy the HTML of ${title}`}>
+      Copy
+    </button>
+  </div>)}
+</figure>
+
+<script>
+  import { setUpExamples } from '../lib/example-frame.ts'
+
+  setUpExamples()
+</script>

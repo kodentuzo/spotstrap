@@ -6,7 +6,7 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["**", "!!**/dist", "!.claude/skills"]
+    "includes": ["**", "!!**/dist", "!!**/.astro", "!.claude/skills"]
   },
   "formatter": {
     "enabled": true,
@@ -45,6 +45,19 @@
       "formatter": {
         "enabled": false
       }
+    },
+    {
+      "includes": ["site/src/examples/**/*.html", "demo/**/*.html"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "useAriaPropsForRole": "off"
+          }
+        }
+      }
     }
-  ]
+  ],
+  "html": {
+    "experimentalFullSupportEnabled": true
+  }
 }

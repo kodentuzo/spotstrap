@@ -7,6 +7,7 @@
  *   Sizes: btn-compact (36px, still a 44px hit area), btn-icon (square).
  *   States: :hover, :active or [data-pressed], :focus-visible, :disabled or
  *   [aria-disabled="true"], [aria-busy="true"] (a spinner; change the label too: "Saving…").
+ *   Toggle buttons: [aria-pressed="true"] (or [data-selected], [data-state="on"]) shows as on.
  */
 
 @utility btn {
@@ -69,6 +70,13 @@
   &[data-pressed] {
     scale: 0.97;
     opacity: 0.85;
+  }
+
+  /* A toggle button that's on: the accent fill, whatever the variant. */
+  &:is([aria-pressed="true"], [data-selected], [data-state="on"]) {
+    background-color: var(--btn-bg-on, var(--color-accent));
+    color: var(--btn-fg-on, var(--color-accent-foreground));
+    box-shadow: inset 0 0 0 1px var(--color-border);
   }
 
   &:focus-visible,

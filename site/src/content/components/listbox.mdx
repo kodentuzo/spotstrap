@@ -1,0 +1,30 @@
+---
+title: Listbox
+description: A select you can style, with 44px options. Needs spotstrap/js; without it, use select on a native <select>.
+order: 9
+js: true
+---
+import Example from '../../components/Example.astro'
+
+The trigger uses the `select` class and the list uses `menu`. It submits its value under
+`data-name` and fires `spotstrap:change`. The list opens below and flips above when there's no
+room.
+
+<Example name="listbox/basic" title="A listbox" minHeight={320} />
+
+## Keyboard (spotstrap/js)
+
+| Key | Does |
+| --- | --- |
+| Enter, Space, ↓ ↑ on the button | Opens the list |
+| ↓ ↑, Home, End | Moves between options, skipping disabled ones |
+| Enter | Picks the option |
+| Escape | Closes the list |
+
+## States it styles
+
+| State | Attributes |
+| --- | --- |
+| Highlighted | `[data-highlighted]`, `[data-focus]`, `[data-active]`, `[data-focused]` |
+| Selected | `[data-state="checked"]`, `[aria-selected="true"]`, `[data-selected]`: shows a check |
+| Disabled | `[data-disabled]`, `[aria-disabled="true"]` |

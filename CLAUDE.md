@@ -6,16 +6,18 @@ CSS, and recipes for React Native. It styles state; it doesn't ship a component 
 
 ## Layout
 
-| Path                 | What                                                     |
-| -------------------- | -------------------------------------------------------- |
-| `docs/guidelines.md` | Interface rules from Apple's HIG; components follow them |
-| `docs/decisions/`    | ADRs                                                     |
-| `CHANGELOG.md`       | Keep a Changelog; `Unreleased` on top                    |
+| Path                 | What                                                              |
+| -------------------- | ----------------------------------------------------------------- |
+| `site/`              | spotstrap.dev (Astro): component pages, examples, docs (ADR 0006) |
+| `docs/guidelines.md` | Interface rules from Apple's HIG; components follow them          |
+| `docs/decisions/`    | ADRs                                                              |
+| `CHANGELOG.md`       | Keep a Changelog; `Unreleased` on top                             |
 
 ## Commands
 
 ```bash
-pnpm verify   # check + typecheck + build + test: run before calling work done
+pnpm verify   # check, typecheck, build, the site (with its link check), tests: run before calling work done
+pnpm site:dev # the website at localhost:4321
 pnpm check    # Biome; `pnpm fix` writes fixes
 ```
 

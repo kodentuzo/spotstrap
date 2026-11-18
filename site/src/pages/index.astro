@@ -1,0 +1,98 @@
+---
+import Example from '../components/Example.astro'
+import Base from '../layouts/Base.astro'
+import { THEMES } from '../lib/themes.ts'
+
+const promises = [
+  {
+    title: 'No framework needed',
+    text: 'One CSS file and plain HTML. Tailwind and React, Vue or Svelte are optional.',
+  },
+  {
+    title: 'Feels right on phones',
+    text: "44pt touch targets and Apple's type scale, so a web app feels native.",
+  },
+  {
+    title: 'Web and native match',
+    text: 'The same sizes and tokens in React Native, through Uniwind recipes.',
+  },
+  {
+    title: 'Your brand in one file',
+    text: 'Change the accent, radius and fonts, and every app follows.',
+  },
+]
+---
+
+<Base>
+  <section class="py-12 sm:py-20">
+    <p class="text-subhead font-medium text-muted-foreground">spotstrap</p>
+    <h1 class="mt-2 max-w-3xl text-large-title font-semibold tracking-tight sm:text-5xl sm:leading-tight">
+      Bootstrap's reach, shadcn's look, made for phones.
+    </h1>
+    <p class="mt-4 max-w-2xl text-body text-muted-foreground">
+      A Tailwind v4 UI library that works in plain HTML, every web framework and React Native. It styles the
+      headless library you already use instead of shipping another runtime.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-(--gap-control)">
+      <a class="btn" href="/docs/getting-started">Get started</a>
+      <a class="btn btn-outline" href="/components/button">Components</a>
+    </div>
+  </section>
+
+  <Example name="home/settings" title="A settings form built with spotstrap" minHeight={380} code={false} />
+
+  <section class="mt-16 grid gap-6 sm:grid-cols-2" aria-label="What spotstrap promises">
+    {
+      promises.map((p) => (
+        <div class="rounded-xl border border-border p-5">
+          <h2 class="text-headline">{p.title}</h2>
+          <p class="mt-1 text-body text-muted-foreground">{p.text}</p>
+        </div>
+      ))
+    }
+  </section>
+
+  <section class="mt-16" aria-labelledby="install">
+    <h2 class="text-title-2 font-semibold" id="install">Three ways in</h2>
+    <div class="mt-6 grid gap-6 lg:grid-cols-3">
+      <div class="min-w-0">
+        <h3 class="text-headline">With Tailwind v4</h3>
+        <pre class="mt-2 overflow-x-auto rounded-lg border border-border bg-raised p-4 text-subhead"><code>@import "tailwindcss";
+@import "spotstrap/tailwind.css";
+@import "spotstrap/themes/neutral.css";</code></pre>
+      </div>
+      <div class="min-w-0">
+        <h3 class="text-headline">Plain HTML</h3>
+        <pre class="mt-2 overflow-x-auto rounded-lg border border-border bg-raised p-4 text-subhead"><code>&lt;link rel="stylesheet" href=
+  "https://cdn.jsdelivr.net/npm/spotstrap/dist/spotstrap.css"&gt;
+&lt;link rel="stylesheet" href=
+  "https://cdn.jsdelivr.net/npm/spotstrap/dist/themes/neutral.css"&gt;</code></pre>
+      </div>
+      <div class="min-w-0">
+        <h3 class="text-headline">React Native</h3>
+        <pre class="mt-2 overflow-x-auto rounded-lg border border-border bg-raised p-4 text-subhead"><code>@import "uniwind";
+@import "spotstrap/native.css";
+@import "spotstrap/themes/neutral.css";</code></pre>
+      </div>
+    </div>
+    <p class="mt-4 text-body"><a class="btn btn-link -ms-1 px-1" href="/docs/getting-started">Read Getting started</a></p>
+  </section>
+
+  <section class="mt-16" aria-labelledby="presets">
+    <h2 class="text-title-2 font-semibold" id="presets">One contract, many brands</h2>
+    <p class="mt-2 max-w-2xl text-body text-muted-foreground">
+      Every theme sets the same shadcn-named tokens. Switch them in any example's toolbar, or compare them all.
+    </p>
+    <ul class="mt-4 flex flex-wrap gap-2">
+      {
+        THEMES.map((t) => (
+          <li>
+            <a class="btn btn-outline btn-compact" href={`/docs/theming#theme-${t}`}>
+              {t}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>

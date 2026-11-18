@@ -1,0 +1,24 @@
+---
+title: Tabs
+description: 44px tabs that scroll sideways when they don't fit. spotstrap/js switches them; without it every panel shows.
+order: 11
+js: true
+---
+import Example from '../../components/Example.astro'
+
+Arrow keys select as they move, as the WAI-ARIA pattern recommends.
+
+<Example name="tabs/basic" title="Tabs" />
+
+## Classes
+
+| Class | What |
+| --- | --- |
+| `tabs`, `tab-list`, `tab`, `tab-panel` | Tabs. |
+
+## States it styles
+
+| State | Attributes |
+| --- | --- |
+| Selected | `[aria-selected="true"]`, `[data-selected]` (react-aria, Zag), `[data-state="active"]` (Radix, reka-ui, bits-ui) |
+| Focus, disabled | `:focus-visible`, `[data-focus-visible]`, `:disabled`, `[data-disabled]` |

@@ -1,0 +1,23 @@
+---
+title: Combobox
+description: An input that filters a list as people type. Needs spotstrap/js.
+order: 10
+js: true
+---
+import Example from '../../components/Example.astro'
+
+Items that don't match are hidden; a `menu-empty` part says so when nothing matches. It fires
+`spotstrap:change`.
+
+<Example name="combobox/basic" title="A combobox" minHeight={340} />
+
+## Keyboard (spotstrap/js)
+
+| Key | Does |
+| --- | --- |
+| Typing | Filters the list |
+| ↓ ↑ | Moves between matches |
+| Enter | Picks the highlighted match |
+| Escape | Closes the list |
+
+It styles the same states as [Listbox](/components/listbox).

@@ -1,0 +1,22 @@
+---
+title: Popover
+description: A small panel next to the button that opened it, on [popover]. It flips to stay on screen.
+order: 7
+---
+import Example from '../../components/Example.astro'
+
+Open it with `commandfor` and `command="toggle-popover"`. It's anchored to its button and
+flips above when there's no room below.
+
+<Example name="popover/basic" title="A popover" minHeight={200} />
+
+## Classes
+
+| Class | What |
+| --- | --- |
+| `popover` | The panel. On a native `[popover]` it's anchored to its button. |
+
+| State | Plain HTML | Headless libraries |
+| --- | --- | --- |
+| Open | `:popover-open` | Mounted content is shown |
+| Closing | — | `[data-state="closed"]`, `[data-closed]`, `[data-exiting]` fade out |

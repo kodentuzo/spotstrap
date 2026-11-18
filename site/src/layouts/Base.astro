@@ -1,0 +1,52 @@
+---
+import SiteFooter from '../components/SiteFooter.astro'
+import SiteHeader from '../components/SiteHeader.astro'
+import { DESCRIPTION, SITE_NAME } from '../lib/site.ts'
+import '../styles/global.css'
+
+interface Props {
+  title?: string
+  description?: string
+}
+const { title, description = DESCRIPTION } = Astro.props
+const fullTitle = title
+  ? `${title} · ${SITE_NAME}`
+  : `${SITE_NAME}: Bootstrap's reach, shadcn's look, made for phones`
+// Pages can't send headers, so the policy is a meta tag. Scripts and styles come from files.
+const csp = [
+  "default-src 'self'",
+  "script-src 'self'",
+  "style-src 'self'",
+  // Highlighted code (Shiki) colors its tokens with style attributes; no script can run there.
+  "style-src-attr 'unsafe-inline'",
+  "img-src 'self' data:",
+  "font-src 'self'",
+  "frame-src 'self'",
+  "base-uri 'none'",
+  "form-action 'none'",
+  "object-src 'none'",
+].join('; ')
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content={csp} />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="color-scheme" content="light dark" />
+    <script is:inline src="/scheme.js"></script>
+  </head>
+  <body class="min-h-dvh">
+    <a class="btn btn-secondary absolute left-4 top-2 z-50 -translate-y-24 focus-visible:translate-y-0" href="#main">Skip to content</a>
+    <SiteHeader />
+    <main id="main" class="mx-auto w-full max-w-6xl px-[max(1rem,env(safe-area-inset-left))] pb-16">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

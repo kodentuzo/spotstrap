@@ -1,0 +1,28 @@
+---
+title: Checkbox
+description: A 20px box with a 44 × 44 hit area, in a 44px row with its label.
+order: 3
+---
+import Example from '../../components/Example.astro'
+
+Put `checkbox` on an `<input type="checkbox">`, inside a `choice` row with its label: the
+whole row is the target.
+
+<Example name="checkbox/basic" title="Checkboxes" />
+
+## Classes
+
+| Class | What |
+| --- | --- |
+| `choice` | A 44px row that holds a control and its label. |
+| `checkbox` | The box. Its mark is drawn with CSS, so strict CSPs don't block it. |
+
+## States it styles
+
+| State | Plain HTML | Headless libraries |
+| --- | --- | --- |
+| Checked | `:checked`, `[aria-checked="true"]` | `[data-state="checked"]`, `[data-checked]`, `[data-selected]` |
+| Mixed | `:indeterminate`, `[aria-checked="mixed"]` | `[data-state="indeterminate"]`, `[data-indeterminate]` |
+| Focus, invalid, disabled | `:focus-visible`, `:user-invalid`, `:disabled` | `[data-focus-visible]`, `[data-invalid]`, `[data-disabled]` |
+
+The unchecked outline uses the muted text color, so it reaches WCAG's 3:1 for a control's edge.
