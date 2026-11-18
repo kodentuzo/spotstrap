@@ -20,7 +20,7 @@ const id = `example-${name.replace(/\W+/g, '-')}`
 <figure class="example my-6 overflow-hidden rounded-xl border border-border" data-example id={id}>
   <div class="flex flex-wrap items-center gap-2 border-b border-border bg-raised p-2" role="toolbar" aria-label={`${title}: preview`}>
     <label class="sr-only" for={`${id}-theme`}>Theme</label>
-    <select class="select w-auto min-w-40" id={`${id}-theme`} data-example-theme>
+    <select class="select w-auto min-w-40 max-sm:min-w-0 max-sm:flex-1" id={`${id}-theme`} data-example-theme>
       {THEMES.map((t) => <option value={t}>{t}</option>)}
     </select>
     <fieldset class="m-0 flex gap-1 border-0 p-0">
@@ -29,7 +29,7 @@ const id = `example-${name.replace(/\W+/g, '-')}`
       <button type="button" class="btn btn-ghost" data-example-scheme="light" aria-pressed="false">Light</button>
       <button type="button" class="btn btn-ghost" data-example-scheme="dark" aria-pressed="false">Dark</button>
     </fieldset>
-    <fieldset class="m-0 ms-auto flex gap-1 border-0 p-0">
+    <fieldset class="m-0 ms-auto flex gap-1 border-0 p-0 max-sm:hidden">
       <legend class="sr-only">Width</legend>
       <button type="button" class="btn btn-ghost" data-example-width="phone" aria-pressed="false">Phone</button>
       <button type="button" class="btn btn-ghost" data-example-width="full" aria-pressed="true">Full</button>

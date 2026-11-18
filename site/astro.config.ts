@@ -1,3 +1,4 @@
+import mdx from '@astrojs/mdx'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'astro/config'
 
@@ -6,6 +7,7 @@ import { defineConfig } from 'astro/config'
 export default defineConfig({
   site: 'https://spotstrap.dev',
   output: 'static',
+  integrations: [mdx()],
   // `/docs/theming` is written as `docs/theming.html`, which Pages serves at that URL.
   build: { format: 'file', inlineStylesheets: 'never' },
   trailingSlash: 'never',

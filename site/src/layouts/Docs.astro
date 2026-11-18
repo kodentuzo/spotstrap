@@ -1,5 +1,6 @@
 ---
-import { COMPONENT_NAV, DOCS_NAV, PROJECT_NAV } from '../lib/nav.ts'
+import { getCollection } from 'astro:content'
+import { DOCS_NAV, PROJECT_NAV } from '../lib/nav.ts'
 import Base from './Base.astro'
 
 interface Props {
@@ -10,6 +11,8 @@ interface Props {
 }
 const { title, description, source } = Astro.props
 const path = Astro.url.pathname.replace(/\.html$/, '')
+const components = (await getCollection('components')).sort((a, b) => a.data.order - b.data.order)
+const COMPONENT_NAV = components.map((c) => ({ href: `/components/${c.id}`, label: c.data.title }))
 const groups = [
   { label: 'Docs', links: DOCS_NAV },
   { label: 'Components', links: COMPONENT_NAV },

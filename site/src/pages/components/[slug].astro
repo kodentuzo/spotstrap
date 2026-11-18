@@ -1,0 +1,26 @@
+---
+import { getCollection, render } from 'astro:content'
+import Docs from '../../layouts/Docs.astro'
+import { GITHUB_AT_VERSION } from '../../lib/site.ts'
+
+export async function getStaticPaths() {
+  const entries = await getCollection('components')
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }))
+}
+
+const { entry } = Astro.props
+const { Content } = await render(entry)
+---
+
+<Docs title={entry.data.title} description={entry.data.description} source={`${GITHUB_AT_VERSION}/site/src/content/components/${entry.id}.mdx`}>
+  {
+    entry.data.js && (
+      <p slot="eyebrow" class="mb-2 text-footnote text-muted-foreground">
+        Needs <a class="underline underline-offset-2" href="/docs/getting-started#behavior">spotstrap/js</a> in plain HTML
+      </p>
+    )
+  }
+  <div class="prose max-w-none [&>:not(figure)]:max-w-[44rem]">
+    <Content />
+  </div>
+</Docs>

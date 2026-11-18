@@ -1,0 +1,48 @@
+---
+title: Fields
+description: Label, input, textarea, select, description and error, grouped by field and fieldset. Controls are 44px with text of at least 16px.
+order: 2
+---
+import Example from '../../components/Example.astro'
+
+A `field` stacks a `label`, a control, and a `field-description` or `field-error`. Errors say
+what's wrong in words, not only in red.
+
+<Example name="fields/field" title="Fields with a description and an error" minHeight={260} />
+
+## Textarea and select
+
+`select` uses the browser's stylable `<select>` (`appearance: base-select`) where it exists:
+its picker looks like a popover, with 44px options. Elsewhere, such as Firefox today, it's the
+native picker with spotstrap's border and chevron.
+
+<Example name="fields/controls" title="Textarea and select" minHeight={260} />
+
+## Fieldset
+
+<Example name="fields/fieldset" title="A fieldset with a legend" minHeight={260} />
+
+## Classes
+
+| Class | What |
+| --- | --- |
+| `field` | Stacks a label, a control, a description and an error. |
+| `label`, `field-description`, `field-error` | The text around a control. |
+| `input`, `textarea`, `select` | The controls: 44px tall, text at least 16px so iOS doesn't zoom. |
+| `fieldset`, `legend` | A group of fields with a heading. |
+
+## States it styles
+
+| State | Plain HTML | Headless libraries |
+| --- | --- | --- |
+| Focus | `:focus-visible` | `[data-focus-visible]`, `[data-focused]` |
+| Invalid | `:user-invalid` (only after people interact), `[aria-invalid="true"]` | `[data-invalid]` |
+| Disabled | `:disabled` | `[data-disabled]` |
+| Read only | `[readonly]` | same |
+
+## Guidelines
+
+- Every field has a visible label. A placeholder is a hint, never the label.
+- Pick `type`, `inputmode` and `autocomplete` to match the data, so phones show the right keyboard.
+- Validate when people leave the field, not while they type.
+- There's no compact text control: a 36px input would have a 36px hit area.

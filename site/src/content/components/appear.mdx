@@ -1,0 +1,25 @@
+---
+title: Appear
+description: Enter and exit motion, like Headless UI's Transition, on @starting-style. Reduced motion keeps only the fade.
+order: 13
+---
+import Example from '../../components/Example.astro'
+
+`appear` fades an element in when it's shown and out when it's hidden; `appear-up` also slides
+it up and `appear-scale` also grows it. It works on `[hidden]`, on a native `[popover]` or
+`<dialog>`, and on content a library closes.
+
+<Example name="appear/popover" title="A popover that slides up" minHeight={200} />
+
+## Classes
+
+| Class | What |
+| --- | --- |
+| `appear` | Fades in and out. |
+| `appear-up` | Also slides up 8px. |
+| `appear-scale` | Also grows from 96%. |
+
+| Hidden when | |
+| --- | --- |
+| Plain HTML | `[hidden]`, a closed `[popover]` or `<dialog>` |
+| Headless libraries | `[data-closed]` (Headless UI), `[data-state="closed"]`, `[data-exiting]` (react-aria) |

@@ -1,0 +1,53 @@
+---
+title: Button
+description: Buttons and link buttons, 44px tall, with shadcn's variants and a hit area that never drops below 44 × 44.
+order: 1
+---
+import Example from '../../components/Example.astro'
+
+Put `btn` on a `<button>` or an `<a>`. Without a variant it's the default, prominent style.
+
+<Example name="button/variants" title="Button variants" />
+
+## Sizes
+
+`btn-compact` is 36px tall, for dense desktop screens; its hit area stays 44 × 44. `btn-icon`
+makes a square button for an icon alone; give it an `aria-label`.
+
+<Example name="button/sizes" title="Button sizes" />
+
+## States
+
+A busy button shows a spinner: set `aria-busy="true"` and change the label too ("Saving…"). A
+toggle button that's on uses the accent fill.
+
+<Example name="button/states" title="Button states" />
+
+## Classes
+
+| Class | What |
+| --- | --- |
+| `btn` | The button. |
+| `btn-secondary`, `btn-outline`, `btn-ghost`, `btn-link`, `btn-destructive` | Variants, shadcn's names. |
+| `btn-compact` | 36px tall; the hit area stays 44 × 44. |
+| `btn-icon` | Square, for an icon alone. |
+
+Modifiers set variables that `btn` reads, so their order in `class` never matters.
+
+## States it styles
+
+| State | Plain HTML | Headless libraries |
+| --- | --- | --- |
+| Pressed | `:active` | `[data-pressed]` (react-aria) |
+| Keyboard focus | `:focus-visible` | `[data-focus-visible]` (react-aria) |
+| Disabled | `:disabled`, `[aria-disabled="true"]` | `[data-disabled]` |
+| Busy | `[aria-busy="true"]` | same |
+| On (toggle) | `[aria-pressed="true"]` | `[data-selected]` (react-aria), `[data-state="on"]` (Radix, reka-ui, bits-ui) |
+
+## Guidelines
+
+- At most one or two default (prominent) buttons per view.
+- A destructive action is never the default one.
+- Labels are short and start with a verb. Add "…" when the button opens another view.
+- `btn-link` uses the text color with an underline: primary-colored text fails contrast in some
+  dark themes.

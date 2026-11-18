@@ -1,0 +1,21 @@
+---
+title: Disclosure
+description: A section that opens and closes, on <details>. No script; several with one name make an accordion.
+order: 12
+---
+import Example from '../../components/Example.astro'
+
+Give several `<details>` the same `name` and they open one at a time. Where the browser can
+animate `<details>`, it opens smoothly.
+
+<Example name="disclosure/accordion" title="An accordion" minHeight={220} />
+
+## Classes
+
+| Class | What |
+| --- | --- |
+| `disclosure`, `disclosure-button`, `disclosure-panel` | The section, its 44px summary row and its content. |
+
+| State | Attributes |
+| --- | --- |
+| Open | `details[open]`, or on a library's button: `[aria-expanded="true"]`, `[data-state="open"]`, `[data-open]` |
