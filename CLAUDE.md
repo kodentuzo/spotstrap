@@ -1,13 +1,16 @@
 # Spotstrap
 
-A UI library. The first focus is Tailwind CSS and how other projects pull it in.
+A UI library: Bootstrap's reach, shadcn's look, made for phones. Tailwind v4 source, prebuilt
+CSS, and recipes for React Native. It styles state; it doesn't ship a component runtime
+(ADR 0004).
 
 ## Layout
 
-| Path           | What                                  |
-| -------------- | ------------------------------------- |
-| `docs/`        | Guides and ADRs (`docs/decisions/`)   |
-| `CHANGELOG.md` | Keep a Changelog; `Unreleased` on top |
+| Path                 | What                                                     |
+| -------------------- | -------------------------------------------------------- |
+| `docs/guidelines.md` | Interface rules from Apple's HIG; components follow them |
+| `docs/decisions/`    | ADRs                                                     |
+| `CHANGELOG.md`       | Keep a Changelog; `Unreleased` on top                    |
 
 ## Conventions
 
