@@ -12,7 +12,9 @@ A UI library. The first focus is Tailwind CSS and how other projects pull it in.
 ## Conventions
 
 - **Branches:** `dev` is the default; branch from it and open PRs into it. `main` is
-  production. Releases are `vX.Y.Z` tags on `main`.
+  production.
+- **Releases:** fast-forward `main` to `dev`, tag `vX.Y.Z` on `main`, then merge `main` back
+  into `dev`.
 - **Commits:** commit each finished, verified step with a
   [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) message (skill
   `commit-message`). Never force-push or push to `dev` or `main` directly. Push, merge and tag only
