@@ -23,3 +23,8 @@ or **Removed** with migration steps.
   librevitalis, librelifts (LibreBars uses it too), spotcraft, sokobanko, tagtape and
   vinskiano. Every theme defines the same tokens, in light and dark. Themes name their fonts
   but don't load them.
+- **Prebuilt CSS** for sites without Tailwind: `spotstrap/dist/spotstrap.css` (base layer, type
+  scale, classes) and `spotstrap/dist/themes/<name>.css`. Everything is in CSS layers, so a
+  page's own CSS wins. See ADR 0005.
+- **`spotstrap/tokens.json`**: every theme's colors in light and dark, as oklch and hex, plus
+  fonts and radii, for meta tags, favicons, manifests and canvas code.

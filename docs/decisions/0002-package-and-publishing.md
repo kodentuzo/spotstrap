@@ -5,7 +5,7 @@ status: accepted
 implementation: planned
 date: 2026-11-18
 supersedes: []
-superseded_by: []
+superseded_by: [5]
 notes: "Decision only; the package skeleton and builds land in the foundation PR."
 ---
 
