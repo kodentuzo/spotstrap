@@ -35,6 +35,7 @@ or push to `dev` or `main` directly; work on a branch off `dev`. Push, merge and
   it for trivial changes.
 - **Breaking changes:** add `!` after the scope, and a
   `BREAKING CHANGE: <what and how to migrate>` footer.
+- **Attribution:** end the message with the agent's `Co-Authored-By:` line.
 
 ## Types
 
