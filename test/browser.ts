@@ -15,15 +15,16 @@ const types: Record<string, string> = {
 
 let browser: Browser
 let server: Server
-let demo: string
+let base: string
+let start: string
 const open: Page[] = []
 
-/** Serves the repo over HTTP: browsers don't load ES modules from file:// URLs. */
-function serve(): Promise<string> {
+/** Serves `dir` over HTTP: browsers don't load ES modules from file:// URLs. */
+function serve(dir: URL): Promise<string> {
   server = createServer(async (req, res) => {
     const path = decodeURIComponent(new URL(req.url ?? '/', 'http://x').pathname)
     try {
-      const body = await readFile(new URL(`.${path}`, root))
+      const body = await readFile(new URL(`.${path}`, dir))
       res.writeHead(200, { 'content-type': types[extname(path)] ?? 'application/octet-stream' })
       res.end(body)
     } catch {
@@ -33,15 +34,16 @@ function serve(): Promise<string> {
   return new Promise((resolve) =>
     server.listen(0, '127.0.0.1', () => {
       const { port } = server.address() as AddressInfo
-      resolve(`http://127.0.0.1:${port}/demo/index.html`)
+      resolve(`http://127.0.0.1:${port}`)
     }),
   )
 }
 
-/** Starts one Chromium for the file's tests and opens the demo at a phone's size. */
-export function useDemo(): () => Promise<Page> {
+/** Starts a server and one Chromium for the file's tests. */
+function useBrowser(dir: URL, path: string) {
   before(async () => {
-    demo = await serve()
+    base = await serve(dir)
+    start = `${base}${path}`
     browser = await chromium.launch()
   })
   // One page at a time: only one can have focus, and keyboard handling checks it.
@@ -52,7 +54,22 @@ export function useDemo(): () => Promise<Page> {
     await browser?.close()
     server?.close()
   })
+}
+
+/** The library's demo page (demo/index.html), opened at a phone's size. */
+export function useDemo(): () => Promise<Page> {
+  useBrowser(root, '/demo/index.html')
   return () => openDemo({ width: 375, height: 812 })
+}
+
+/** The built website (site/dist), served as GitHub Pages serves it. */
+export function useSite(): (path: string) => Promise<Page> {
+  useBrowser(new URL('site/dist/', root), '/')
+  return async (path) => {
+    const page = await openDemo({ width: 375, height: 812 })
+    await page.goto(`${base}${path}`)
+    return page
+  }
 }
 
 /** Opens the demo at another size, in the file's browser, optionally without JavaScript. */
@@ -63,7 +80,7 @@ export async function openDemo(
   const context = await browser.newContext({ viewport, javaScriptEnabled })
   const page = await context.newPage()
   open.push(page)
-  await page.goto(demo)
+  await page.goto(start)
   return page
 }
 
@@ -75,32 +92,43 @@ export interface HitArea {
   misses: string[]
 }
 
-/** Measures every `[data-control]` on the page and probes its hit area. */
-export function measureControls(page: Page): Promise<HitArea[]> {
-  return page.$$eval('[data-control]', (els) =>
-    els.map((el) => {
-      el.scrollIntoView({ block: 'center', inline: 'center' })
-      const r = el.getBoundingClientRect()
-      const cx = r.left + r.width / 2
-      const cy = r.top + r.height / 2
-      const probes: Record<string, [number, number]> = {
-        up: [cx, cy - 21.5],
-        down: [cx, cy + 21.5],
-        left: [cx - 21.5, cy],
-        right: [cx + 21.5, cy],
-      }
-      const misses = Object.entries(probes)
-        .filter(([, [x, y]]) => {
-          const hit = document.elementFromPoint(x, y)
-          return !(hit && (hit === el || el.contains(hit)))
-        })
-        .map(([name]) => name)
-      return {
-        label: el.getAttribute('aria-label') ?? el.textContent?.trim() ?? el.tagName,
-        width: Math.round(r.width),
-        height: Math.round(r.height),
-        misses,
-      }
-    }),
+/** Measures every control matching `selector` and probes its hit area. */
+export function measureControls(page: Page, selector = '[data-control]'): Promise<HitArea[]> {
+  return page.$$eval(selector, (els) =>
+    els
+      // Targets only: visible, enabled, and not a 1px element kept for forms or screen readers.
+      .filter((el) => {
+        const r = el.getBoundingClientRect()
+        const disabled = el.matches(':disabled, [aria-disabled="true"]')
+        return (
+          r.width > 1 && r.height > 1 && !disabled && getComputedStyle(el).visibility !== 'hidden'
+        )
+      })
+      .map((el) => {
+        el.scrollIntoView({ block: 'center', inline: 'center' })
+        const r = el.getBoundingClientRect()
+        const cx = r.left + r.width / 2
+        const cy = r.top + r.height / 2
+        const probes: Record<string, [number, number]> = {
+          up: [cx, cy - 21.5],
+          down: [cx, cy + 21.5],
+          left: [cx - 21.5, cy],
+          right: [cx + 21.5, cy],
+        }
+        const misses = Object.entries(probes)
+          .filter(([, [x, y]]) => {
+            const hit = document.elementFromPoint(x, y)
+            // A tap on a control's own <label> counts: it activates the control.
+            const label = hit?.closest('label')
+            return !(hit && (hit === el || el.contains(hit) || label?.control === el))
+          })
+          .map(([name]) => name)
+        return {
+          label: el.getAttribute('aria-label') ?? el.textContent?.trim() ?? el.tagName,
+          width: Math.round(r.width),
+          height: Math.round(r.height),
+          misses,
+        }
+      }),
   )
 }

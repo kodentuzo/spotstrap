@@ -53,7 +53,7 @@
     "fix": "biome check --write",
     "typecheck": "tsc --noEmit",
     "test": "node --test",
-    "verify": "pnpm check && pnpm typecheck && pnpm build && pnpm test",
+    "verify": "pnpm check && pnpm typecheck && pnpm build && pnpm --filter @spotstrap/site typecheck && pnpm --filter @spotstrap/site build && pnpm test",
     "prepack": "node scripts/build.ts",
     "site:dev": "pnpm --filter @spotstrap/site dev",
     "site:build": "pnpm build && pnpm --filter @spotstrap/site build"
