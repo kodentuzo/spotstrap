@@ -8,3 +8,4 @@ that supersedes the old one; old records are never rewritten.
 | 0001 | [shadcn's token names, in oklch, with brand themes](0001-token-contract.md)                      | accepted |
 | 0002 | [One npm package: Tailwind source, prebuilt CSS, native recipes](0002-package-and-publishing.md) | accepted |
 | 0003 | [Touch-sized controls and Apple's type scale](0003-touch-sizes-and-type.md)                      | accepted |
+| 0004 | [Style the state, don't own the runtime](0004-style-state-not-runtime.md)                        | accepted |
