@@ -11,8 +11,10 @@ interface Props {
   title: string
   /** Minimum preview height in px, for examples that open something (menus, dialogs). */
   minHeight?: number
+  /** Show the HTML under the preview. */
+  code?: boolean
 }
-const { name, title, minHeight = 160 } = Astro.props
+const { name, title, minHeight = 160, code = true } = Astro.props
 const html = example(name)
 const id = `example-${name.replace(/\W+/g, '-')}`
 ---
@@ -43,12 +45,12 @@ const id = `example-${name.replace(/\W+/g, '-')}`
       loading="lazy"
       data-min-height={minHeight}></iframe>
   </div>
-  <div class="relative border-t border-border">
+  {code && (<div class="relative border-t border-border">
     <Code code={html} lang="html" themes={{ light: 'github-light', dark: 'github-dark' }} class="example-code" />
     <button type="button" class="btn btn-outline btn-compact absolute right-2 top-2" data-example-copy aria-label={`Copy the HTML of ${title}`}>
       Copy
     </button>
-  </div>
+  </div>)}
 </figure>
 
 <script>
