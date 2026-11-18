@@ -15,6 +15,7 @@
     "@tailwindcss/vite": "^4.3.5",
     "@types/node": "^26.6.6",
     "astro": "^7.4.12",
+    "marked": "^18.2.1",
     "spotstrap": "workspace:*",
     "tailwindcss": "^4.3.5",
     "typescript": "^6.0.3"

@@ -63,7 +63,9 @@ Menu, Listbox, Combobox and Tabs in plain HTML need a little script:
 
 ## Docs
 
+- [Getting started](docs/getting-started.md): install, the three ways in, themes.
 - [Components](docs/components.md): classes, and the states they style.
+- [React Native](docs/react-native.md): recipes and `native.css`.
 - [Guidelines](docs/guidelines.md): the interface rules, taken from Apple's Human Interface
   Guidelines.
 - [Decisions](docs/decisions/README.md): architecture decision records.

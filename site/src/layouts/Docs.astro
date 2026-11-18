@@ -1,0 +1,77 @@
+---
+import { COMPONENT_NAV, DOCS_NAV, PROJECT_NAV } from '../lib/nav.ts'
+import Base from './Base.astro'
+
+interface Props {
+  title: string
+  description?: string
+  /** "Edit on GitHub" target. */
+  source?: string
+}
+const { title, description, source } = Astro.props
+const path = Astro.url.pathname.replace(/\.html$/, '')
+const groups = [
+  { label: 'Docs', links: DOCS_NAV },
+  { label: 'Components', links: COMPONENT_NAV },
+  { label: 'Project', links: PROJECT_NAV },
+].filter((g) => g.links.length > 0)
+---
+
+<Base title={title} description={description}>
+  <div class="grid gap-8 pt-6 lg:grid-cols-[13rem_minmax(0,1fr)] lg:pt-10">
+    <nav aria-label="Docs" class="lg:sticky lg:top-24 lg:self-start">
+      <details class="disclosure lg:hidden">
+        <summary class="disclosure-button">On this site</summary>
+        <div class="disclosure-panel">
+          {
+            groups.map((g) => (
+              <div class="mb-3">
+                <div class="menu-label px-0">{g.label}</div>
+                {g.links.map((l) => (
+                  <a href={l.href} class="menu-item" aria-current={path === l.href ? 'page' : undefined}>
+                    {l.label}
+                  </a>
+                ))}
+              </div>
+            ))
+          }
+        </div>
+      </details>
+      <div class="max-lg:hidden">
+        {
+          groups.map((g) => (
+            <div class="mb-4">
+              <div class="menu-label">{g.label}</div>
+              {g.links.map((l) => (
+                <a
+                  href={l.href}
+                  class="menu-item menu-compact aria-[current=page]:bg-accent aria-[current=page]:font-medium"
+                  aria-current={path === l.href ? 'page' : undefined}
+                >
+                  {l.label}
+                </a>
+              ))}
+            </div>
+          ))
+        }
+      </div>
+    </nav>
+    <article class="min-w-0">
+      <header class="mb-6">
+        <slot name="eyebrow" />
+        <h1 class="text-large-title font-semibold">{title}</h1>
+        {description && <p class="mt-2 max-w-2xl text-body text-muted-foreground">{description}</p>}
+      </header>
+      <slot />
+      {
+        source && (
+          <p class="mt-12 text-footnote text-muted-foreground">
+            <a class="underline underline-offset-2" href={source}>
+              Edit this page on GitHub
+            </a>
+          </p>
+        )
+      }
+    </article>
+  </div>
+</Base>
