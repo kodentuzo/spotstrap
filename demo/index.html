@@ -114,6 +114,25 @@
         <!-- biome-ignore lint/a11y/useAriaPropsForRole: a native checkbox exposes its checked state; aria-checked would have to be kept in sync by script -->
         <label class="choice"><input type="checkbox" role="switch" class="switch" data-control /> Bluetooth</label>
       </section>
+
+      <section id="overlays">
+        <h2 class="text-title-2">Dialog and popover</h2>
+        <div class="row">
+          <button type="button" class="btn btn-destructive" commandfor="confirm" command="show-modal" data-control>Delete…</button>
+          <button type="button" class="btn btn-outline" commandfor="info" command="toggle-popover" data-control>What's this?</button>
+        </div>
+        <div class="popover" id="info" popover>
+          Backups run every night and are kept for 30 days.
+        </div>
+        <dialog class="dialog" id="confirm" aria-labelledby="confirm-title" aria-describedby="confirm-text">
+          <h3 class="dialog-title" id="confirm-title">Delete this project?</h3>
+          <p class="dialog-description" id="confirm-text">Its files and history go too. You can't undo this.</p>
+          <div class="dialog-actions">
+            <button type="button" class="btn btn-outline" commandfor="confirm" command="close">Cancel</button>
+            <button type="button" class="btn btn-destructive" commandfor="confirm" command="close">Delete</button>
+          </div>
+        </dialog>
+      </section>
     </main>
     <script>
       document.getElementById('mixed').indeterminate = true

@@ -13,11 +13,14 @@ export function useDemo(): () => Promise<Page> {
   after(async () => {
     await browser?.close()
   })
-  return async () => {
-    const page = await browser.newPage({ viewport: { width: 375, height: 812 } })
-    await page.goto(demo)
-    return page
-  }
+  return () => openDemo({ width: 375, height: 812 })
+}
+
+/** Opens the demo at another size, in the file's browser. */
+export async function openDemo(viewport: { width: number; height: number }): Promise<Page> {
+  const page = await browser.newPage({ viewport })
+  await page.goto(demo)
+  return page
 }
 
 export interface HitArea {

@@ -96,3 +96,36 @@ There's no compact size for text controls: a 36px input would have a 36px hit ar
 | Focus, invalid, disabled | `:focus-visible`, `:user-invalid`, `:disabled` | `[data-focus-visible]`, `[data-invalid]`, `[data-disabled]`                                                        |
 
 Unchecked outlines use the muted text color, so they reach WCAG's 3:1 for a control's edge.
+
+## Dialog and popover
+
+```html
+<button class="btn btn-destructive" commandfor="confirm" command="show-modal">Delete…</button>
+<dialog class="dialog" id="confirm" aria-labelledby="confirm-title">
+  <h2 class="dialog-title" id="confirm-title">Delete this project?</h2>
+  <p class="dialog-description">Its files and history go too. You can't undo this.</p>
+  <div class="dialog-actions">
+    <button class="btn btn-outline" commandfor="confirm" command="close">Cancel</button>
+    <button class="btn btn-destructive" commandfor="confirm" command="close">Delete</button>
+  </div>
+</dialog>
+
+<button class="btn btn-outline" commandfor="info" command="toggle-popover">What's this?</button>
+<div class="popover" id="info" popover>Backups run every night.</div>
+```
+
+No script is needed: `commandfor` and `command` open and close them in every current browser.
+
+| Class                                | What                                                                                                  |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------- |
+| `dialog`                             | A modal panel. On screens narrower than 40rem it's a sheet at the bottom, within thumb reach.         |
+| `dialog-title`, `dialog-description` | Its heading and text.                                                                                 |
+| `dialog-actions`                     | Its buttons. On narrow screens they stack full width, the first one (put Cancel first) at the bottom. |
+| `popover`                            | A small panel next to the button that opened it. It flips above when there's no room below.           |
+
+| State   | Plain HTML                | Headless libraries                                                  |
+| ------- | ------------------------- | ------------------------------------------------------------------- |
+| Open    | `[open]`, `:popover-open` | Mounted content is shown; `[data-state="open"]`                     |
+| Closing | —                         | `[data-state="closed"]`, `[data-closed]`, `[data-exiting]` fade out |
+
+Motion: dialogs fade and scale in, sheets slide up. With reduced motion, both only fade.

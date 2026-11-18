@@ -14,6 +14,7 @@
 @import "./components/button.css";
 @import "./components/field.css";
 @import "./components/toggle.css";
+@import "./components/overlay.css";
 
 /* Themes set colors under `light` and `dark`. Tailwind has `dark` built in. */
 @custom-variant light (@media (prefers-color-scheme: light));

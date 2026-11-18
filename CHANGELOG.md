@@ -39,3 +39,7 @@ or **Removed** with migration steps.
 - **Checkbox, radio group and switch:** `checkbox`, `radio`, `radio-group`, `switch` and a
   44px `choice` row for a control and its label. The switch has Apple's size (51 × 31). Each
   has a 44 × 44 hit area, and their outlines meet WCAG's 3:1 for controls.
+- **Dialog and popover:** `dialog` (with `dialog-title`, `dialog-description`,
+  `dialog-actions`) and `popover`, on `<dialog>` and `[popover]`, opened without script by
+  `commandfor` buttons. On narrow screens a dialog is a bottom sheet with stacked actions. A
+  popover sits next to its button and flips to stay on screen.
