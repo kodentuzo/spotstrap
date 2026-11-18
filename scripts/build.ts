@@ -2,9 +2,13 @@
 //   dist/spotstrap.css        base layer, type scale and every spotstrap class, no theme
 //   dist/themes/<name>.css    one theme as plain CSS; dark follows the system setting
 //   dist/tokens.json          every theme's values, as oklch and hex
+//   dist/js/spotstrap.js      spotstrap/js, bundled with Zag, for browsers and bundlers alike
+//   dist/js/index.d.ts        its types
 
+import { execFileSync } from 'node:child_process'
 import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { compile, optimize } from '@tailwindcss/node'
+import { build as bundle } from 'esbuild'
 import { toHex } from './color.ts'
 import { colors, fonts, radii, themes } from './contract.ts'
 
@@ -60,6 +64,20 @@ async function main() {
     )
   }
   await writeFile(new URL('tokens.json', dist), `${JSON.stringify(tokens, null, 2)}\n`)
+
+  await bundle({
+    entryPoints: [new URL('src/js/index.ts', root).pathname],
+    outfile: new URL('js/spotstrap.js', dist).pathname,
+    bundle: true,
+    format: 'esm',
+    platform: 'browser',
+    target: 'es2022',
+    minify: true,
+    sourcemap: true,
+    legalComments: 'linked',
+    banner: { js: header('behavior for menu, listbox and combobox').split('\n')[0] },
+  })
+  execFileSync('tsc', ['-p', 'tsconfig.build.json'], { stdio: 'inherit' })
 }
 
 type ThemeTokens = Awaited<ReturnType<typeof themeTokens>>

@@ -133,11 +133,62 @@
           </div>
         </dialog>
       </section>
+
+      <section id="menus">
+        <h2 class="text-title-2">Menu, listbox, combobox</h2>
+        <div class="row">
+          <div data-spotstrap="menu" id="project-menu">
+            <button type="button" class="btn btn-outline" data-part="trigger" commandfor="project-actions" command="toggle-popover" data-control>Project…</button>
+            <div class="menu" id="project-actions" data-part="content" popover>
+              <div class="menu-label">Project</div>
+              <button type="button" class="menu-item" data-part="item" data-value="rename">Rename…</button>
+              <button type="button" class="menu-item" data-part="item" data-value="duplicate">Duplicate</button>
+              <hr class="menu-separator" />
+              <button type="button" class="menu-item menu-item-destructive" data-part="item" data-value="delete">Delete…</button>
+            </div>
+          </div>
+          <output id="menu-result" class="text-subhead"></output>
+        </div>
+
+        <div class="field" data-spotstrap="listbox" data-name="size" id="size">
+          <span class="label" data-part="label">Size</span>
+          <button type="button" class="select" data-part="trigger" data-control><span data-part="value-text" data-placeholder="Pick a size"></span></button>
+          <div class="menu" data-part="content">
+            <div class="menu-item" data-part="item" data-value="s">Small</div>
+            <div class="menu-item" data-part="item" data-value="m" data-selected>Medium</div>
+            <div class="menu-item" data-part="item" data-value="l">Large</div>
+            <div class="menu-item" data-part="item" data-value="xl" data-disabled>Extra large</div>
+          </div>
+        </div>
+
+        <div class="field" data-spotstrap="combobox" data-name="country" id="country">
+          <label class="label" data-part="label" for="country-input">Country</label>
+          <div data-part="control">
+            <input class="input" id="country-input" data-part="input" placeholder="Start typing" data-control />
+          </div>
+          <div class="menu" data-part="content">
+            <div class="menu-item" data-part="item" data-value="at">Austria</div>
+            <div class="menu-item" data-part="item" data-value="hr">Croatia</div>
+            <div class="menu-item" data-part="item" data-value="de">Germany</div>
+            <div class="menu-item" data-part="item" data-value="it">Italy</div>
+            <div class="menu-item" data-part="item" data-value="si">Slovenia</div>
+            <div class="menu-empty" data-part="empty" hidden>No country matches.</div>
+          </div>
+        </div>
+      </section>
     </main>
     <script>
       document.getElementById('mixed').indeterminate = true
       document.getElementById('theme-picker').addEventListener('change', (e) => {
         document.getElementById('theme').href = `../dist/themes/${e.target.value}.css`
+      })
+    </script>
+    <script type="module">
+      import { init } from '../dist/js/spotstrap.js'
+
+      init()
+      document.getElementById('project-menu').addEventListener('spotstrap:select', (e) => {
+        document.getElementById('menu-result').textContent = `Chose ${e.detail.value}`
       })
     </script>
   </body>

@@ -43,3 +43,9 @@ or **Removed** with migration steps.
   `dialog-actions`) and `popover`, on `<dialog>` and `[popover]`, opened without script by
   `commandfor` buttons. On narrow screens a dialog is a bottom sheet with stacked actions. A
   popover sits next to its button and flips to stay on screen.
+- **Menu, listbox and combobox:** `menu`, `menu-item`, `menu-label`, `menu-separator`,
+  `menu-empty` and `menu-compact`, styled for every headless library's highlight and
+  selection attributes.
+- **`spotstrap/js`**: keyboard and ARIA behavior for Menu, Listbox and Combobox in plain HTML,
+  on Zag.js (`init()`, about 49 kB gzipped). A Menu also works without it, through `popover`
+  and `commandfor`.

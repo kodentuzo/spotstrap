@@ -129,3 +129,66 @@ No script is needed: `commandfor` and `command` open and close them in every cur
 | Closing | —                         | `[data-state="closed"]`, `[data-closed]`, `[data-exiting]` fade out |
 
 Motion: dialogs fade and scale in, sheets slide up. With reduced motion, both only fade.
+
+## Menu, listbox, combobox
+
+These need keyboard handling the browser doesn't have, so in plain HTML they use
+`spotstrap/js` (built on [Zag.js](https://zagjs.com)). Framework apps use their own headless
+library's Menu, Select or Combobox with the same classes, and don't need the script.
+
+```html
+<script type="module">
+  import { init } from "spotstrap/js" // or …/spotstrap/dist/js/spotstrap.js from a CDN
+  init()
+</script>
+
+<div data-spotstrap="menu">
+  <button class="btn btn-outline" data-part="trigger" commandfor="actions" command="toggle-popover">Project…</button>
+  <div class="menu" id="actions" data-part="content" popover>
+    <div class="menu-label">Project</div>
+    <button class="menu-item" data-part="item" data-value="rename">Rename…</button>
+    <hr class="menu-separator" />
+    <button class="menu-item menu-item-destructive" data-part="item" data-value="delete">Delete…</button>
+  </div>
+</div>
+
+<div class="field" data-spotstrap="listbox" data-name="size">
+  <span class="label" data-part="label">Size</span>
+  <button class="select" data-part="trigger"><span data-part="value-text" data-placeholder="Pick a size"></span></button>
+  <div class="menu" data-part="content">
+    <div class="menu-item" data-part="item" data-value="m" data-selected>Medium</div>
+    <div class="menu-item" data-part="item" data-value="xl" data-disabled>Extra large</div>
+  </div>
+</div>
+
+<div class="field" data-spotstrap="combobox" data-name="country">
+  <label class="label" data-part="label" for="country">Country</label>
+  <div data-part="control"><input class="input" id="country" data-part="input" /></div>
+  <div class="menu" data-part="content">
+    <div class="menu-item" data-part="item" data-value="hr">Croatia</div>
+    <div class="menu-empty" data-part="empty" hidden>No country matches.</div>
+  </div>
+</div>
+```
+
+- **Menu** works without the script too: `popover` and `commandfor` open it, and its items are
+  buttons. The script adds arrow keys, typeahead and focus handling, and fires a
+  `spotstrap:select` event with `{ value }`.
+- **Listbox** is a select you can style. It needs the script; without it, use `select` on a
+  native `<select>`. It fires `spotstrap:change` and submits its value under `data-name`.
+- **Combobox** filters its items as people type. It fires `spotstrap:change`.
+- Lists open below their button and flip above when there's no room.
+
+| Class                          | What                                                          |
+| ------------------------------ | ------------------------------------------------------------- |
+| `menu`                         | The list panel.                                               |
+| `menu-item`                    | A 44px row. `menu-item-destructive` for a destructive action. |
+| `menu-label`, `menu-separator` | A group heading and a divider.                                |
+| `menu-empty`                   | The message when a combobox matches nothing.                  |
+| `menu-compact`                 | 36px rows, on the `menu`.                                     |
+
+| State       | Attributes                                                                                                                                          |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Highlighted | `[data-highlighted]` (Zag, Radix, reka-ui, bits-ui), `[data-focus]`, `[data-active]` (Headless UI), `[data-focused]` (react-aria), `:focus-visible` |
+| Selected    | `[data-state="checked"]`, `[aria-selected="true"]`, `[aria-checked="true"]`, `[data-selected]`: shows a check                                       |
+| Disabled    | `[data-disabled]`, `[aria-disabled="true"]`, `:disabled`                                                                                            |

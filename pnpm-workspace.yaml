@@ -7,3 +7,7 @@ trustPolicy: no-downgrade
 blockExoticSubdeps: true
 strictDepBuilds: true
 engineStrict: true
+
+# esbuild installs its platform binary in a postinstall script.
+allowBuilds:
+  esbuild: true
