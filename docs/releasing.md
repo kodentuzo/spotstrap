@@ -17,6 +17,8 @@ breaking change. While the version is 0.y.z, a breaking change raises the minor 
    re-run.
 5. Merge `main` back into `dev`.
 6. Publish a GitHub Release for the tag with its changelog section.
+7. The push to `main` also deploys spotstrap.dev (`.github/workflows/pages.yml`); check that the
+   site shows the new version in its footer.
 
 An npm version can't be replaced: fix a broken one with a new patch release and deprecate the
 broken one (`npm deprecate spotstrap@0.1.0 "Use 0.1.1"`).
@@ -40,3 +42,19 @@ Only the original repository (`kodentuzo/spotstrap`) publishes; CI skips the ste
    - allow `npm publish`.
 3. Delete the `NPM_TOKEN` secret and revoke the token. From then on CI publishes through
    GitHub's OIDC token, with no stored secret.
+
+## One-time website setup
+
+spotstrap.dev is the `site/` package, deployed to GitHub Pages from `main`
+([ADR 0006](decisions/0006-website.md)).
+
+1. In `kodentuzo/spotstrap` → Settings → Pages: set the source to **GitHub Actions** and the
+   custom domain to `spotstrap.dev`; turn on **Enforce HTTPS** once the certificate is issued.
+2. In the kodentuzo organization → Settings → Pages, verify `spotstrap.dev` (a TXT record), so
+   no other repository can claim it.
+3. In Cloudflare's DNS for spotstrap.dev, **DNS only** (not proxied):
+   - `A` `@` → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+   - `AAAA` `@` → `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`,
+     `2606:50c0:8003::153`
+   - `CNAME` `www` → `kodentuzo.github.io`
+4. Run the Pages workflow from `main` (it also runs on every release).

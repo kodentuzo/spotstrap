@@ -2,11 +2,11 @@
 title: spotstrap.dev is an Astro site in this repo, on GitHub Pages, built with spotstrap
 number: 6
 status: accepted
-implementation: planned
+implementation: done
 date: 2026-11-19
 supersedes: []
 superseded_by: []
-notes: "Built in site/; goes live with the first push to main."
+notes: "Built in site/, with the Pages workflow. Goes live with the first push to main, after the one-time setup in docs/releasing.md."
 ---
 
 # spotstrap.dev is an Astro site in this repo, on GitHub Pages, built with spotstrap
