@@ -10,3 +10,4 @@ that supersedes the old one; old records are never rewritten.
 | 0003 | [Touch-sized controls and Apple's type scale](0003-touch-sizes-and-type.md)                      | accepted                            |
 | 0004 | [Style the state, don't own the runtime](0004-style-state-not-runtime.md)                        | accepted                            |
 | 0005 | [Prebuilt CSS has its own paths under spotstrap/dist](0005-prebuilt-under-dist.md)               | accepted                            |
+| 0006 | [spotstrap.dev: an Astro site in this repo, on GitHub Pages](0006-website.md)                    | accepted                            |
