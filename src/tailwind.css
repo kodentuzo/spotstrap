@@ -13,6 +13,43 @@
 /* Themes set colors under `light` and `dark`. Tailwind has `dark` built in. */
 @custom-variant light (@media (prefers-color-scheme: light));
 
+/*
+ * Touch sizes, from Apple's HIG (docs/decisions/0003-touch-sizes-and-type.md). In rem, so
+ * they grow with the text size. Use them as `h-(--size-control)`, `gap-(--gap-control)`.
+ */
+@theme static {
+  --size-control: 2.75rem; /* 44px */
+  --size-control-compact: 2.25rem; /* 36px; its hit area stays 44px */
+  --gap-control: 0.75rem; /* 12px between targets */
+}
+
+/* Apple's iOS text styles, as `text-body`, `text-title-1`… Body text is 17px. */
+@theme {
+  --text-large-title: 2.125rem;
+  --text-large-title--line-height: 2.5625rem;
+  --text-title-1: 1.75rem;
+  --text-title-1--line-height: 2.125rem;
+  --text-title-2: 1.375rem;
+  --text-title-2--line-height: 1.75rem;
+  --text-title-3: 1.25rem;
+  --text-title-3--line-height: 1.5625rem;
+  --text-headline: 1.0625rem;
+  --text-headline--line-height: 1.375rem;
+  --text-headline--font-weight: 600;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.375rem;
+  --text-callout: 1rem;
+  --text-callout--line-height: 1.3125rem;
+  --text-subhead: 0.9375rem;
+  --text-subhead--line-height: 1.25rem;
+  --text-footnote: 0.8125rem;
+  --text-footnote--line-height: 1.125rem;
+  --text-caption-1: 0.75rem;
+  --text-caption-1--line-height: 1rem;
+  --text-caption-2: 0.6875rem;
+  --text-caption-2--line-height: 0.8125rem;
+}
+
 /* Older shadcn components use `font-heading`; it's the display font. */
 @theme inline {
   --font-heading: var(--font-display);
@@ -34,5 +71,14 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+  }
+
+  /* iOS Safari zooms into text inputs smaller than 16px. */
+  input,
+  select,
+  textarea {
+    font-size: max(16px, 1em);
   }
 }

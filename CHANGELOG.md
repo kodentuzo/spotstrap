@@ -14,3 +14,8 @@ or **Removed** with migration steps.
 - **`spotstrap/tailwind.css`** for projects on Tailwind v4: the base layer (page colors, border
   and outline colors) and a `light` variant for themes. Colors follow the system setting.
 - **`spotstrap/dark-class.css`** makes colors follow a `.dark` class on `<html>` instead.
+- **Touch sizes** from Apple's HIG: `--size-control` (44px), `--size-control-compact` (36px)
+  and `--gap-control` (12px).
+- **Type scale** from Apple's iOS text styles: `text-large-title`, `text-title-1`…`3`,
+  `text-headline`, `text-body`, `text-callout`, `text-subhead`, `text-footnote`,
+  `text-caption-1` and `-2`. Body text is 17px, and text inputs never go below 16px.
