@@ -1,3 +1,7 @@
+# The website (docs/decisions/0006-website.md) is the only workspace package besides the root.
+packages:
+  - site
+
 # Supply chain, written out explicitly so a change of pnpm defaults can't
 # quietly weaken them: releases install only once they're a day old,
 # provenance can't be downgraded, transitive deps can't come from git or

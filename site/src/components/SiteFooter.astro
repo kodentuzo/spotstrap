@@ -1,0 +1,12 @@
+---
+import { GITHUB, VERSION } from '../lib/site.ts'
+---
+
+<footer class="border-t border-border pb-[max(2rem,env(safe-area-inset-bottom))] pt-8 text-footnote text-muted-foreground">
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-[max(1rem,env(safe-area-inset-left))]">
+    <span>spotstrap {VERSION}, MIT</span>
+    <a class="underline underline-offset-2" href={GITHUB}>GitHub</a>
+    <a class="underline underline-offset-2" href="/docs/changelog">Changelog</a>
+    <a class="underline underline-offset-2" href="/docs/decisions">Decisions</a>
+  </div>
+</footer>
