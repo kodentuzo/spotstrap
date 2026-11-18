@@ -53,6 +53,7 @@ Colors outside CSS (meta tags, favicons, canvas) come from `spotstrap/tokens.jso
 
 ## Docs
 
+- [Components](docs/components.md): classes, and the states they style.
 - [Guidelines](docs/guidelines.md): the interface rules, taken from Apple's Human Interface
   Guidelines.
 - [Decisions](docs/decisions/README.md): architecture decision records.

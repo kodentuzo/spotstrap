@@ -1,0 +1,160 @@
+/*
+ * Button: `btn`, on <button> or <a>. Modifiers set variables that `btn` reads, so their order
+ * in the class list never matters.
+ *
+ *   Variants (shadcn's names): btn-secondary, btn-outline, btn-ghost, btn-link, btn-destructive.
+ *   Without one, a button is the default (primary) style.
+ *   Sizes: btn-compact (36px, still a 44px hit area), btn-icon (square).
+ *   States: :hover, :active or [data-pressed], :focus-visible, :disabled or
+ *   [aria-disabled="true"], [aria-busy="true"] (a spinner; change the label too: "Saving…").
+ */
+
+@utility btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: var(--btn-height, var(--size-control));
+  min-width: var(--btn-width, auto);
+  padding-inline: var(--btn-padding, 1rem);
+  border: 1px solid var(--btn-border, transparent);
+  border-radius: var(--btn-radius, var(--radius-lg));
+  background-color: var(--btn-bg, var(--color-primary));
+  color: var(--btn-fg, var(--color-primary-foreground));
+  font: inherit;
+  font-size: var(--btn-font-size, var(--text-body));
+  line-height: var(--text-body--line-height);
+  font-weight: 500;
+  text-decoration: var(--btn-decoration, none);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition-property: background-color, border-color, color, opacity, scale;
+  transition-duration: 150ms;
+
+  /* The hit area is at least 44 × 44, whatever the button looks like (ADR 0003). */
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(100%, var(--size-control));
+    height: max(100%, var(--size-control));
+    translate: -50% -50%;
+  }
+
+  & svg {
+    flex-shrink: 0;
+    width: 1.25em;
+    height: 1.25em;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(
+        --btn-bg-hover,
+        color-mix(
+          in oklab,
+          var(--btn-bg, var(--color-primary)) 90%,
+          var(--btn-fg, var(--color-primary-foreground))
+        )
+      );
+    }
+  }
+
+  &:active,
+  &[data-pressed] {
+    scale: 0.97;
+    opacity: 0.85;
+  }
+
+  &:focus-visible,
+  &[data-focus-visible] {
+    outline: 3px solid color-mix(in oklab, var(--color-ring) 60%, transparent);
+    outline-offset: 2px;
+  }
+
+  &:disabled,
+  &[aria-disabled="true"],
+  &[data-disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &[aria-busy="true"] {
+    cursor: progress;
+  }
+
+  &[aria-busy="true"]::before {
+    content: "";
+    width: 1em;
+    height: 1em;
+    border: 2px solid currentColor;
+    border-inline-end-color: transparent;
+    border-radius: 9999px;
+    animation: spotstrap-spin 0.8s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition-property: background-color, border-color, color, opacity;
+
+    &:active,
+    &[data-pressed] {
+      scale: none;
+    }
+  }
+}
+
+@utility btn-secondary {
+  --btn-bg: var(--color-secondary);
+  --btn-fg: var(--color-secondary-foreground);
+}
+
+@utility btn-outline {
+  --btn-bg: var(--color-background);
+  --btn-fg: var(--color-foreground);
+  --btn-border: var(--color-border);
+  --btn-bg-hover: var(--color-accent);
+}
+
+@utility btn-ghost {
+  --btn-bg: transparent;
+  --btn-fg: var(--color-foreground);
+  --btn-bg-hover: var(--color-accent);
+}
+
+/* The text color, not the primary: the underline marks it, and it stays readable on every
+   theme's background (primary text on the page fails AA in some dark themes). */
+@utility btn-link {
+  --btn-bg: transparent;
+  --btn-fg: var(--color-foreground);
+  --btn-bg-hover: transparent;
+  --btn-decoration: underline;
+  --btn-padding: 0.25rem;
+}
+
+@utility btn-destructive {
+  --btn-bg: var(--color-destructive);
+  --btn-fg: var(--color-destructive-foreground);
+}
+
+@utility btn-compact {
+  --btn-height: var(--size-control-compact);
+  --btn-padding: 0.75rem;
+  --btn-font-size: var(--text-subhead);
+}
+
+@utility btn-icon {
+  --btn-padding: 0;
+  --btn-width: var(--btn-height, var(--size-control));
+}
+
+@keyframes spotstrap-spin {
+  to {
+    rotate: 1turn;
+  }
+}

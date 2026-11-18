@@ -3,7 +3,7 @@
 //   dist/themes/<name>.css    one theme as plain CSS; dark follows the system setting
 //   dist/tokens.json          every theme's values, as oklch and hex
 
-import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
+import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { compile, optimize } from '@tailwindcss/node'
 import { toHex } from './color.ts'
 import { colors, fonts, radii, themes } from './contract.ts'
@@ -18,7 +18,13 @@ async function build(css: string, candidates: string[]): Promise<string> {
 
 /** Every class name spotstrap defines with `@utility` or as a theme text style. */
 async function spotstrapClasses(): Promise<string[]> {
-  const source = await readFile(new URL('src/tailwind.css', root), 'utf8')
+  const files = [
+    'src/tailwind.css',
+    ...(await readdir(new URL('src/components/', root))).map((f) => `src/components/${f}`),
+  ]
+  const source = (await Promise.all(files.map((f) => readFile(new URL(f, root), 'utf8')))).join(
+    '\n',
+  )
   const utilities = [...source.matchAll(/@utility ([\w-]+)/g)].map((m) => m[1])
   const text = [...source.matchAll(/--text-([\w-]+?):/g)].map((m) => `text-${m[1]}`)
   return [...utilities, ...text]

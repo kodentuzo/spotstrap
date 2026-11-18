@@ -1,6 +1,7 @@
 name: CI
 
 # Pull requests and pushes to dev and main: check, typecheck, build and test (`pnpm verify`).
+# The tests include a headless Chromium that measures the demo page at a phone's size.
 on:
   push:
     branches: [dev, main]
@@ -27,4 +28,6 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      # The demo tests measure controls in headless Chromium.
+      - run: pnpm exec playwright install --with-deps --only-shell chromium
       - run: pnpm verify

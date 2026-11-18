@@ -1,0 +1,37 @@
+import assert from 'node:assert/strict'
+import { test } from 'node:test'
+import { measureControls, useDemo } from './browser.ts'
+
+// The demo page uses the prebuilt CSS, so `pnpm build` must run first (`pnpm verify` does).
+const open = useDemo()
+
+test('every control has a 44 × 44 hit area at 375px', async () => {
+  const page = await open()
+  const small = (await measureControls(page)).filter((c) => c.misses.length > 0)
+  assert.deepEqual(small, [])
+})
+
+test('buttons are 44px tall, and compact ones 36px', async () => {
+  const page = await open()
+  const heights = await page.$$eval('#buttons .btn', (els) =>
+    els.map((el) => ({
+      compact: el.classList.contains('btn-compact'),
+      height: Math.round(el.getBoundingClientRect().height),
+    })),
+  )
+  for (const { compact, height } of heights) assert.equal(height, compact ? 36 : 44)
+})
+
+test('icon buttons are square', async () => {
+  const page = await open()
+  const sizes = await page.$$eval('#buttons .btn-icon', (els) =>
+    els.map((el) => {
+      const r = el.getBoundingClientRect()
+      return Math.round(r.width) - Math.round(r.height)
+    }),
+  )
+  assert.deepEqual(
+    sizes,
+    sizes.map(() => 0),
+  )
+})

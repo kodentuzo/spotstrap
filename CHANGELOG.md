@@ -28,3 +28,7 @@ or **Removed** with migration steps.
   page's own CSS wins. See ADR 0005.
 - **`spotstrap/tokens.json`**: every theme's colors in light and dark, as oklch and hex, plus
   fonts and radii, for meta tags, favicons, manifests and canvas code.
+- **Button** (`btn`): shadcn's variants (`btn-secondary`, `btn-outline`, `btn-ghost`,
+  `btn-link`, `btn-destructive`), `btn-compact` and `btn-icon`. Every button has a 44 × 44 hit
+  area, a pressed state and a busy state (`aria-busy="true"`). Works on `<button>` and `<a>`.
+  See `docs/components.md`.
