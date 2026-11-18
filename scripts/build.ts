@@ -75,7 +75,7 @@ async function main() {
     minify: true,
     sourcemap: true,
     legalComments: 'linked',
-    banner: { js: header('behavior for menu, listbox and combobox').split('\n')[0] },
+    banner: { js: header('behavior for menu, listbox, combobox and tabs').split('\n')[0] },
   })
   execFileSync('tsc', ['-p', 'tsconfig.build.json'], { stdio: 'inherit' })
 }

@@ -192,3 +192,44 @@ library's Menu, Select or Combobox with the same classes, and don't need the scr
 | Highlighted | `[data-highlighted]` (Zag, Radix, reka-ui, bits-ui), `[data-focus]`, `[data-active]` (Headless UI), `[data-focused]` (react-aria), `:focus-visible` |
 | Selected    | `[data-state="checked"]`, `[aria-selected="true"]`, `[aria-checked="true"]`, `[data-selected]`: shows a check                                       |
 | Disabled    | `[data-disabled]`, `[aria-disabled="true"]`, `:disabled`                                                                                            |
+
+## Tabs, disclosure, appear
+
+```html
+<div class="tabs" data-spotstrap="tabs">
+  <div class="tab-list" data-part="list">
+    <button class="tab" data-part="trigger" data-value="general">General</button>
+    <button class="tab" data-part="trigger" data-value="billing">Billing</button>
+  </div>
+  <div class="tab-panel" data-part="content" data-value="general">…</div>
+  <div class="tab-panel" data-part="content" data-value="billing">…</div>
+</div>
+
+<details class="disclosure" name="faq">
+  <summary class="disclosure-button">How long are backups kept?</summary>
+  <div class="disclosure-panel">Thirty days.</div>
+</details>
+
+<p class="appear-up" hidden>Saved a moment ago.</p>
+```
+
+- **Tabs** switch with `spotstrap/js`: click, or arrow keys, which select as they move. Without
+  the script, every panel shows, one after another. Tabs are 44px tall and the list scrolls
+  sideways when it's wider than the screen.
+- **Disclosure** is `<details>`: no script. Several with the same `name` open one at a time.
+  Where the browser can animate `<details>`, it opens smoothly.
+- **Appear** is Headless UI's Transition: `appear` fades an element in when it's shown and out
+  when it's hidden, `appear-up` also slides it up, `appear-scale` also grows it. With reduced
+  motion, they only fade.
+
+| Class                                                 | What                             |
+| ----------------------------------------------------- | -------------------------------- |
+| `tabs`, `tab-list`, `tab`, `tab-panel`                | Tabs.                            |
+| `disclosure`, `disclosure-button`, `disclosure-panel` | A section that opens and closes. |
+| `appear`, `appear-up`, `appear-scale`                 | Enter and exit motion.           |
+
+| State           | Attributes                                                                                                       |
+| --------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Selected tab    | `[aria-selected="true"]`, `[data-selected]` (react-aria, Zag), `[data-state="active"]` (Radix, reka-ui, bits-ui) |
+| Open disclosure | `details[open]`, or on a library's button: `[aria-expanded="true"]`, `[data-state="open"]`, `[data-open]`        |
+| Hidden (appear) | `[hidden]`, `[data-closed]` (Headless UI), `[data-state="closed"]`, `[data-exiting]` (react-aria)                |

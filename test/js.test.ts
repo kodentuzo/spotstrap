@@ -96,3 +96,32 @@ test('combobox: says so when nothing matches', async () => {
   await page.locator('#country [data-part="input"]').fill('zzz')
   await page.locator('#country [data-part="empty"]').waitFor({ state: 'visible' })
 })
+
+test('tabs: switch by click and by arrow keys', async () => {
+  const page = await open()
+  const panel = (v: string) =>
+    page.locator(`#settings-tabs [data-part="content"][data-value="${v}"]`)
+  assert.ok(await panel('general').isVisible())
+  assert.ok(await panel('members').isHidden())
+  await page.click('#settings-tabs [data-value="members"][data-part="trigger"]')
+  await panel('members').waitFor({ state: 'visible', timeout: 2000 })
+  // Arrow keys select as they move (automatic activation, as WAI-ARIA recommends).
+  await page.keyboard.press('ArrowRight')
+  await panel('billing').waitFor({ state: 'visible', timeout: 2000 })
+  assert.equal(
+    await page.getAttribute(
+      '#settings-tabs [data-value="billing"][data-part="trigger"]',
+      'aria-selected',
+    ),
+    'true',
+  )
+})
+
+test('tabs: without JavaScript every panel shows', async () => {
+  const page = await openDemo({ width: 375, height: 812 }, false)
+  for (const v of ['general', 'members', 'billing']) {
+    assert.ok(
+      await page.locator(`#settings-tabs [data-part="content"][data-value="${v}"]`).isVisible(),
+    )
+  }
+})

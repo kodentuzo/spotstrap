@@ -16,6 +16,7 @@
 @import "./components/toggle.css";
 @import "./components/overlay.css";
 @import "./components/menu.css";
+@import "./components/disclosure.css";
 
 /* Themes set colors under `light` and `dark`. Tailwind has `dark` built in. */
 @custom-variant light (@media (prefers-color-scheme: light));

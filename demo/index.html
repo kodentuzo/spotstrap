@@ -176,6 +176,34 @@
           </div>
         </div>
       </section>
+
+      <section id="more">
+        <h2 class="text-title-2">Tabs, disclosure, appear</h2>
+        <div class="tabs" data-spotstrap="tabs" id="settings-tabs">
+          <div class="tab-list" data-part="list">
+            <button type="button" class="tab" data-part="trigger" data-value="general" data-control>General</button>
+            <button type="button" class="tab" data-part="trigger" data-value="members" data-control>Members</button>
+            <button type="button" class="tab" data-part="trigger" data-value="billing" data-control>Billing</button>
+          </div>
+          <div class="tab-panel" data-part="content" data-value="general">Name, address and time zone.</div>
+          <div class="tab-panel" data-part="content" data-value="members">Who can open this project.</div>
+          <div class="tab-panel" data-part="content" data-value="billing">Plan and invoices.</div>
+        </div>
+        <div>
+          <details class="disclosure" name="faq" id="faq-backups">
+            <summary class="disclosure-button" data-control>How long are backups kept?</summary>
+            <div class="disclosure-panel">Thirty days, then the oldest one goes each night.</div>
+          </details>
+          <details class="disclosure" name="faq" id="faq-export">
+            <summary class="disclosure-button" data-control>Can I export my data?</summary>
+            <div class="disclosure-panel">Yes, as JSON, from Settings.</div>
+          </details>
+        </div>
+        <div class="row">
+          <button type="button" class="btn btn-outline" id="toggle-note" data-control>Show note</button>
+          <p class="appear-up text-subhead" id="note" hidden>Saved a moment ago.</p>
+        </div>
+      </section>
     </main>
     <script>
       document.getElementById('mixed').indeterminate = true
@@ -189,6 +217,10 @@
       init()
       document.getElementById('project-menu').addEventListener('spotstrap:select', (e) => {
         document.getElementById('menu-result').textContent = `Chose ${e.detail.value}`
+      })
+      document.getElementById('toggle-note').addEventListener('click', () => {
+        const note = document.getElementById('note')
+        note.hidden = !note.hidden
       })
     </script>
   </body>

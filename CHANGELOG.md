@@ -49,3 +49,7 @@ or **Removed** with migration steps.
 - **`spotstrap/js`**: keyboard and ARIA behavior for Menu, Listbox and Combobox in plain HTML,
   on Zag.js (`init()`, about 49 kB gzipped). A Menu also works without it, through `popover`
   and `commandfor`.
+- **Tabs, disclosure and appear:** `tabs`, `tab-list`, `tab`, `tab-panel` (switched by
+  `spotstrap/js`); `disclosure`, `disclosure-button`, `disclosure-panel` on `<details>`, with no
+  script; and `appear`, `appear-up`, `appear-scale` for enter and exit motion (Headless UI's
+  Transition), which only fade with reduced motion.

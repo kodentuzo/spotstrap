@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises'
 import { createServer, type Server } from 'node:http'
 import type { AddressInfo } from 'node:net'
 import { extname } from 'node:path'
-import { after, before } from 'node:test'
+import { after, afterEach, before } from 'node:test'
 import { type Browser, chromium, type Page } from 'playwright'
 
 const root = new URL('..', import.meta.url)
@@ -16,6 +16,7 @@ const types: Record<string, string> = {
 let browser: Browser
 let server: Server
 let demo: string
+const open: Page[] = []
 
 /** Serves the repo over HTTP: browsers don't load ES modules from file:// URLs. */
 function serve(): Promise<string> {
@@ -43,6 +44,10 @@ export function useDemo(): () => Promise<Page> {
     demo = await serve()
     browser = await chromium.launch()
   })
+  // One page at a time: only one can have focus, and keyboard handling checks it.
+  afterEach(async () => {
+    for (const page of open.splice(0)) await page.context().close()
+  })
   after(async () => {
     await browser?.close()
     server?.close()
@@ -57,6 +62,7 @@ export async function openDemo(
 ): Promise<Page> {
   const context = await browser.newContext({ viewport, javaScriptEnabled })
   const page = await context.newPage()
+  open.push(page)
   await page.goto(demo)
   return page
 }

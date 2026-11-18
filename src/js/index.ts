@@ -1,6 +1,6 @@
 /**
- * spotstrap/js: keyboard and ARIA behavior for Menu, Listbox and Combobox in plain HTML,
- * built on Zag.js state machines (docs/decisions/0004-style-state-not-runtime.md).
+ * spotstrap/js: keyboard and ARIA behavior for Menu, Listbox, Combobox
+ * and Tabs, built on Zag.js state machines (docs/decisions/0004-style-state-not-runtime.md).
  * Framework apps keep their own headless library and don't need this.
  *
  *   <script type="module">
@@ -8,7 +8,7 @@
  *     init()
  *   </script>
  *
- * Components are found by `data-spotstrap="menu|listbox|combobox"` and their parts by
+ * Components are found by `data-spotstrap="menu|listbox|combobox|tabs"` and their parts by
  * `data-part="…"`. A menu written with `popover` and `commandfor` works without this
  * script; init() swaps those for Zag's behavior.
  */
@@ -16,6 +16,7 @@
 import * as combobox from '@zag-js/combobox'
 import * as menu from '@zag-js/menu'
 import * as select from '@zag-js/select'
+import * as tabs from '@zag-js/tabs'
 import { normalizeProps, spreadProps, VanillaMachine } from '@zag-js/vanilla'
 
 export type Cleanup = () => void
@@ -196,7 +197,29 @@ function initCombobox(root: HTMLElement): Cleanup {
   })
 }
 
+function initTabs(root: HTMLElement): Cleanup {
+  const list = part(root, 'list')
+  const triggers = parts(root, 'trigger')
+  const panels = parts(root, 'content')
+  const value = (el: HTMLElement) => el.dataset.value ?? ''
+  const selected = triggers.find((t) => t.hasAttribute('data-selected')) ?? triggers[0]
+  const machine = new VanillaMachine(tabs.machine, {
+    id: root.id || nextId('tabs'),
+    defaultValue: selected ? value(selected) : null,
+    onValueChange: ({ value }) => emit(root, 'change', { value }),
+  })
+  for (const t of triggers) t.removeAttribute('data-selected')
+  return run(machine, () => {
+    const api = tabs.connect(machine.service, normalizeProps)
+    spreadProps(root, rootProps(api.getRootProps()))
+    spreadProps(list, api.getListProps())
+    for (const t of triggers) spreadProps(t, api.getTriggerProps({ value: value(t) }))
+    for (const p of panels) spreadProps(p, api.getContentProps({ value: value(p) }))
+  })
+}
+
 const kinds: Record<string, (root: HTMLElement) => Cleanup> = {
+  tabs: initTabs,
   menu: initMenu,
   listbox: initListbox,
   combobox: initCombobox,

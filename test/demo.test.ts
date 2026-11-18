@@ -127,3 +127,38 @@ test('a popover opens next to its button, and flips to stay on screen', async ()
   assert.ok(p.y >= 0 && p.y + p.height <= 812, 'inside the viewport')
   assert.ok(p.x >= 0 && p.x + p.width <= 375, 'inside the viewport')
 })
+
+test('disclosures open one at a time, with no script', async () => {
+  const page = await openDemo({ width: 375, height: 812 }, false)
+  await page.click('#faq-backups summary')
+  assert.equal(await page.$eval('#faq-backups', (el) => (el as HTMLDetailsElement).open), true)
+  await page.click('#faq-export summary')
+  assert.equal(await page.$eval('#faq-backups', (el) => (el as HTMLDetailsElement).open), false)
+  assert.equal(await page.$eval('#faq-export', (el) => (el as HTMLDetailsElement).open), true)
+})
+
+test('appear slides while hidden, and only fades with reduced motion', async () => {
+  const page = await open()
+  // #note starts hidden: the state it fades in from and out to.
+  const hidden = () =>
+    page.$eval('#note', (el) => {
+      const cs = getComputedStyle(el)
+      return { property: cs.transitionProperty, opacity: cs.opacity, translate: cs.translate }
+    })
+  const normal = await hidden()
+  assert.match(normal.property, /opacity/)
+  assert.equal(normal.opacity, '0')
+  assert.equal(normal.translate, '0px 8px')
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  const reduced = await hidden()
+  assert.equal(reduced.opacity, '0')
+  assert.equal(reduced.translate, 'none')
+})
+
+test('a shown appear element ends visible', async () => {
+  const page = await open()
+  await page.click('#toggle-note')
+  await page.waitForFunction(
+    () => getComputedStyle(document.getElementById('note') as Element).opacity === '1',
+  )
+})

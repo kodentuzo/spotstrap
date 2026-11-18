@@ -51,7 +51,7 @@ Themes: `neutral`, `kodentuzo`, `librevitalis`, `librelifts`, `spotcraft`, `soko
 
 Colors outside CSS (meta tags, favicons, canvas) come from `spotstrap/tokens.json`.
 
-Menu, Listbox and Combobox in plain HTML need a little script:
+Menu, Listbox, Combobox and Tabs in plain HTML need a little script:
 
 ```html
 <script type="module">
