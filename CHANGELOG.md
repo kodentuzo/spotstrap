@@ -53,3 +53,6 @@ or **Removed** with migration steps.
   `spotstrap/js`); `disclosure`, `disclosure-button`, `disclosure-panel` on `<details>`, with no
   script; and `appear`, `appear-up`, `appear-scale` for enter and exit motion (Headless UI's
   Transition), which only fade with reduced motion.
+- **React Native:** `spotstrap/native.css` (sizes and type scale for Uniwind) and
+  `spotstrap/recipes`, functions that return full class strings and a `hitSlop` for each
+  component, from the same tokens as the web.

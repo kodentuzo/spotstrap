@@ -40,6 +40,11 @@
       "types": "./dist/js/index.d.ts",
       "default": "./dist/js/spotstrap.js"
     },
+    "./native.css": "./src/native.css",
+    "./recipes": {
+      "types": "./dist/recipes/index.d.ts",
+      "default": "./dist/recipes/index.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {

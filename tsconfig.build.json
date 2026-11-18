@@ -4,8 +4,9 @@
     "noEmit": false,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "rootDir": "src/js",
-    "outDir": "dist/js"
+    "rewriteRelativeImportExtensions": true,
+    "rootDir": "src",
+    "outDir": "dist"
   },
-  "include": ["src/js"]
+  "include": ["src/js", "src/recipes"]
 }

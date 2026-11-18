@@ -1,0 +1,17 @@
+/*
+ * Spotstrap for React Native with Uniwind: sizes and the type scale, without the web's base
+ * layer and components. Import it after Uniwind, then a theme:
+ *
+ *   @import "tailwindcss";
+ *   @import "uniwind";
+ *   @import "spotstrap/native.css";
+ *   @import "spotstrap/themes/neutral.css";
+ *
+ * Then build components from spotstrap/recipes. Fonts: React Native needs one family name per
+ * font, so set --font-sans and friends in your own @theme after the theme.
+ */
+
+@import "./tokens.css";
+
+/* The recipes' classes, so Uniwind generates them. */
+@source "./recipes";
