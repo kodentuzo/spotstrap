@@ -14,6 +14,9 @@ or **Removed** with migration steps.
 - **The neutral theme's accent is shadcn's light gray** (it was near-black, from spotcraft's
   style), so hovers, highlighted menu items and toggled buttons are subtle. The spotcraft
   preset keeps its bold accent.
+- **A `choice` row that follows another is 12px below it**, so stacked checkboxes, radios and
+  switches keep the guidelines' 12px between targets without a wrapper. `radio-group` no longer
+  adds its own gap.
 
 ### Added
 

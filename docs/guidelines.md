@@ -24,7 +24,7 @@ Before a change, ask whether it serves:
   44 × 44 hit area.
 - Checkboxes, radios, switches, close buttons and chips can look smaller, but their hit area
   is 44 × 44.
-- Targets are **12px** apart (`--gap-control`).
+- Targets are **12px** apart (`--gap-control`). Stacked `choice` rows space themselves.
 - Links inside running text follow the text size.
 
 See [ADR 0003](decisions/0003-touch-sizes-and-type.md).

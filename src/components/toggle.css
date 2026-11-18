@@ -20,6 +20,11 @@
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 
+  /* Rows that follow each other keep 12px between targets (docs/guidelines.md). */
+  & + & {
+    margin-top: var(--gap-control);
+  }
+
   &:has(:disabled),
   &[data-disabled] {
     opacity: 0.5;
@@ -27,9 +32,9 @@
   }
 }
 
+/* The rows space themselves (choice + choice), so the group adds no gap of its own. */
 @utility radio-group {
   display: grid;
-  gap: var(--gap-control);
 }
 
 @utility checkbox {
