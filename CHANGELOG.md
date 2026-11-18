@@ -22,6 +22,8 @@ or **Removed** with migration steps.
   before. See ADR 0007.
 - **Toggle buttons:** a `btn` with `aria-pressed="true"` (or `[data-selected]`,
   `[data-state="on"]`) shows as on, with the accent fill.
+- **Appear on popovers and dialogs:** `appear`, `appear-up` and `appear-scale` also fade a
+  native `[popover]` or `<dialog>` in and out as it opens and closes.
 
 ## [0.1.0] - 2026-11-19
 

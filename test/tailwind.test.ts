@@ -51,3 +51,9 @@ test('controls built on the size tokens are 44px and 36px', async () => {
   assert.match(css, /height: var\(--size-control\)/)
   assert.match(css, /height: var\(--size-control-compact\)/)
 })
+
+test('appear treats a closed popover or dialog as hidden', async () => {
+  const css = await compileCss(entry, ['appear'])
+  assert.match(css, /\[popover\]:not\(:popover-open\)/)
+  assert.match(css, /dialog:not\(\[open\]\)/)
+})
