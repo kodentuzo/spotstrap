@@ -35,3 +35,26 @@ test('icon buttons are square', async () => {
     sizes.map(() => 0),
   )
 })
+
+test('text controls are at least 16px and 44px tall', async () => {
+  const page = await open()
+  const controls = await page.$$eval('#fields :is(.input, .textarea, .select)', (els) =>
+    els.map((el) => ({
+      id: el.id,
+      fontSize: Number.parseFloat(getComputedStyle(el).fontSize),
+      height: Math.round(el.getBoundingClientRect().height),
+    })),
+  )
+  assert.ok(controls.length >= 5)
+  for (const c of controls) {
+    assert.ok(c.fontSize >= 16, `${c.id} font size ${c.fontSize}`)
+    assert.ok(c.height >= 44, `${c.id} height ${c.height}`)
+  }
+})
+
+test('an invalid field shows a destructive border', async () => {
+  const page = await open()
+  const border = (id: string) => page.$eval(id, (el) => getComputedStyle(el).borderColor)
+  const [invalid, valid] = [await border('#handle'), await border('#email')]
+  assert.notEqual(invalid, valid)
+})

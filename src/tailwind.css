@@ -12,6 +12,7 @@
 
 /* Components (docs/components.md). */
 @import "./components/button.css";
+@import "./components/field.css";
 
 /* Themes set colors under `light` and `dark`. Tailwind has `dark` built in. */
 @custom-variant light (@media (prefers-color-scheme: light));

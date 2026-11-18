@@ -1,0 +1,173 @@
+/*
+ * Fields: `field` groups a `label`, a control, a `field-description` and a `field-error`.
+ * Controls: `input`, `textarea`, `select`. `fieldset` and `legend` group fields.
+ *
+ * Text is at least 16px so iOS doesn't zoom. Invalid styles show only after people have
+ * interacted (`:user-invalid`), or when the app says so (`aria-invalid="true"`), so a field
+ * isn't red before anyone typed in it.
+ */
+
+@utility field {
+  display: grid;
+  gap: 0.375rem;
+  align-content: start;
+}
+
+@utility fieldset {
+  display: grid;
+  gap: var(--gap-control);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  &:disabled,
+  &[data-disabled] {
+    opacity: 0.5;
+  }
+}
+
+@utility legend {
+  padding: 0;
+  /* A legend isn't a grid item of its fieldset, so it takes the fieldset's gap itself. */
+  margin-bottom: var(--gap-control);
+  font-size: var(--text-headline);
+  line-height: var(--text-headline--line-height);
+  font-weight: var(--text-headline--font-weight);
+}
+
+@utility label {
+  font-size: var(--text-subhead);
+  line-height: var(--text-subhead--line-height);
+  font-weight: 500;
+  color: var(--color-foreground);
+
+  &:where([data-disabled], :has(+ :disabled)) {
+    opacity: 0.5;
+  }
+}
+
+@utility field-description {
+  margin: 0;
+  font-size: var(--text-footnote);
+  line-height: var(--text-footnote--line-height);
+  color: var(--color-muted-foreground);
+}
+
+@utility field-error {
+  margin: 0;
+  font-size: var(--text-footnote);
+  line-height: var(--text-footnote--line-height);
+  color: var(--color-destructive);
+}
+
+@utility input {
+  display: block;
+  width: 100%;
+  min-height: var(--size-control);
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--color-input);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font: inherit;
+  font-size: max(16px, var(--text-body));
+  line-height: var(--text-body--line-height);
+  transition-property: border-color, outline-color;
+  transition-duration: 150ms;
+
+  &::placeholder {
+    color: var(--color-muted-foreground);
+    opacity: 1;
+  }
+
+  &:focus-visible,
+  &[data-focus-visible],
+  &[data-focused] {
+    border-color: var(--color-ring);
+    outline: 3px solid color-mix(in oklab, var(--color-ring) 40%, transparent);
+    outline-offset: 0;
+  }
+
+  &:user-invalid,
+  &[aria-invalid="true"],
+  &[data-invalid] {
+    border-color: var(--color-destructive);
+    outline-color: color-mix(in oklab, var(--color-destructive) 30%, transparent);
+  }
+
+  &:disabled,
+  &[data-disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &[readonly] {
+    background-color: var(--color-muted);
+  }
+}
+
+@utility textarea {
+  @apply input;
+  min-height: calc(var(--text-body--line-height) * 4 + 1.25rem + 2px);
+  resize: vertical;
+}
+
+@utility select {
+  @apply input;
+  appearance: none;
+  padding-inline-end: 2.5rem;
+  cursor: pointer;
+  /* A chevron drawn in the text color, so it follows the theme. */
+  background-image:
+    linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position:
+    right 1.125rem center,
+    right 0.8125rem center;
+  background-size: 0.3125rem 0.3125rem;
+  background-repeat: no-repeat;
+
+  /* Where the browser supports a stylable <select>, its picker matches a popover and its
+     options are 44px rows. Elsewhere it's the native picker. */
+  @supports (appearance: base-select) {
+    &,
+    &::picker(select) {
+      appearance: base-select;
+    }
+
+    &::picker-icon {
+      display: none;
+    }
+
+    &::picker(select) {
+      margin-block: 0.25rem;
+      padding: 0.25rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      background-color: var(--color-popover);
+      color: var(--color-popover-foreground);
+      box-shadow: var(--shadow-lg);
+    }
+
+    & option {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-height: var(--size-control);
+      padding-inline: 0.75rem;
+      border-radius: var(--radius-md);
+    }
+
+    & option:hover,
+    & option:focus-visible {
+      background-color: var(--color-accent);
+      color: var(--color-accent-foreground);
+    }
+
+    & option::checkmark {
+      order: 1;
+      margin-inline-start: auto;
+    }
+  }
+}

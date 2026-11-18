@@ -32,3 +32,7 @@ or **Removed** with migration steps.
   `btn-link`, `btn-destructive`), `btn-compact` and `btn-icon`. Every button has a 44 × 44 hit
   area, a pressed state and a busy state (`aria-busy="true"`). Works on `<button>` and `<a>`.
   See `docs/components.md`.
+- **Fields:** `field`, `label`, `field-description`, `field-error`, `fieldset`, `legend`, and
+  the controls `input`, `textarea` and `select`. Controls are 44px tall with text of at least
+  16px. Invalid styles wait for interaction (`:user-invalid`) or `aria-invalid="true"`.
+  `select` uses the stylable `<select>` where the browser has it.

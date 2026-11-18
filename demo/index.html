@@ -59,6 +59,43 @@
           <button type="button" class="btn btn-outline" disabled>Disabled</button>
         </div>
       </section>
+
+      <section id="fields">
+        <h2 class="text-title-2">Fields</h2>
+        <div class="field">
+          <label class="label" for="email">Email</label>
+          <input class="input" id="email" type="email" autocomplete="email" placeholder="you@example.com" data-control />
+          <p class="field-description">We send the sign-in link here.</p>
+        </div>
+        <div class="field">
+          <label class="label" for="handle">Username</label>
+          <input class="input" id="handle" value="ad" aria-invalid="true" aria-describedby="handle-error" data-control />
+          <p class="field-error" id="handle-error">Use at least 3 characters.</p>
+        </div>
+        <div class="field">
+          <label class="label" for="notes">Notes</label>
+          <textarea class="textarea" id="notes" data-control></textarea>
+        </div>
+        <div class="field">
+          <label class="label" for="plan">Plan</label>
+          <select class="select" id="plan" data-control>
+            <option>Free</option>
+            <option>Pro</option>
+            <option>Team</option>
+          </select>
+        </div>
+        <fieldset class="fieldset">
+          <legend class="legend">Shipping</legend>
+          <div class="field">
+            <label class="label" for="zip">Postal code</label>
+            <input class="input" id="zip" inputmode="numeric" autocomplete="postal-code" data-control />
+          </div>
+          <div class="field">
+            <label class="label" for="locked">Country</label>
+            <input class="input" id="locked" value="Croatia" disabled />
+          </div>
+        </fieldset>
+      </section>
     </main>
     <script>
       document.getElementById('theme-picker').addEventListener('change', (e) => {

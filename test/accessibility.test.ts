@@ -5,6 +5,7 @@ import { themes } from '../scripts/contract.ts'
 import { readTheme } from './themes.ts'
 
 // Text on its background must reach WCAG AA, 4.5:1 (docs/guidelines.md, Accessibility).
+// Destructive is also text: field errors use it on the page and on cards.
 const textPairs = [
   ['foreground', 'background'],
   ['card-foreground', 'card'],
@@ -16,6 +17,8 @@ const textPairs = [
   ['muted-foreground', 'card'],
   ['accent-foreground', 'accent'],
   ['destructive-foreground', 'destructive'],
+  ['destructive', 'background'],
+  ['destructive', 'card'],
   ['sidebar-foreground', 'sidebar'],
   ['sidebar-primary-foreground', 'sidebar-primary'],
   ['sidebar-accent-foreground', 'sidebar-accent'],

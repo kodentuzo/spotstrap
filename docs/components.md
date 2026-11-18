@@ -32,3 +32,39 @@ States it styles:
 
 Rules from the guidelines: at most one or two default (prominent) buttons per view; a
 destructive action is never the default one; labels start with a verb.
+
+## Fields
+
+```html
+<div class="field">
+  <label class="label" for="email">Email</label>
+  <input class="input" id="email" type="email" autocomplete="email" />
+  <p class="field-description">We send the sign-in link here.</p>
+</div>
+
+<div class="field">
+  <label class="label" for="handle">Username</label>
+  <input class="input" id="handle" aria-invalid="true" aria-describedby="handle-error" />
+  <p class="field-error" id="handle-error">Use at least 3 characters.</p>
+</div>
+```
+
+| Class                                       | What                                                                                              |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `field`                                     | Stacks a label, a control, a description and an error.                                            |
+| `label`, `field-description`, `field-error` | The text around a control. Errors use the destructive color and always say what's wrong in words. |
+| `input`, `textarea`, `select`               | The controls: 44px tall, text at least 16px so iOS doesn't zoom.                                  |
+| `fieldset`, `legend`                        | A group of fields with a heading.                                                                 |
+
+| State     | Plain HTML                                                            | Headless libraries                       |
+| --------- | --------------------------------------------------------------------- | ---------------------------------------- |
+| Focus     | `:focus-visible`                                                      | `[data-focus-visible]`, `[data-focused]` |
+| Invalid   | `:user-invalid` (only after people interact), `[aria-invalid="true"]` | `[data-invalid]`                         |
+| Disabled  | `:disabled`                                                           | `[data-disabled]`                        |
+| Read only | `[readonly]`                                                          | same                                     |
+
+`select` uses the browser's stylable `<select>` (`appearance: base-select`) where it exists:
+its picker looks like a popover and options are 44px rows. Elsewhere, such as Firefox today,
+it's the native picker with spotstrap's border and chevron.
+
+There's no compact size for text controls: a 36px input would have a 36px hit area.
