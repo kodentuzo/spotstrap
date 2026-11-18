@@ -26,7 +26,7 @@ Node from `.nvmrc`, pnpm from `packageManager`.
 - **Branches:** `dev` is the default; branch from it and open PRs into it. `main` is
   production.
 - **Releases:** fast-forward `main` to `dev`, tag `vX.Y.Z` on `main`, then merge `main` back
-  into `dev`.
+  into `dev` (`docs/releasing.md`). CI publishes the tag to npm.
 - **Commits:** commit each finished, verified step with a
   [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) message (skill
   `commit-message`). Never force-push or push to `dev` or `main` directly. Push, merge and tag only
