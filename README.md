@@ -13,8 +13,6 @@ Spotstrap is a styling layer, not a component runtime. Its classes style the sta
 headless libraries already expose (react-aria, Radix, reka-ui, bits-ui, Headless UI), and
 the browser's own elements (`<dialog>`, `popover`, `<details>`) in plain HTML.
 
-> Status: being designed. Nothing is published yet.
-
 ## Scope
 
 - **Tokens:** shadcn's names, in oklch, with light and dark values. Brand themes set the
