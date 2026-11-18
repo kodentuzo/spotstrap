@@ -138,7 +138,8 @@ test('the built types work in a consumer', async () => {
         files: ['use.ts'],
       }),
     )
-    execFileSync('tsc', ['-p', `${dir}/tsconfig.json`], { stdio: 'pipe' })
+    const tsc = new URL('../node_modules/.bin/tsc', import.meta.url).pathname
+    execFileSync(tsc, ['-p', `${dir}/tsconfig.json`], { stdio: 'pipe' })
   } finally {
     await rm(dir, { recursive: true, force: true })
   }
