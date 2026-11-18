@@ -11,9 +11,11 @@ A UI library. The first focus is Tailwind CSS and how other projects pull it in.
 
 ## Conventions
 
+- **Branches:** `dev` is the default; branch from it and open PRs into it. `main` is
+  production. Releases are `vX.Y.Z` tags on `main`.
 - **Commits:** commit each finished, verified step with a
   [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) message (skill
-  `commit-message`). Never force-push or push to `main` directly. Push, merge and tag only
+  `commit-message`). Never force-push or push to `dev` or `main` directly. Push, merge and tag only
   when the user asks.
 - **Versions** follow [SemVer 2.0.0](https://semver.org/spec/v2.0.0.html); `CHANGELOG.md`
   follows [Keep a Changelog 1.0.0](https://keepachangelog.com/en/1.0.0/). User-facing changes

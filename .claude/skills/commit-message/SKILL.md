@@ -7,7 +7,7 @@ description: Write a Conventional Commits message and commit the current changes
 
 You commit finished, verified work with this message, following
 [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/). Never force-push
-or push to `main` directly. Push, merge and tag only when the user asks.
+or push to `dev` or `main` directly; work on a branch off `dev`. Push, merge and tag only when the user asks.
 
 ## Steps
 
