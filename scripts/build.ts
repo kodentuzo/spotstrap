@@ -1,6 +1,6 @@
 // Builds the prebuilt outputs in dist/ from src/ (docs/decisions/0002, 0005):
 //   dist/spotstrap.css        base layer, type scale and every spotstrap class, no theme
-//   dist/themes/<name>.css    one theme as plain CSS; dark follows the system setting
+//   dist/themes/<name>.css    one theme as plain CSS; dark follows the system, or .dark/.light
 //   dist/tokens.json          every theme's values, as oklch and hex
 //   dist/js/spotstrap.js      spotstrap/js, bundled with Zag, for browsers and bundlers alike
 //   dist/js/index.d.ts        its types
@@ -98,8 +98,9 @@ type ThemeTokens = Awaited<ReturnType<typeof themeTokens>>
 
 /**
  * A theme as plain CSS for sites without Tailwind: fonts, radii and light colors on :root,
- * dark colors when the system is dark. Everything in the `theme` layer, like Tailwind's own
- * output, so spotstrap.css and the page's own CSS can override it.
+ * dark colors when the system is dark, unless <html> has `.light`, or when it has `.dark`
+ * (docs/decisions/0007-prebuilt-class-mode.md). Everything is in the `theme` layer, like
+ * Tailwind's own output, so spotstrap.css and the page's own CSS can override it.
  */
 function themeCss(t: ThemeTokens): string {
   const lines = (values: Record<string, string>, indent: string) =>
@@ -115,9 +116,13 @@ ${lines(colorsOf('light'), '    ')}
   }
 
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not(.light) {
 ${lines(colorsOf('dark'), '      ')}
     }
+  }
+
+  :root.dark {
+${lines(colorsOf('dark'), '    ')}
   }
 }
 `

@@ -9,6 +9,12 @@ or **Removed** with migration steps.
 
 ## [Unreleased]
 
+### Added
+
+- **Prebuilt themes follow `.dark` and `.light`** on `<html>`, over the system setting, so a
+  site without Tailwind can have a theme toggle. Without either class, the system decides, as
+  before. See ADR 0007.
+
 ## [0.1.0] - 2026-11-19
 
 The first release: tokens, themes, touch sizes and Apple's type scale, every component in

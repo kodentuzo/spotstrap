@@ -16,12 +16,14 @@ test('spotstrap.css is layered, with sizes, type and the base layer', async () =
 })
 
 for (const name of themes) {
-  test(`the prebuilt ${name} theme has every color, light and dark`, async () => {
+  test(`the prebuilt ${name} theme has every color, light, dark and .dark`, async () => {
     const css = await read(`themes/${name}.css`)
-    const [light, dark] = css.split('@media (prefers-color-scheme: dark)')
+    const [light, rest] = css.split('@media (prefers-color-scheme: dark)')
+    const [dark, darkClass] = rest.split(':root.dark {')
     for (const c of colors) {
       assert.match(light, new RegExp(`--color-${c}: oklch`), `light ${c}`)
       assert.match(dark, new RegExp(`--color-${c}: oklch`), `dark ${c}`)
+      assert.match(darkClass, new RegExp(`--color-${c}: oklch`), `.dark ${c}`)
     }
   })
 }

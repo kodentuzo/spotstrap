@@ -34,6 +34,15 @@
     color-scheme: light dark;
   }
 
+  /* A page that picks a scheme with a class (dark-class.css, or the prebuilt themes). */
+  :root.light {
+    color-scheme: light;
+  }
+
+  :root.dark {
+    color-scheme: dark;
+  }
+
   *,
   ::before,
   ::after {
