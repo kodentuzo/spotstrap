@@ -58,3 +58,29 @@ test('an invalid field shows a destructive border', async () => {
   const [invalid, valid] = [await border('#handle'), await border('#email')]
   assert.notEqual(invalid, valid)
 })
+
+test('choice rows are 44px tall, and switches are 51 × 31', async () => {
+  const page = await open()
+  const rows = await page.$$eval('#toggles .choice', (els) =>
+    els.map((el) => Math.round(el.getBoundingClientRect().height)),
+  )
+  for (const h of rows) assert.ok(h >= 44, `row ${h}`)
+  const switches = await page.$$eval('#toggles .switch', (els) =>
+    els.map((el) => {
+      const r = el.getBoundingClientRect()
+      return [Math.round(r.width), Math.round(r.height)]
+    }),
+  )
+  for (const s of switches) assert.deepEqual(s, [51, 31])
+})
+
+test('tapping the edge of a checkbox hit area toggles it', async () => {
+  const page = await open()
+  const box = page.locator('#toggles .checkbox').first()
+  await box.scrollIntoViewIfNeeded()
+  const before = await box.isChecked()
+  const r = await box.boundingBox()
+  assert.ok(r)
+  await page.mouse.click(r.x + r.width / 2, r.y + r.height / 2 - 20)
+  assert.equal(await box.isChecked(), !before)
+})

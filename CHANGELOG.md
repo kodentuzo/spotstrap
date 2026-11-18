@@ -36,3 +36,6 @@ or **Removed** with migration steps.
   the controls `input`, `textarea` and `select`. Controls are 44px tall with text of at least
   16px. Invalid styles wait for interaction (`:user-invalid`) or `aria-invalid="true"`.
   `select` uses the stylable `<select>` where the browser has it.
+- **Checkbox, radio group and switch:** `checkbox`, `radio`, `radio-group`, `switch` and a
+  44px `choice` row for a control and its label. The switch has Apple's size (51 × 31). Each
+  has a 44 × 44 hit area, and their outlines meet WCAG's 3:1 for controls.

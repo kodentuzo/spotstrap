@@ -68,3 +68,31 @@ its picker looks like a popover and options are 44px rows. Elsewhere, such as Fi
 it's the native picker with spotstrap's border and chevron.
 
 There's no compact size for text controls: a 36px input would have a 36px hit area.
+
+## Checkbox, radio group, switch
+
+```html
+<label class="choice"><input type="checkbox" class="checkbox" /> Email me about releases</label>
+
+<div class="radio-group" role="radiogroup" aria-label="Plan">
+  <label class="choice"><input type="radio" name="plan" class="radio" /> Free</label>
+  <label class="choice"><input type="radio" name="plan" class="radio" /> Pro</label>
+</div>
+
+<label class="choice"><input type="checkbox" role="switch" class="switch" /> Wi-Fi</label>
+```
+
+| Class               | What                                                                                           |
+| ------------------- | ---------------------------------------------------------------------------------------------- |
+| `choice`            | A 44px row that holds a control and its label; the whole row is the target.                    |
+| `checkbox`, `radio` | 20px boxes with a 44 × 44 hit area. Marks are drawn with CSS, so strict CSPs don't block them. |
+| `switch`            | Apple's switch, 51 × 31, with a 44px tall hit area. Use it for settings that apply at once.    |
+| `radio-group`       | Spaces radio rows 12px apart.                                                                  |
+
+| State                    | Plain HTML                                     | Headless libraries                                                                                                 |
+| ------------------------ | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Checked                  | `:checked`, `[aria-checked="true"]`            | `[data-state="checked"]` (Radix, reka-ui, bits-ui), `[data-checked]` (Headless UI), `[data-selected]` (react-aria) |
+| Mixed                    | `:indeterminate`, `[aria-checked="mixed"]`     | `[data-state="indeterminate"]`, `[data-indeterminate]`                                                             |
+| Focus, invalid, disabled | `:focus-visible`, `:user-invalid`, `:disabled` | `[data-focus-visible]`, `[data-invalid]`, `[data-disabled]`                                                        |
+
+Unchecked outlines use the muted text color, so they reach WCAG's 3:1 for a control's edge.
