@@ -69,6 +69,33 @@ font files yourself, for example with Fontsource.
 Colors outside CSS (meta `theme-color`, favicons, manifests, canvas code) come from
 `@kodentuzo/spotstrap/tokens.json`, with each color as oklch and hex.
 
+## Moving an existing shadcn app
+
+What changes when an app that already uses shadcn (or its own Tailwind theme) switches to
+spotstrap's theme:
+
+- **Replace, don't stack.** Remove the app's `:root` / `.dark` color blocks and its
+  `@theme inline` mappings; spotstrap's theme defines the same names. shadcn's unprefixed
+  variables (`var(--secondary)`) keep working: they point at the theme's tokens.
+- **Body text is 17px** (Apple's body size), not 16px. Text without its own size class grows
+  by a pixel. Set a size on the element, or `body { font-size: … }` in your own CSS, if a
+  layout depends on 16px.
+- **Default borders use `--color-border`.** A bare `border` that used to take the text color
+  is now the theme's subtle border; write `border-foreground` where you want it dark.
+- **Fonts are named, not loaded.** Themes set `--font-sans` and friends; load the font files
+  yourself, for example with Fontsource.
+- **Keep `tw-animate-css` if your shadcn components animate with it** (enter and exit on
+  `data-state` or `data-entering`). spotstrap's `appear` covers native popovers, dialogs and
+  `[hidden]`, not those classes.
+- **Keep `@source`** for component folders outside your app, so Tailwind still finds their
+  classes.
+- **`cn` / tailwind-merge:** spotstrap's text sizes (`text-body`, `text-title-1`…) look like
+  colors to tailwind-merge. If you merge classes, add them to its `font-size` group.
+- **`disclosure-button` has no side padding**, so it lines up with text. Add `px-*` when it
+  sits inside a padded card.
+- **pnpm's `minimumReleaseAge`** holds back fresh releases. For your own packages, add them
+  to `minimumReleaseAgeExclude`; their provenance is still checked.
+
 ## What to read next
 
 - [Guidelines](guidelines.md): touch sizes, type, buttons, fields, accessibility.

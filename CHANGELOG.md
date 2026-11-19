@@ -9,6 +9,32 @@ or **Removed** with migration steps.
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-11-19
+
+Fixes and notes from the first migrations (tagtape, spotcraft).
+
+### Added
+
+- **shadcn's unprefixed variables** (`--background`, `--primary`, `--secondary`…, `--radius`)
+  point at the theme's tokens, so copied shadcn components that use `var(--secondary)` keep
+  their colors.
+
+### Changed
+
+- **tagtape and vinskiano dark themes:** primary is lighter (green L 0.62, crimson L 0.65) with
+  dark text on it, so it also reads as text on the page (5.7:1 instead of 2.8:1 and 2.5:1).
+  Dark-mode buttons in those themes change from a deep fill with white text to a light fill
+  with dark text. Every theme's primary now passes WCAG AA as text, checked by a test.
+- **Getting started has a "Moving an existing shadcn app" section:** 17px body text,
+  default border colors, fonts, `tw-animate-css`, `@source`, tailwind-merge and release-age
+  notes, from the first migrations. Theme files say that they name fonts but don't load them.
+
+### Fixed
+
+- **Outline and ghost buttons keep readable text on hover.** They hover onto the accent fill
+  and now take the accent's text color with it (`--btn-fg-hover`). In themes with a dark
+  accent, such as spotcraft, the text used to vanish on hover.
+
 ## [0.1.0] - 2026-11-19
 
 The first release, published as `@kodentuzo/spotstrap` (npm refuses an unscoped `spotstrap`; see
@@ -74,5 +100,6 @@ list, `@kodentuzo/spotstrap/js` for plain HTML, and React Native recipes.
   `@kodentuzo/spotstrap/recipes`, functions that return full class strings and a `hitSlop` for each
   component, from the same tokens as the web.
 
-[Unreleased]: https://github.com/kodentuzo/spotstrap/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/kodentuzo/spotstrap/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/kodentuzo/spotstrap/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/kodentuzo/spotstrap/releases/tag/v0.1.0

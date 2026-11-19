@@ -2,6 +2,8 @@
  * Spotstrap theme: Kodentuzo.
  * Near-neutral with one violet accent, Archivo headings.
  *
+ * Fonts are named here, not loaded: load the font files yourself (e.g. Fontsource).
+ *
  * Static values only, so Tailwind and Uniwind both read this file
  * (docs/decisions/0001-token-contract.md).
  */

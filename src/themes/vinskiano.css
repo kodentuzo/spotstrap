@@ -2,6 +2,8 @@
  * Spotstrap theme: Vinskiano.
  * Crimson on mauve, soft corners, Inter.
  *
+ * Fonts are named here, not loaded: load the font files yourself (e.g. Fontsource).
+ *
  * Static values only, so Tailwind and Uniwind both read this file
  * (docs/decisions/0001-token-contract.md).
  */
@@ -105,8 +107,8 @@
       --color-card-foreground: oklch(0.985 0 0);
       --color-popover: oklch(0.212 0.019 322.12);
       --color-popover-foreground: oklch(0.985 0 0);
-      --color-primary: oklch(0.455 0.188 13.697);
-      --color-primary-foreground: oklch(0.969 0.015 12.422);
+      --color-primary: oklch(0.65 0.188 13.697);
+      --color-primary-foreground: oklch(0.145 0.008 326);
       --color-secondary: oklch(0.274 0.006 286.033);
       --color-secondary-foreground: oklch(0.985 0 0);
       --color-muted: oklch(0.263 0.024 320.12);
@@ -125,8 +127,8 @@
       --color-chart-5: oklch(0.269 0 0);
       --color-sidebar: oklch(0.212 0.019 322.12);
       --color-sidebar-foreground: oklch(0.985 0 0);
-      --color-sidebar-primary: oklch(0.455 0.188 13.697);
-      --color-sidebar-primary-foreground: oklch(0.969 0.015 12.422);
+      --color-sidebar-primary: oklch(0.65 0.188 13.697);
+      --color-sidebar-primary-foreground: oklch(0.145 0.008 326);
       --color-sidebar-accent: oklch(0.263 0.024 320.12);
       --color-sidebar-accent-foreground: oklch(0.985 0 0);
       --color-sidebar-border: oklch(1 0 0 / 10%);
