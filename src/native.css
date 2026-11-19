@@ -4,10 +4,10 @@
  *
  *   @import "tailwindcss";
  *   @import "uniwind";
- *   @import "spotstrap/native.css";
- *   @import "spotstrap/themes/neutral.css";
+ *   @import "@kodentuzo/spotstrap/native.css";
+ *   @import "@kodentuzo/spotstrap/themes/neutral.css";
  *
- * Then build components from spotstrap/recipes. Fonts: React Native needs one family name per
+ * Then build components from @kodentuzo/spotstrap/recipes. Fonts: React Native needs one family name per
  * font, so set --font-sans and friends in your own @theme after the theme.
  */
 

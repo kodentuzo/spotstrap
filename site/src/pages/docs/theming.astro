@@ -1,5 +1,5 @@
 ---
-import tokens from 'spotstrap/tokens.json'
+import tokens from '@kodentuzo/spotstrap/tokens.json'
 import { contrast } from '../../../../scripts/color.ts'
 import { colors } from '../../../../scripts/contract.ts'
 import Docs from '../../layouts/Docs.astro'
@@ -79,7 +79,7 @@ const typeScale = [
             </div>
           ))}
           <p class="border-t border-border px-4 py-2 text-footnote text-muted-foreground">
-            <code>spotstrap/themes/{name}.css</code> · radius {theme.radius.base} · {theme.fonts.sans.split(',')[0].replaceAll('"', '')}
+            <code>@kodentuzo/spotstrap/themes/{name}.css</code> · radius {theme.radius.base} · {theme.fonts.sans.split(',')[0].replaceAll('"', '')}
           </p>
         </section>
       ))
@@ -124,7 +124,7 @@ const typeScale = [
   <div class="prose mt-10">
     <h2 id="your-own"><a href="#your-own">Your own theme</a></h2>
     <ol>
-      <li>Copy <code>spotstrap/themes/neutral.css</code> into your project.</li>
+      <li>Copy <code>@kodentuzo/spotstrap/themes/neutral.css</code> into your project.</li>
       <li>Change the values: accent, neutrals, radius, fonts. Keep every name.</li>
       <li>Import it instead of a preset.</li>
     </ol>

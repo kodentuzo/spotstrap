@@ -8,7 +8,7 @@ const components = defineCollection({
     title: z.string(),
     description: z.string(),
     order: z.number(),
-    /** Needs spotstrap/js in plain HTML. */
+    /** Needs @kodentuzo/spotstrap/js in plain HTML. */
     js: z.boolean().default(false),
   }),
 })

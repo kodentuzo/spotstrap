@@ -9,12 +9,12 @@ web, and a test checks that they match.
 /* global.css */
 @import "tailwindcss";
 @import "uniwind";
-@import "spotstrap/native.css";
-@import "spotstrap/themes/librelifts.css";
+@import "@kodentuzo/spotstrap/native.css";
+@import "@kodentuzo/spotstrap/themes/librelifts.css";
 ```
 
 ```tsx
-import { button } from 'spotstrap/recipes'
+import { button } from '@kodentuzo/spotstrap/recipes'
 
 ;<Pressable onPress={save}>
   {({ pressed }) => {

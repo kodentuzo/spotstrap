@@ -6,14 +6,14 @@ touch-sized controls and Apple's type scale. Use it in one of three ways.
 ## With Tailwind v4
 
 ```bash
-pnpm add spotstrap
+pnpm add @kodentuzo/spotstrap
 ```
 
 ```css
 /* your main CSS file */
 @import "tailwindcss";
-@import "spotstrap/tailwind.css";
-@import "spotstrap/themes/neutral.css";
+@import "@kodentuzo/spotstrap/tailwind.css";
+@import "@kodentuzo/spotstrap/themes/neutral.css";
 ```
 
 Then write `class="btn"`, `class="input"` and so on. Tailwind only emits the classes you use,
@@ -23,7 +23,7 @@ To follow a `.dark` class on `<html>` instead of the system's light or dark sett
 theme toggle), add:
 
 ```css
-@import "spotstrap/dark-class.css";
+@import "@kodentuzo/spotstrap/dark-class.css";
 ```
 
 ## Without Tailwind
@@ -31,8 +31,8 @@ theme toggle), add:
 Link the prebuilt CSS and one theme, from npm or a CDN:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/spotstrap/dist/spotstrap.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/spotstrap/dist/themes/neutral.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@kodentuzo/spotstrap/dist/spotstrap.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@kodentuzo/spotstrap/dist/themes/neutral.css" />
 ```
 
 Colors follow the system's light or dark setting, or a `dark` or `light` class on `<html>`.
@@ -51,7 +51,7 @@ doesn't have. In plain HTML, add:
 
 ```html
 <script type="module">
-  import { init } from "https://cdn.jsdelivr.net/npm/spotstrap/dist/js/spotstrap.js"
+  import { init } from "https://cdn.jsdelivr.net/npm/@kodentuzo/spotstrap/dist/js/spotstrap.js"
   init()
 </script>
 ```
@@ -67,7 +67,7 @@ spotcraft, sokobanko, tagtape and vinskiano. Themes name fonts but don't load th
 font files yourself, for example with Fontsource.
 
 Colors outside CSS (meta `theme-color`, favicons, manifests, canvas code) come from
-`spotstrap/tokens.json`, with each color as oklch and hex.
+`@kodentuzo/spotstrap/tokens.json`, with each color as oklch and hex.
 
 ## What to read next
 

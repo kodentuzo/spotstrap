@@ -1,9 +1,9 @@
 /*
  * Follow a `.dark` class on <html> instead of the system setting. Import after
- * "spotstrap/tailwind.css":
+ * "@kodentuzo/spotstrap/tailwind.css":
  *
- *   @import "spotstrap/tailwind.css";
- *   @import "spotstrap/dark-class.css";
+ *   @import "@kodentuzo/spotstrap/tailwind.css";
+ *   @import "@kodentuzo/spotstrap/dark-class.css";
  */
 @custom-variant dark (&:where(.dark, .dark *));
 @custom-variant light (&:not(:where(.dark, .dark *)));
