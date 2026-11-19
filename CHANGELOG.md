@@ -9,6 +9,34 @@ or **Removed** with migration steps.
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-11-19
+
+From the lifts, sokobanko and website migrations.
+
+### Added
+
+- **`@kodentuzo/spotstrap/dist/base.css`**: the prebuilt reset, tokens, base layer and type scale
+  without the component classes (11 kB, 2.5 kB gzipped), for plain pages that use none of
+  them. `dist/spotstrap.css` still has everything.
+- **`@kodentuzo/spotstrap/tokens/<theme>.json`**: one theme's tokens, for code that needs just
+  one. `tokens.json` still has them all.
+
+### Changed
+
+- **Migration notes:** Getting started covers the prebuilt files' load order, `@layer base`
+  for a site's own CSS, taken unprefixed names (`--muted`, `--accent`), where an app's own
+  tokens go, focus outline strength and shadcn's `dark:bg-destructive/60`. Prebuilt theme
+  files say to load them after the base file.
+
+### Fixed
+
+- **The body's line height is a ratio** (22/17), not a fixed 22px, so text with its own size
+  inside the body gets a line height to match. lifts' small two-line captions had grown from
+  34px to 44px tall.
+- **`tokens.json` hex values match the original brand colors** for the presets that started as
+  hex (kodentuzo, librevitalis, librelifts): their oklch values carry more precision, so
+  `#0b6e5f` no longer comes back as `#0a6e5f`.
+
 ## [0.1.2] - 2026-11-19
 
 ### Changed
@@ -108,7 +136,8 @@ list, `@kodentuzo/spotstrap/js` for plain HTML, and React Native recipes.
   `@kodentuzo/spotstrap/recipes`, functions that return full class strings and a `hitSlop` for each
   component, from the same tokens as the web.
 
-[Unreleased]: https://github.com/kodentuzo/spotstrap/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/kodentuzo/spotstrap/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/kodentuzo/spotstrap/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/kodentuzo/spotstrap/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/kodentuzo/spotstrap/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/kodentuzo/spotstrap/releases/tag/v0.1.0

@@ -1,6 +1,6 @@
 {
   "name": "@kodentuzo/spotstrap",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Bootstrap's reach, shadcn's look, made for phones: Tailwind v4 tokens and classes, prebuilt CSS, and React Native recipes",
   "keywords": [
     "tailwindcss",
@@ -34,8 +34,10 @@
     "./dark-class.css": "./src/dark-class.css",
     "./themes/*.css": "./src/themes/*.css",
     "./dist/spotstrap.css": "./dist/spotstrap.css",
+    "./dist/base.css": "./dist/base.css",
     "./dist/themes/*.css": "./dist/themes/*.css",
     "./tokens.json": "./dist/tokens.json",
+    "./tokens/*.json": "./dist/tokens/*.json",
     "./js": {
       "types": "./dist/js/index.d.ts",
       "default": "./dist/js/spotstrap.js"

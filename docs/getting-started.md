@@ -38,6 +38,12 @@ Link the prebuilt CSS and one theme, from npm or a CDN:
 Colors follow the system's light or dark setting, or a `dark` or `light` class on `<html>`.
 Everything is in CSS layers, so your own CSS wins without `!important`.
 
+- **Load the theme after the base file.** Both set the font variables, and the later one wins.
+- **`dist/base.css`** is the same base without the component classes (11 kB instead of 43 kB),
+  for pages that use none of them.
+- **Put your own base rules in `@layer base`.** Unlayered CSS beats every layer, so a plain
+  `a { color: inherit }` would override a `.btn` on a link.
+
 ## React Native
 
 With [Uniwind](https://uniwind.dev), import the native CSS and a theme, then build components
@@ -91,6 +97,19 @@ spotstrap's theme:
   classes.
 - **`cn` / tailwind-merge:** spotstrap's text sizes (`text-body`, `text-title-1`…) look like
   colors to tailwind-merge. If you merge classes, add them to its `font-size` group.
+- **Unprefixed names are taken.** spotstrap defines shadcn's `--background`, `--muted`,
+  `--accent`, `--border` and the rest. If your CSS used `--muted` for text or `--accent` for
+  a brand color, rename all of them in one change: a missed one silently takes spotstrap's
+  meaning.
+- **Your own tokens** (a game board's colors, a chart's) go in your CSS next to the theme:
+  `@theme` for ones Tailwind should make utilities from, `:root` otherwise. With
+  `dark-class.css`, give their dark values under `.dark`.
+- **Overriding a text size** (`--text-body`) changes that utility and the body's size; the
+  body's line height is a ratio, so it follows.
+- **Focus outlines** use the ring color at 50%. A high-contrast theme that wants them solid
+  sets `outline-color: var(--color-ring)` in its own base layer.
+- **shadcn's `dark:bg-destructive/60`** turns gray in a black-and-white theme, where
+  destructive is white. Use `bg-destructive text-destructive-foreground` instead.
 - **`disclosure-button` has no side padding**, so it lines up with text. Add `px-*` when it
   sits inside a padded card.
 - **pnpm's `minimumReleaseAge`** holds back fresh releases. For your own packages, add them
