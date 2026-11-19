@@ -9,6 +9,12 @@ or **Removed** with migration steps.
 
 ## [Unreleased]
 
+### Fixed
+
+- **The body's line height is a ratio** (22/17), not a fixed 22px, so text with its own size
+  inside the body gets a line height to match. lifts' small two-line captions had grown from
+  34px to 44px tall.
+
 ## [0.1.2] - 2026-11-19
 
 ### Changed

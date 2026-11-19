@@ -27,6 +27,8 @@ test('the base layer colors the page from the theme', async () => {
   const css = await compileCss(entry)
   assert.match(css, /background-color: var\(--color-background\)/)
   assert.match(css, /font-family: var\(--font-sans\)/)
+  // A ratio, so smaller or larger text inside the body keeps a fitting line height.
+  assert.match(css, /body\s*\{[^}]*line-height: 1\.2941/)
 })
 
 test('touch sizes are always in the output', async () => {

@@ -95,7 +95,8 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     font-size: var(--text-body);
-    line-height: var(--text-body--line-height);
+    /* 22/17 as a ratio, not 22px: text with its own size inherits a line height to match. */
+    line-height: 1.2941;
   }
 
   /* iOS Safari zooms into text inputs smaller than 16px. */
