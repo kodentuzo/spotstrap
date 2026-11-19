@@ -99,6 +99,15 @@ async function main() {
     target: 'es2022',
     banner: { js: header('React Native recipes').split('\n')[0] },
   })
+  await bundle({
+    entryPoints: [new URL('src/recipes/merge.ts', root).pathname],
+    outfile: new URL('recipes/merge.js', dist).pathname,
+    bundle: true,
+    format: 'esm',
+    platform: 'neutral',
+    target: 'es2022',
+    banner: { js: header('tailwind-merge config').split('\n')[0] },
+  })
   execFileSync('tsc', ['-p', 'tsconfig.build.json'], { stdio: 'inherit' })
   // tsc keeps the source's `.ts` specifiers in declarations; consumers resolve `.js` to `.d.ts`.
   const types = new URL('recipes/index.d.ts', dist)

@@ -9,6 +9,12 @@ or **Removed** with migration steps.
 
 ## [Unreleased]
 
+### Added
+
+- **`@kodentuzo/spotstrap/merge`**: a tailwind-merge config (`spotstrapMerge`) that knows
+  spotstrap's text sizes, so `cn('text-body text-foreground')` keeps both. Without it,
+  tailwind-merge takes `text-body` for a color and drops it.
+
 ## [0.1.4] - 2026-11-19
 
 ### Added

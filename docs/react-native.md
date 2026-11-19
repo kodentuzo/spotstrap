@@ -38,3 +38,6 @@ and points Uniwind at the recipes' classes. Themes name web fonts with fallbacks
 takes one family per font, so set `--font-sans` and friends in your own `@theme` after the
 theme. Behavior (focus, menus, dialogs) comes from React Native Reusables or your own
 components.
+
+If your components merge classes with `cn()` (tailwind-merge), extend it with
+`spotstrapMerge` from `@kodentuzo/spotstrap/merge`, or it drops the recipes' text sizes.
