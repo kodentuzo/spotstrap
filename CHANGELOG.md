@@ -9,6 +9,10 @@ or **Removed** with migration steps.
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-11-19
+
+Fixes and notes from the first migrations (tagtape, spotcraft).
+
 ### Added
 
 - **shadcn's unprefixed variables** (`--background`, `--primary`, `--secondary`…, `--radius`)
@@ -92,5 +96,6 @@ list, `@kodentuzo/spotstrap/js` for plain HTML, and React Native recipes.
   `@kodentuzo/spotstrap/recipes`, functions that return full class strings and a `hitSlop` for each
   component, from the same tokens as the web.
 
-[Unreleased]: https://github.com/kodentuzo/spotstrap/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/kodentuzo/spotstrap/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/kodentuzo/spotstrap/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/kodentuzo/spotstrap/releases/tag/v0.1.0
