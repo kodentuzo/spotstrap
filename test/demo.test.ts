@@ -266,3 +266,33 @@ test("a button's icon is 1.25em by default, and keeps its own size class", async
   assert.equal(await size('#plain svg'), Math.round(17 * 1.25))
   assert.equal(await size('#sized svg'), 24)
 })
+
+test('an open trigger keeps its full size and shows as open, not pressed', async () => {
+  const page = await open()
+  const style = (id: string) =>
+    page.$eval(id, (el) => {
+      const cs = getComputedStyle(el)
+      return {
+        scale: cs.scale,
+        opacity: cs.opacity,
+        bg: cs.backgroundColor,
+        h: el.getBoundingClientRect().height,
+      }
+    })
+  const open_ = await style('#open-trigger')
+  const closed = await style('#closed-trigger')
+  assert.equal(open_.scale, 'none', 'no pressed shrink while its overlay is open')
+  assert.equal(open_.opacity, '1')
+  assert.equal(Math.round(open_.h), 44)
+  assert.notEqual(open_.bg, closed.bg, 'the open trigger has the accent fill')
+})
+
+test('a tab that is the current page shows as selected', async () => {
+  const css = await compileCss(
+    '@import "tailwindcss"; @import "./src/tailwind.css"; @import "./src/themes/neutral.css";',
+    ['tab'],
+  )
+  // Both the text color and the underline follow aria-current.
+  const tab = css.slice(css.indexOf('.tab {'))
+  assert.ok((tab.match(/\[aria-current="page"\]/g) ?? []).length >= 2)
+})

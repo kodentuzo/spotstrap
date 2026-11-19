@@ -9,6 +9,19 @@ or **Removed** with migration steps.
 
 ## [Unreleased]
 
+## [0.1.6] - 2026-11-19
+
+### Added
+
+- **Open triggers:** a `btn` with `aria-expanded="true"` (its menu, listbox or dialog is open)
+  shows as open; outline and ghost take the accent fill.
+- **Tabs that are links:** `tab` also shows as selected with `aria-current="page"`.
+
+### Fixed
+
+- **A trigger with an open overlay no longer looks pressed.** React Aria keeps `data-pressed` on
+  a trigger while its menu or dialog is open, which left it shrunk to 43px and faded.
+
 ## [0.1.5] - 2026-11-19
 
 ### Added
@@ -164,7 +177,8 @@ list, `@kodentuzo/spotstrap/js` for plain HTML, and React Native recipes.
   `@kodentuzo/spotstrap/recipes`, functions that return full class strings and a `hitSlop` for each
   component, from the same tokens as the web.
 
-[Unreleased]: https://github.com/kodentuzo/spotstrap/compare/v0.1.5...HEAD
+[Unreleased]: https://github.com/kodentuzo/spotstrap/compare/v0.1.6...HEAD
+[0.1.6]: https://github.com/kodentuzo/spotstrap/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/kodentuzo/spotstrap/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/kodentuzo/spotstrap/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/kodentuzo/spotstrap/compare/v0.1.2...v0.1.3

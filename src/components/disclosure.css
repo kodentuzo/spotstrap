@@ -57,12 +57,19 @@
     }
   }
 
-  &:is([aria-selected="true"], [data-selected], [data-state="active"], [data-state="checked"]) {
+  &:is(
+      [aria-selected="true"],
+      [aria-current="page"],
+      [data-selected],
+      [data-state="active"],
+      [data-state="checked"]
+    ) {
     color: var(--color-foreground);
   }
 
   &:is(
       [aria-selected="true"],
+      [aria-current="page"],
       [data-selected],
       [data-state="active"],
       [data-state="checked"]
