@@ -9,6 +9,10 @@ or **Removed** with migration steps.
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-11-19
+
+From the lifts, sokobanko and website migrations.
+
 ### Added
 
 - **`@kodentuzo/spotstrap/dist/base.css`**: the prebuilt reset, tokens, base layer and type scale
@@ -132,7 +136,8 @@ list, `@kodentuzo/spotstrap/js` for plain HTML, and React Native recipes.
   `@kodentuzo/spotstrap/recipes`, functions that return full class strings and a `hitSlop` for each
   component, from the same tokens as the web.
 
-[Unreleased]: https://github.com/kodentuzo/spotstrap/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/kodentuzo/spotstrap/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/kodentuzo/spotstrap/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/kodentuzo/spotstrap/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/kodentuzo/spotstrap/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/kodentuzo/spotstrap/releases/tag/v0.1.0
