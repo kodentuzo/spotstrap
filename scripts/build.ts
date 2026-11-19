@@ -73,7 +73,7 @@ async function main() {
     )
     await writeFile(
       new URL(`themes/${name}.css`, dist),
-      header(`${name} theme`) + themeCss(tokens[name]),
+      header(`${name} theme; load it after spotstrap.css or base.css`) + themeCss(tokens[name]),
     )
   }
   await writeFile(new URL('tokens.json', dist), `${JSON.stringify(tokens, null, 2)}\n`)

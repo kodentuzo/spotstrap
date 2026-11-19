@@ -17,6 +17,13 @@ or **Removed** with migration steps.
 - **`@kodentuzo/spotstrap/tokens/<theme>.json`**: one theme's tokens, for code that needs just
   one. `tokens.json` still has them all.
 
+### Changed
+
+- **Migration notes:** Getting started covers the prebuilt files' load order, `@layer base`
+  for a site's own CSS, taken unprefixed names (`--muted`, `--accent`), where an app's own
+  tokens go, focus outline strength and shadcn's `dark:bg-destructive/60`. Prebuilt theme
+  files say to load them after the base file.
+
 ### Fixed
 
 - **The body's line height is a ratio** (22/17), not a fixed 22px, so text with its own size
