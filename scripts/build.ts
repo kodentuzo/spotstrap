@@ -2,9 +2,9 @@
 //   dist/spotstrap.css        base layer, type scale and every spotstrap class, no theme
 //   dist/themes/<name>.css    one theme as plain CSS; dark follows the system, or .dark/.light
 //   dist/tokens.json          every theme's values, as oklch and hex
-//   dist/js/spotstrap.js      spotstrap/js, bundled with Zag, for browsers and bundlers alike
+//   dist/js/spotstrap.js      @kodentuzo/spotstrap/js, bundled with Zag, for browsers and bundlers alike
 //   dist/js/index.d.ts        its types
-//   dist/recipes/index.js     spotstrap/recipes, class strings for React Native, with types
+//   dist/recipes/index.js     @kodentuzo/spotstrap/recipes, class strings for React Native, with types
 
 import { execFileSync } from 'node:child_process'
 import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises'

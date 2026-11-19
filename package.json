@@ -1,5 +1,5 @@
 {
-  "name": "spotstrap",
+  "name": "@kodentuzo/spotstrap",
   "version": "0.1.0",
   "description": "Bootstrap's reach, shadcn's look, made for phones: Tailwind v4 tokens and classes, prebuilt CSS, and React Native recipes",
   "keywords": [

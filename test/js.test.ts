@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { openDemo, useDemo } from './browser.ts'
 
-// spotstrap/js on the demo page: keyboard, selection and filtering, as a person would use them.
+// @kodentuzo/spotstrap/js on the demo page: keyboard, selection and filtering, as a person would use them.
 const open = useDemo()
 
 test('menu: opens from its button, moves with arrows, selects with Enter, closes', async () => {

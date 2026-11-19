@@ -1,5 +1,5 @@
 /**
- * spotstrap/recipes: the components as Uniwind class strings for React Native, built from the
+ * @kodentuzo/spotstrap/recipes: the components as Uniwind class strings for React Native, built from the
  * same tokens as the web (docs/decisions/0002-package-and-publishing.md).
  *
  * React Native has no :hover, :checked or ::after, so state comes in as options, and small

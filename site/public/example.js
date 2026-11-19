@@ -1,4 +1,4 @@
-// Runs inside an example page: applies ?theme= and ?scheme=, starts spotstrap/js, and tells
+// Runs inside an example page: applies ?theme= and ?scheme=, starts @kodentuzo/spotstrap/js, and tells
 // the page around the iframe how tall the example is.
 ;(() => {
   const root = document.documentElement

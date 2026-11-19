@@ -38,7 +38,7 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      # The site uses spotstrap's built files (prebuilt themes, spotstrap/js), then checks every
+      # The site uses spotstrap's built files (prebuilt themes, @kodentuzo/spotstrap/js), then checks every
       # page, link and anchor (site/scripts/check-links.ts).
       - run: pnpm site:build
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0

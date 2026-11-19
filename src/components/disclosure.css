@@ -1,7 +1,7 @@
 /*
  * Tabs, disclosure and appear (Headless UI's Transition).
  *
- * Tabs: `tabs` > `tab-list` > `tab`s, then `tab-panel`s. In plain HTML spotstrap/js switches
+ * Tabs: `tabs` > `tab-list` > `tab`s, then `tab-panel`s. In plain HTML @kodentuzo/spotstrap/js switches
  * them (data-spotstrap="tabs"); without it every panel shows, one after another.
  * Disclosure: <details class="disclosure"> with <summary class="disclosure-button"> and a
  * `disclosure-panel`; `name` on several <details> makes an accordion. No script needed.

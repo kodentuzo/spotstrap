@@ -31,10 +31,10 @@ With Tailwind v4:
 
 ```css
 @import "tailwindcss";
-@import "spotstrap/tailwind.css";
-@import "spotstrap/themes/neutral.css";
+@import "@kodentuzo/spotstrap/tailwind.css";
+@import "@kodentuzo/spotstrap/themes/neutral.css";
 /* Optional: follow a .dark class on <html> instead of the system setting. */
-@import "spotstrap/dark-class.css";
+@import "@kodentuzo/spotstrap/dark-class.css";
 ```
 
 Without Tailwind:
@@ -47,16 +47,16 @@ Without Tailwind:
 Themes: `neutral`, `kodentuzo`, `librevitalis`, `librelifts`, `spotcraft`, `sokobanko`,
 `tagtape`, `vinskiano`. They name fonts but don't load them; load the font files yourself.
 
-Colors outside CSS (meta tags, favicons, canvas) come from `spotstrap/tokens.json`.
+Colors outside CSS (meta tags, favicons, canvas) come from `@kodentuzo/spotstrap/tokens.json`.
 
-React Native with Uniwind: import `spotstrap/native.css` and a theme, then build components with
-`spotstrap/recipes` ([docs](docs/react-native.md)).
+React Native with Uniwind: import `@kodentuzo/spotstrap/native.css` and a theme, then build components with
+`@kodentuzo/spotstrap/recipes` ([docs](docs/react-native.md)).
 
 Menu, Listbox, Combobox and Tabs in plain HTML need a little script:
 
 ```html
 <script type="module">
-  import { init } from "spotstrap/js"
+  import { init } from "@kodentuzo/spotstrap/js"
   init()
 </script>
 ```

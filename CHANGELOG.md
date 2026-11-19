@@ -9,48 +9,41 @@ or **Removed** with migration steps.
 
 ## [Unreleased]
 
-### Changed
+## [0.1.0] - 2026-11-19
 
-- **The neutral theme's accent is shadcn's light gray** (it was near-black, from spotcraft's
-  style), so hovers, highlighted menu items and toggled buttons are subtle. The spotcraft
-  preset keeps its bold accent.
-- **A `choice` row that follows another is 12px below it**, so stacked checkboxes, radios and
-  switches keep the guidelines' 12px between targets without a wrapper. `radio-group` no longer
-  adds its own gap.
+The first release, published as `@kodentuzo/spotstrap` (npm refuses an unscoped `spotstrap`; see
+ADR 0008): tokens, themes, touch sizes and Apple's type scale, every component in Headless UI's
+list, `@kodentuzo/spotstrap/js` for plain HTML, and React Native recipes.
 
 ### Added
 
+- **The website, [spotstrap.dev](https://spotstrap.dev):** a page per component with live
+  examples, plus getting started, theming, guidelines and the decisions.
 - **Prebuilt themes follow `.dark` and `.light`** on `<html>`, over the system setting, so a
-  site without Tailwind can have a theme toggle. Without either class, the system decides, as
-  before. See ADR 0007.
+  site without Tailwind can have a theme toggle. Without either class, the system decides.
+  See ADR 0007.
 - **Toggle buttons:** a `btn` with `aria-pressed="true"` (or `[data-selected]`,
   `[data-state="on"]`) shows as on, with the accent fill.
 - **Appear on popovers and dialogs:** `appear`, `appear-up` and `appear-scale` also fade a
   native `[popover]` or `<dialog>` in and out as it opens and closes.
-
-## [0.1.0] - 2026-11-19
-
-The first release: tokens, themes, touch sizes and Apple's type scale, every component in
-Headless UI's list, `spotstrap/js` for plain HTML, and React Native recipes.
-
-### Added
-
-- **`spotstrap/tailwind.css`** for projects on Tailwind v4: the base layer (page colors, border
+- **Stacked `choice` rows space themselves 12px apart**, so checkboxes, radios and switches keep
+  the guidelines' 12px between targets without a wrapper.
+- **`@kodentuzo/spotstrap/tailwind.css`** for projects on Tailwind v4: the base layer (page colors, border
   and outline colors) and a `light` variant for themes. Colors follow the system setting.
-- **`spotstrap/dark-class.css`** makes colors follow a `.dark` class on `<html>` instead.
+- **`@kodentuzo/spotstrap/dark-class.css`** makes colors follow a `.dark` class on `<html>` instead.
 - **Touch sizes** from Apple's HIG: `--size-control` (44px), `--size-control-compact` (36px)
   and `--gap-control` (12px).
 - **Type scale** from Apple's iOS text styles: `text-large-title`, `text-title-1`…`3`,
   `text-headline`, `text-body`, `text-callout`, `text-subhead`, `text-footnote`,
   `text-caption-1` and `-2`. Body text is 17px, and text inputs never go below 16px.
-- **Themes** in `spotstrap/themes/`: `neutral` (the default) and presets for kodentuzo,
-  librevitalis, librelifts (LibreBars uses it too), spotcraft, sokobanko, tagtape and
+- **Themes** in `@kodentuzo/spotstrap/themes/`: `neutral` (the default, with shadcn's light
+  gray accent) and presets for kodentuzo, librevitalis, librelifts (LibreBars uses it too), spotcraft, sokobanko, tagtape and
   vinskiano. Every theme defines the same tokens, in light and dark. Themes name their fonts
   but don't load them.
-- **Prebuilt CSS** for sites without Tailwind: `spotstrap/dist/spotstrap.css` (base layer, type
-  scale, classes) and `spotstrap/dist/themes/<name>.css`. Everything is in CSS layers, so a
+- **Prebuilt CSS** for sites without Tailwind: `@kodentuzo/spotstrap/dist/spotstrap.css` (base layer, type
+  scale, classes) and `@kodentuzo/spotstrap/dist/themes/<name>.css`. Everything is in CSS layers, so a
   page's own CSS wins. See ADR 0005.
-- **`spotstrap/tokens.json`**: every theme's colors in light and dark, as oklch and hex, plus
+- **`@kodentuzo/spotstrap/tokens.json`**: every theme's colors in light and dark, as oklch and hex, plus
   fonts and radii, for meta tags, favicons, manifests and canvas code.
 - **Button** (`btn`): shadcn's variants (`btn-secondary`, `btn-outline`, `btn-ghost`,
   `btn-link`, `btn-destructive`), `btn-compact` and `btn-icon`. Every button has a 44 × 44 hit
@@ -70,15 +63,15 @@ Headless UI's list, `spotstrap/js` for plain HTML, and React Native recipes.
 - **Menu, listbox and combobox:** `menu`, `menu-item`, `menu-label`, `menu-separator`,
   `menu-empty` and `menu-compact`, styled for every headless library's highlight and
   selection attributes.
-- **`spotstrap/js`**: keyboard and ARIA behavior for Menu, Listbox and Combobox in plain HTML,
+- **`@kodentuzo/spotstrap/js`**: keyboard and ARIA behavior for Menu, Listbox and Combobox in plain HTML,
   on Zag.js (`init()`, about 49 kB gzipped). A Menu also works without it, through `popover`
   and `commandfor`.
 - **Tabs, disclosure and appear:** `tabs`, `tab-list`, `tab`, `tab-panel` (switched by
-  `spotstrap/js`); `disclosure`, `disclosure-button`, `disclosure-panel` on `<details>`, with no
+  `@kodentuzo/spotstrap/js`); `disclosure`, `disclosure-button`, `disclosure-panel` on `<details>`, with no
   script; and `appear`, `appear-up`, `appear-scale` for enter and exit motion (Headless UI's
   Transition), which only fade with reduced motion.
-- **React Native:** `spotstrap/native.css` (sizes and type scale for Uniwind) and
-  `spotstrap/recipes`, functions that return full class strings and a `hitSlop` for each
+- **React Native:** `@kodentuzo/spotstrap/native.css` (sizes and type scale for Uniwind) and
+  `@kodentuzo/spotstrap/recipes`, functions that return full class strings and a `hitSlop` for each
   component, from the same tokens as the web.
 
 [Unreleased]: https://github.com/kodentuzo/spotstrap/compare/v0.1.0...HEAD

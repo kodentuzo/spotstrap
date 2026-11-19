@@ -1,10 +1,10 @@
 /**
- * spotstrap/js: keyboard and ARIA behavior for Menu, Listbox, Combobox
+ * @kodentuzo/spotstrap/js: keyboard and ARIA behavior for Menu, Listbox, Combobox
  * and Tabs, built on Zag.js state machines (docs/decisions/0004-style-state-not-runtime.md).
  * Framework apps keep their own headless library and don't need this.
  *
  *   <script type="module">
- *     import { init } from "spotstrap/js"
+ *     import { init } from "@kodentuzo/spotstrap/js"
  *     init()
  *   </script>
  *

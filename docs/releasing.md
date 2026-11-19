@@ -1,7 +1,7 @@
 # Releasing
 
 Spotstrap follows [SemVer](https://semver.org/spec/v2.0.0.html). Its public API is the export
-paths, class names, token names, `spotstrap/js`'s `init()` and the recipes' signatures
+paths, class names, token names, `@kodentuzo/spotstrap/js`'s `init()` and the recipes' signatures
 ([ADR 0002](decisions/0002-package-and-publishing.md)): renaming or removing any of them is a
 breaking change. While the version is 0.y.z, a breaking change raises the minor version.
 
@@ -21,7 +21,7 @@ breaking change. While the version is 0.y.z, a breaking change raises the minor 
    site shows the new version in its footer.
 
 An npm version can't be replaced: fix a broken one with a new patch release and deprecate the
-broken one (`npm deprecate spotstrap@0.1.0 "Use 0.1.1"`).
+broken one (`npm deprecate @kodentuzo/spotstrap@0.1.0 "Use 0.1.1"`).
 
 ## One-time npm setup
 
@@ -29,12 +29,13 @@ Only the original repository (`kodentuzo/spotstrap`) publishes; CI skips the ste
 
 1. **First release only:** npm can't link a trusted publisher to a package that doesn't exist
    yet, so the first version needs a token:
-   - on npmjs.com, create a granular access token that can publish packages (expiry: a few
-     days);
+   - on npmjs.com, the free organization `kodentuzo` owns the `@kodentuzo` scope;
+   - create a granular access token that can publish packages, with read and write on the
+     `kodentuzo` organization and 2FA bypass (expiry: a few days);
    - store it as the secret `NPM_TOKEN` in a GitHub environment named `npm` in
      `kodentuzo/spotstrap`;
    - release as above.
-2. On npmjs.com, in the settings of `spotstrap`, link a **trusted publisher**. The fields are
+2. On npmjs.com, in the settings of `@kodentuzo/spotstrap`, link a **trusted publisher**. The fields are
    case-sensitive:
    - provider: GitHub Actions;
    - organization or user: `kodentuzo`, repository: `spotstrap`;

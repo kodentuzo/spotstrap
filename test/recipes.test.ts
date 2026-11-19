@@ -118,8 +118,8 @@ test('the built types work in a consumer', async () => {
   try {
     await writeFile(
       `${dir}/use.ts`,
-      `import { button, sizes } from 'spotstrap/recipes'
-       import { init } from 'spotstrap/js'
+      `import { button, sizes } from '@kodentuzo/spotstrap/recipes'
+       import { init } from '@kodentuzo/spotstrap/js'
        const b: { className: string; textClassName: string } = button({ variant: 'outline' })
        const n: number = sizes.control
        const stop: () => void = init()
