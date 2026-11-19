@@ -9,6 +9,12 @@ or **Removed** with migration steps.
 
 ## [Unreleased]
 
+### Added
+
+- **shadcn's unprefixed variables** (`--background`, `--primary`, `--secondary`…, `--radius`)
+  point at the theme's tokens, so copied shadcn components that use `var(--secondary)` keep
+  their colors.
+
 ### Fixed
 
 - **Outline and ghost buttons keep readable text on hover.** They hover onto the accent fill

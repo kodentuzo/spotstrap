@@ -57,3 +57,17 @@ test('appear treats a closed popover or dialog as hidden', async () => {
   assert.match(css, /\[popover\]:not\(:popover-open\)/)
   assert.match(css, /dialog:not\(\[open\]\)/)
 })
+
+test("shadcn's unprefixed variables point at the theme's tokens", async () => {
+  const css = await compileCss(entry)
+  for (const name of [
+    'background',
+    'foreground',
+    'primary',
+    'secondary',
+    'muted-foreground',
+    'sidebar-ring',
+  ]) {
+    assert.match(css, new RegExp(`--${name}: var\\(--color-${name}\\)`), name)
+  }
+})
