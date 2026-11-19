@@ -120,10 +120,12 @@ test('the built types work in a consumer', async () => {
       `${dir}/use.ts`,
       `import { button, sizes } from '@kodentuzo/spotstrap/recipes'
        import { init } from '@kodentuzo/spotstrap/js'
+       import { spotstrapMerge } from '@kodentuzo/spotstrap/merge'
+       const m: object = spotstrapMerge
        const b: { className: string; textClassName: string } = button({ variant: 'outline' })
        const n: number = sizes.control
        const stop: () => void = init()
-       export { b, n, stop }`,
+       export { b, n, stop, m }`,
     )
     await writeFile(
       `${dir}/tsconfig.json`,

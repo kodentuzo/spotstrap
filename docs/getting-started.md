@@ -96,7 +96,9 @@ spotstrap's theme:
 - **Keep `@source`** for component folders outside your app, so Tailwind still finds their
   classes.
 - **`cn` / tailwind-merge:** spotstrap's text sizes (`text-body`, `text-title-1`…) look like
-  colors to tailwind-merge. If you merge classes, add them to its `font-size` group.
+  colors to tailwind-merge, which then drops them. Extend it with spotstrap's config:
+  `extendTailwindMerge(spotstrapMerge)`, or `createCn(spotstrapMerge)` with the `cn` package,
+  importing `spotstrapMerge` from `@kodentuzo/spotstrap/merge`.
 - **Unprefixed names are taken.** spotstrap defines shadcn's `--background`, `--muted`,
   `--accent`, `--border` and the rest. If your CSS used `--muted` for text or `--accent` for
   a brand color, rename all of them in one change: a missed one silently takes spotstrap's

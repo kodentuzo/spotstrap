@@ -14,18 +14,26 @@ web, and a test checks that they match.
 ```
 
 ```tsx
+import { useState } from 'react'
+import { Pressable, Text } from 'react-native'
 import { button } from '@kodentuzo/spotstrap/recipes'
 
-;<Pressable onPress={save}>
-  {({ pressed }) => {
-    const b = button({ variant: 'outline', pressed })
-    return (
-      <View className={b.className} hitSlop={b.hitSlop}>
-        <Text className={b.textClassName}>Export…</Text>
-      </View>
-    )
-  }}
-</Pressable>
+export function ExportButton({ onPress }: { onPress: () => void }) {
+  const [pressed, setPressed] = useState(false)
+  const b = button({ variant: 'outline', pressed })
+  return (
+    // hitSlop belongs on the Pressable: it's what receives the touch.
+    <Pressable
+      className={b.className}
+      hitSlop={b.hitSlop}
+      onPress={onPress}
+      onPressIn={() => setPressed(true)}
+      onPressOut={() => setPressed(false)}
+    >
+      <Text className={b.textClassName}>Export…</Text>
+    </Pressable>
+  )
+}
 ```
 
 Recipes: `button`, `field`, `label`, `fieldDescription`, `fieldError`, `input`, `choice`,
@@ -38,3 +46,6 @@ and points Uniwind at the recipes' classes. Themes name web fonts with fallbacks
 takes one family per font, so set `--font-sans` and friends in your own `@theme` after the
 theme. Behavior (focus, menus, dialogs) comes from React Native Reusables or your own
 components.
+
+If your components merge classes with `cn()` (tailwind-merge), extend it with
+`spotstrapMerge` from `@kodentuzo/spotstrap/merge`, or it drops the recipes' text sizes.

@@ -9,6 +9,21 @@ or **Removed** with migration steps.
 
 ## [Unreleased]
 
+## [0.1.5] - 2026-11-19
+
+### Added
+
+- **`@kodentuzo/spotstrap/merge`**: a tailwind-merge config (`spotstrapMerge`) that knows
+  spotstrap's text sizes, so `cn('text-body text-foreground')` keeps both. Without it,
+  tailwind-merge takes `text-body` for a color and drops it.
+
+### Fixed
+
+- **An icon in a button keeps its own size class** (`size-6`, `w-5 h-5`). The button's
+  default icon size (1.25em) used to override it.
+- **The React Native docs example puts `hitSlop` on the `Pressable`**, which receives the touch;
+  it was on an inner `View`, where it does nothing.
+
 ## [0.1.4] - 2026-11-19
 
 ### Added
@@ -149,7 +164,8 @@ list, `@kodentuzo/spotstrap/js` for plain HTML, and React Native recipes.
   `@kodentuzo/spotstrap/recipes`, functions that return full class strings and a `hitSlop` for each
   component, from the same tokens as the web.
 
-[Unreleased]: https://github.com/kodentuzo/spotstrap/compare/v0.1.4...HEAD
+[Unreleased]: https://github.com/kodentuzo/spotstrap/compare/v0.1.5...HEAD
+[0.1.5]: https://github.com/kodentuzo/spotstrap/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/kodentuzo/spotstrap/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/kodentuzo/spotstrap/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/kodentuzo/spotstrap/compare/v0.1.1...v0.1.2
