@@ -219,3 +219,30 @@ for (const theme of ['neutral', 'spotcraft', 'tagtape', 'vinskiano']) {
     }
   })
 }
+
+for (const [label, viewport] of [
+  ['phone', { width: 375, height: 812 }],
+  ['desktop', { width: 1024, height: 768 }],
+] as const) {
+  test(`${label}: a library's <div> dialog fits its content, like a native one`, async () => {
+    const page = await openDemo(viewport)
+    await page.evaluate(() => {
+      for (const id of ['lib-backdrop', 'lib-dialog']) {
+        ;(document.getElementById(id) as HTMLElement).hidden = false
+      }
+    })
+    await page.waitForTimeout(250)
+    const dialog = await page.locator('#lib-dialog').boundingBox()
+    const backdrop = await page.locator('#lib-backdrop').boundingBox()
+    assert.ok(dialog && backdrop)
+    assert.ok(dialog.height < viewport.height / 2, `dialog is ${dialog.height}px tall`)
+    assert.equal(Math.round(backdrop.width), viewport.width, 'backdrop covers the screen')
+    const buttons = await page.$$eval('#lib-dialog .btn', (els) =>
+      els.map((el) => Math.round(el.getBoundingClientRect().height)),
+    )
+    for (const h of buttons) assert.equal(h, 44, `action button is ${h}px tall`)
+    if (label === 'phone') {
+      assert.equal(Math.round(dialog.y + dialog.height), viewport.height, 'a sheet at the bottom')
+    }
+  })
+}

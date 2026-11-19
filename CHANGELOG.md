@@ -9,6 +9,19 @@ or **Removed** with migration steps.
 
 ## [Unreleased]
 
+## [0.1.4] - 2026-11-19
+
+### Added
+
+- **`dialog-backdrop`**: the dimmed layer behind a headless library's dialog (a native
+  `<dialog>` has `::backdrop`). It fades in, and out on `data-state="closed"`.
+
+### Fixed
+
+- **`dialog` on a library's content `<div>` fits its content.** Only a native `<dialog>` got
+  `fit-content` height, so bits-ui, Radix and reka-ui dialogs filled the screen and stretched
+  their action buttons.
+
 ## [0.1.3] - 2026-11-19
 
 From the lifts, sokobanko and website migrations.
@@ -136,7 +149,8 @@ list, `@kodentuzo/spotstrap/js` for plain HTML, and React Native recipes.
   `@kodentuzo/spotstrap/recipes`, functions that return full class strings and a `hitSlop` for each
   component, from the same tokens as the web.
 
-[Unreleased]: https://github.com/kodentuzo/spotstrap/compare/v0.1.3...HEAD
+[Unreleased]: https://github.com/kodentuzo/spotstrap/compare/v0.1.4...HEAD
+[0.1.4]: https://github.com/kodentuzo/spotstrap/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/kodentuzo/spotstrap/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/kodentuzo/spotstrap/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/kodentuzo/spotstrap/compare/v0.1.0...v0.1.1
