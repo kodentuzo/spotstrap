@@ -1,7 +1,9 @@
 // Builds the prebuilt outputs in dist/ from src/ (docs/decisions/0002, 0005):
 //   dist/spotstrap.css        base layer, type scale and every spotstrap class, no theme
+//   dist/base.css             the same without the component classes, for pages that use none
 //   dist/themes/<name>.css    one theme as plain CSS; dark follows the system, or .dark/.light
 //   dist/tokens.json          every theme's values, as oklch and hex
+//   dist/tokens/<name>.json   one theme's values, for code that needs just one
 //   dist/js/spotstrap.js      @kodentuzo/spotstrap/js, bundled with Zag, for browsers and bundlers alike
 //   dist/js/index.d.ts        its types
 //   dist/recipes/index.js     @kodentuzo/spotstrap/recipes, class strings for React Native, with types
@@ -43,23 +45,32 @@ const header = (what: string) =>
 async function main() {
   await rm(dist, { recursive: true, force: true })
   await mkdir(new URL('themes/', dist), { recursive: true })
+  await mkdir(new URL('tokens/', dist), { recursive: true })
 
-  const base = await build(
-    `@layer theme, base, components, utilities;
+  const entry = `@layer theme, base, components, utilities;
      @import "tailwindcss/theme.css" layer(theme);
      @import "tailwindcss/preflight.css" layer(base);
      @import "tailwindcss/utilities.css" layer(utilities);
-     @import "./src/tailwind.css";`,
-    await spotstrapClasses(),
-  )
+     @import "./src/tailwind.css";`
+  const classes = await spotstrapClasses()
   await writeFile(
     new URL('spotstrap.css', dist),
-    header('base and classes') + optimize(base, { minify: false }).code,
+    header('base and classes') + optimize(await build(entry, classes), { minify: false }).code,
+  )
+  // Reset, tokens, base layer and the type scale: what a page with no components needs.
+  const textOnly = classes.filter((c) => c.startsWith('text-'))
+  await writeFile(
+    new URL('base.css', dist),
+    header('base, no components') + optimize(await build(entry, textOnly), { minify: false }).code,
   )
 
   const tokens: Record<string, ThemeTokens> = {}
   for (const name of themes) {
     tokens[name] = await themeTokens(name)
+    await writeFile(
+      new URL(`tokens/${name}.json`, dist),
+      `${JSON.stringify(tokens[name], null, 2)}\n`,
+    )
     await writeFile(
       new URL(`themes/${name}.css`, dist),
       header(`${name} theme`) + themeCss(tokens[name]),

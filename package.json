@@ -34,8 +34,10 @@
     "./dark-class.css": "./src/dark-class.css",
     "./themes/*.css": "./src/themes/*.css",
     "./dist/spotstrap.css": "./dist/spotstrap.css",
+    "./dist/base.css": "./dist/base.css",
     "./dist/themes/*.css": "./dist/themes/*.css",
     "./tokens.json": "./dist/tokens.json",
+    "./tokens/*.json": "./dist/tokens/*.json",
     "./js": {
       "types": "./dist/js/index.d.ts",
       "default": "./dist/js/spotstrap.js"

@@ -9,6 +9,14 @@ or **Removed** with migration steps.
 
 ## [Unreleased]
 
+### Added
+
+- **`@kodentuzo/spotstrap/dist/base.css`**: the prebuilt reset, tokens, base layer and type scale
+  without the component classes (11 kB, 2.5 kB gzipped), for plain pages that use none of
+  them. `dist/spotstrap.css` still has everything.
+- **`@kodentuzo/spotstrap/tokens/<theme>.json`**: one theme's tokens, for code that needs just
+  one. `tokens.json` still has them all.
+
 ### Fixed
 
 - **The body's line height is a ratio** (22/17), not a fixed 22px, so text with its own size

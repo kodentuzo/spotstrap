@@ -43,3 +43,24 @@ test('tokens.json has every theme, color and mode, with hex values', async () =>
     }
   }
 })
+
+test('base.css has the base layer and type scale but no component classes', async () => {
+  const css = await read('base.css')
+  assert.match(css, /^\/\*.*\*\/\n@layer theme, base, components, utilities;/)
+  assert.match(css, /@layer base \{/)
+  assert.match(css, /\.text-body \{/)
+  assert.doesNotMatch(css, /\.btn \{/)
+  assert.doesNotMatch(css, /\.dialog \{/)
+  const full = await read('spotstrap.css')
+  assert.ok(
+    css.length < full.length / 2,
+    `base.css is ${css.length} bytes, spotstrap.css ${full.length}`,
+  )
+})
+
+test('each theme also has its own tokens file', async () => {
+  const all = JSON.parse(await read('tokens.json'))
+  for (const name of themes) {
+    assert.deepEqual(JSON.parse(await read(`tokens/${name}.json`)), all[name], name)
+  }
+})
