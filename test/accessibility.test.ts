@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { contrast } from '../scripts/color.ts'
+import { contrast, parseOklch } from '../scripts/color.ts'
 import { themes } from '../scripts/contract.ts'
 import { readTheme } from './themes.ts'
 
@@ -38,6 +38,23 @@ for (const name of themes) {
         })
         .filter((r) => r.ratio < 4.5)
       assert.deepEqual(low, [])
+    })
+  }
+}
+
+// A destructive action must not look like the primary one (docs/guidelines.md, Buttons). When
+// both are colored, their hues stay at least 25° apart; a gray or black-and-white theme
+// (neutral, sokobanko) marks destructive by words and placement instead.
+for (const name of themes) {
+  for (const mode of ['light', 'dark'] as const) {
+    test(`${name} ${mode}: destructive doesn't look like primary`, async () => {
+      const colors = (await readTheme(name))[mode]
+      const p = parseOklch(colors.get('color-primary') ?? '')
+      const d = parseOklch(colors.get('color-destructive') ?? '')
+      if (p.c < 0.05 || d.c < 0.05) return
+      const diff = Math.abs(p.h - d.h) % 360
+      const hue = Math.min(diff, 360 - diff)
+      assert.ok(hue >= 25, `primary and destructive hues are ${hue.toFixed(1)}° apart`)
     })
   }
 }
