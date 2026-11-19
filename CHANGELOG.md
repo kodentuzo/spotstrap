@@ -9,6 +9,14 @@ or **Removed** with migration steps.
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-11-19
+
+### Changed
+
+- **vinskiano's destructive is orange-red** (hue 45, was 27 and 22), so a Delete button no
+  longer looks like the crimson primary: light 0.55 0.2 45, dark 0.7 0.191 45. A test keeps
+  primary and destructive at least 25° of hue apart in every colored theme.
+
 ## [0.1.1] - 2026-11-19
 
 Fixes and notes from the first migrations (tagtape, spotcraft).
@@ -100,6 +108,7 @@ list, `@kodentuzo/spotstrap/js` for plain HTML, and React Native recipes.
   `@kodentuzo/spotstrap/recipes`, functions that return full class strings and a `hitSlop` for each
   component, from the same tokens as the web.
 
-[Unreleased]: https://github.com/kodentuzo/spotstrap/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/kodentuzo/spotstrap/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/kodentuzo/spotstrap/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/kodentuzo/spotstrap/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/kodentuzo/spotstrap/releases/tag/v0.1.0
