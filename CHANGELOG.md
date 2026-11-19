@@ -21,6 +21,10 @@ Fixes and notes from the first migrations (tagtape, spotcraft).
 
 ### Changed
 
+- **tagtape and vinskiano dark themes:** primary is lighter (green L 0.62, crimson L 0.65) with
+  dark text on it, so it also reads as text on the page (5.7:1 instead of 2.8:1 and 2.5:1).
+  Dark-mode buttons in those themes change from a deep fill with white text to a light fill
+  with dark text. Every theme's primary now passes WCAG AA as text, checked by a test.
 - **Getting started has a "Moving an existing shadcn app" section:** 17px body text,
   default border colors, fonts, `tw-animate-css`, `@source`, tailwind-merge and release-age
   notes, from the first migrations. Theme files say that they name fonts but don't load them.
