@@ -183,3 +183,39 @@ test('a toggle button that is on looks different from one that is off', async ()
   const bg = (id: string) => page.$eval(id, (el) => getComputedStyle(el).backgroundColor)
   assert.notEqual(await bg('#toggle-on'), await bg('#toggle-off'))
 })
+
+for (const theme of ['neutral', 'spotcraft', 'tagtape', 'vinskiano']) {
+  test(`${theme}: outline and ghost buttons keep readable text on hover`, async () => {
+    const page = await open()
+    await page.evaluate((t) => {
+      ;(document.getElementById('theme') as HTMLLinkElement).href = `../dist/themes/${t}.css`
+    }, theme)
+    await page.waitForLoadState('networkidle')
+    for (const scheme of ['light', 'dark'] as const) {
+      await page.emulateMedia({ colorScheme: scheme })
+      for (const selector of ['#buttons .btn-outline', '#buttons .btn-ghost']) {
+        const button = page.locator(selector).first()
+        await button.hover()
+        await page.waitForTimeout(250) // past the 150ms color transition
+        // The browser turns any CSS color into sRGB pixels; WCAG contrast from those.
+        const [ratio, fg, bg] = await button.evaluate((el) => {
+          const cs = getComputedStyle(el)
+          const ctx = document.createElement('canvas').getContext('2d') as CanvasRenderingContext2D
+          const lum = (color: string) => {
+            ctx.clearRect(0, 0, 1, 1)
+            ctx.fillStyle = color
+            ctx.fillRect(0, 0, 1, 1)
+            const [r, g, b] = [...ctx.getImageData(0, 0, 1, 1).data].map((v) => {
+              const c = v / 255
+              return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
+            })
+            return 0.2126 * r + 0.7152 * g + 0.0722 * b
+          }
+          const [a, b] = [lum(cs.color), lum(cs.backgroundColor)].sort((x, y) => y - x)
+          return [(a + 0.05) / (b + 0.05), cs.color, cs.backgroundColor] as const
+        })
+        assert.ok(ratio >= 4.5, `${scheme} ${selector}: ${fg} on ${bg} is ${ratio.toFixed(2)}:1`)
+      }
+    }
+  })
+}

@@ -9,6 +9,12 @@ or **Removed** with migration steps.
 
 ## [Unreleased]
 
+### Fixed
+
+- **Outline and ghost buttons keep readable text on hover.** They hover onto the accent fill
+  and now take the accent's text color with it (`--btn-fg-hover`). In themes with a dark
+  accent, such as spotcraft, the text used to vanish on hover.
+
 ## [0.1.0] - 2026-11-19
 
 The first release, published as `@kodentuzo/spotstrap` (npm refuses an unscoped `spotstrap`; see

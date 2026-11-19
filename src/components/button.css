@@ -63,6 +63,8 @@
           var(--btn-fg, var(--color-primary-foreground))
         )
       );
+      /* A variant that hovers onto a different fill brings that fill's text color. */
+      color: var(--btn-fg-hover, var(--btn-fg, var(--color-primary-foreground)));
     }
   }
 
@@ -127,12 +129,14 @@
   --btn-fg: var(--color-foreground);
   --btn-border: var(--color-border);
   --btn-bg-hover: var(--color-accent);
+  --btn-fg-hover: var(--color-accent-foreground);
 }
 
 @utility btn-ghost {
   --btn-bg: transparent;
   --btn-fg: var(--color-foreground);
   --btn-bg-hover: var(--color-accent);
+  --btn-fg-hover: var(--color-accent-foreground);
 }
 
 /* The text color, not the primary: the underline marks it, and it stays readable on every
