@@ -10,12 +10,18 @@
  *
  * On narrow screens a dialog becomes a sheet at the bottom, within thumb reach, and its
  * actions stack full width with the first one (usually Cancel) at the bottom.
+ *
+ * With a headless library (bits-ui, Radix, reka-ui), put `dialog` on its content element
+ * and `dialog-backdrop` on its overlay element.
  */
 
 @utility dialog {
   position: fixed;
   inset: 0;
   width: min(32rem, 100% - 2rem);
+  /* A native <dialog> is fit-content by default; a library's content <div> isn't, and with
+     inset: 0 it would fill the screen. */
+  height: fit-content;
   max-height: calc(100% - 2rem);
   margin: auto;
   padding: 1.5rem;
@@ -34,6 +40,7 @@
   /* A closed <dialog> stays hidden; open ones and libraries' mounted content lay out. */
   &:is([open], :popover-open, :not(dialog, [popover])) {
     display: grid;
+    align-content: start;
     gap: 1rem;
   }
 
@@ -89,6 +96,26 @@
         translate: none;
       }
     }
+  }
+}
+
+/* The dimmed layer behind a library's dialog (a native <dialog> has ::backdrop instead). Put it
+   before the content: <div class="dialog-backdrop"></div><div class="dialog" role="dialog">. */
+@utility dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: oklch(0 0 0 / 40%);
+  opacity: 1;
+  transition-property: opacity, display, overlay;
+  transition-duration: 200ms;
+  transition-behavior: allow-discrete;
+
+  @starting-style {
+    opacity: 0;
+  }
+
+  &:is([data-state="closed"], [data-closed], [data-exiting], [hidden]) {
+    opacity: 0;
   }
 }
 

@@ -132,6 +132,15 @@
             <button type="button" class="btn btn-destructive" commandfor="confirm" command="close">Delete</button>
           </div>
         </dialog>
+        <div class="dialog-backdrop" id="lib-backdrop" data-state="open" hidden></div>
+        <div class="dialog" id="lib-dialog" role="dialog" aria-labelledby="lib-title" data-state="open" hidden>
+          <h3 class="dialog-title" id="lib-title">A library's dialog</h3>
+          <p class="dialog-description">Content is a div, the way bits-ui, Radix and reka-ui render it.</p>
+          <div class="dialog-actions">
+            <button type="button" class="btn btn-outline">Cancel</button>
+            <button type="button" class="btn">Save</button>
+          </div>
+        </div>
       </section>
 
       <section id="menus">
