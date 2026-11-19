@@ -14,18 +14,26 @@ web, and a test checks that they match.
 ```
 
 ```tsx
+import { useState } from 'react'
+import { Pressable, Text } from 'react-native'
 import { button } from '@kodentuzo/spotstrap/recipes'
 
-;<Pressable onPress={save}>
-  {({ pressed }) => {
-    const b = button({ variant: 'outline', pressed })
-    return (
-      <View className={b.className} hitSlop={b.hitSlop}>
-        <Text className={b.textClassName}>Export…</Text>
-      </View>
-    )
-  }}
-</Pressable>
+export function ExportButton({ onPress }: { onPress: () => void }) {
+  const [pressed, setPressed] = useState(false)
+  const b = button({ variant: 'outline', pressed })
+  return (
+    // hitSlop belongs on the Pressable: it's what receives the touch.
+    <Pressable
+      className={b.className}
+      hitSlop={b.hitSlop}
+      onPress={onPress}
+      onPressIn={() => setPressed(true)}
+      onPressOut={() => setPressed(false)}
+    >
+      <Text className={b.textClassName}>Export…</Text>
+    </Pressable>
+  )
+}
 ```
 
 Recipes: `button`, `field`, `label`, `fieldDescription`, `fieldError`, `input`, `choice`,

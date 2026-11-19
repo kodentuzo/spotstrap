@@ -15,6 +15,13 @@ or **Removed** with migration steps.
   spotstrap's text sizes, so `cn('text-body text-foreground')` keeps both. Without it,
   tailwind-merge takes `text-body` for a color and drops it.
 
+### Fixed
+
+- **An icon in a button keeps its own size class** (`size-6`, `w-5 h-5`). The button's
+  default icon size (1.25em) used to override it.
+- **The React Native docs example puts `hitSlop` on the `Pressable`**, which receives the touch;
+  it was on an inner `View`, where it does nothing.
+
 ## [0.1.4] - 2026-11-19
 
 ### Added

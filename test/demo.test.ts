@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { measureControls, openDemo, useDemo } from './browser.ts'
+import { compileCss } from './compile.ts'
 
 // The demo page uses the prebuilt CSS, so `pnpm build` must run first (`pnpm verify` does).
 const open = useDemo()
@@ -246,3 +247,22 @@ for (const [label, viewport] of [
     }
   })
 }
+
+test("a button's icon is 1.25em by default, and keeps its own size class", async () => {
+  // Compiled through Tailwind, so `btn` and `size-6` sit in the same layer, as in an app.
+  const css = await compileCss(
+    '@import "tailwindcss"; @import "./src/tailwind.css"; @import "./src/themes/neutral.css";',
+    ['btn', 'size-6'],
+  )
+  const page = await open()
+  const icon = '<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></svg>'
+  await page.setContent(
+    `<style>${css}</style>
+     <button class="btn" id="plain">${icon}Add</button>
+     <button class="btn" id="sized">${icon.replace('<svg', '<svg class="size-6"')}Add</button>`,
+  )
+  const size = (selector: string) =>
+    page.$eval(selector, (el) => Math.round(el.getBoundingClientRect().width))
+  assert.equal(await size('#plain svg'), Math.round(17 * 1.25))
+  assert.equal(await size('#sized svg'), 24)
+})

@@ -47,8 +47,12 @@
     translate: -50% -50%;
   }
 
+  /* Icons default to 1.25em; one with its own size class keeps it. */
   & svg {
     flex-shrink: 0;
+  }
+
+  & svg:not([class*="size-"], [class*="w-"], [class*="h-"]) {
     width: 1.25em;
     height: 1.25em;
   }
