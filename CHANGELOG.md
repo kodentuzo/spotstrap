@@ -14,6 +14,9 @@ or **Removed** with migration steps.
 - **The body's line height is a ratio** (22/17), not a fixed 22px, so text with its own size
   inside the body gets a line height to match. lifts' small two-line captions had grown from
   34px to 44px tall.
+- **`tokens.json` hex values match the original brand colors** for the presets that started as
+  hex (kodentuzo, librevitalis, librelifts): their oklch values carry more precision, so
+  `#0b6e5f` no longer comes back as `#0a6e5f`.
 
 ## [0.1.2] - 2026-11-19
 
