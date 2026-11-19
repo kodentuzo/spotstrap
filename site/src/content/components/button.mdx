@@ -42,6 +42,7 @@ Modifiers set variables that `btn` reads, so their order in `class` never matter
 | Keyboard focus | `:focus-visible` | `[data-focus-visible]` (react-aria) |
 | Disabled | `:disabled`, `[aria-disabled="true"]` | `[data-disabled]` |
 | Busy | `[aria-busy="true"]` | same |
+| Open (trigger) | `[aria-expanded="true"]`: no pressed look; outline and ghost take the accent fill | same (React Aria keeps `data-pressed` while open) |
 | On (toggle) | `[aria-pressed="true"]` | `[data-selected]` (react-aria), `[data-state="on"]` (Radix, reka-ui, bits-ui) |
 
 ## Guidelines
