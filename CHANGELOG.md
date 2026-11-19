@@ -15,6 +15,12 @@ or **Removed** with migration steps.
   point at the theme's tokens, so copied shadcn components that use `var(--secondary)` keep
   their colors.
 
+### Changed
+
+- **Getting started has a "Moving an existing shadcn app" section:** 17px body text,
+  default border colors, fonts, `tw-animate-css`, `@source`, tailwind-merge and release-age
+  notes, from the first migrations. Theme files say that they name fonts but don't load them.
+
 ### Fixed
 
 - **Outline and ghost buttons keep readable text on hover.** They hover onto the accent fill

@@ -2,6 +2,8 @@
  * Spotstrap theme: Tagtape.
  * Green on olive, square corners, Oxanium.
  *
+ * Fonts are named here, not loaded: load the font files yourself (e.g. Fontsource).
+ *
  * Static values only, so Tailwind and Uniwind both read this file
  * (docs/decisions/0001-token-contract.md).
  */

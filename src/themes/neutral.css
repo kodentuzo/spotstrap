@@ -3,6 +3,8 @@
  * The default: shadcn's neutral palette, rounded corners and system fonts. Its accent (hover,
  * highlight, toggles on) is shadcn's light gray; the spotcraft preset keeps a bold one.
  *
+ * Fonts are named here, not loaded: load the font files yourself (e.g. Fontsource).
+ *
  * Static values only, so Tailwind and Uniwind both read this file
  * (docs/decisions/0001-token-contract.md).
  */
